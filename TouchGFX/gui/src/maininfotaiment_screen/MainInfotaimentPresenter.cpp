@@ -21,7 +21,7 @@ void MainInfotaimentPresenter::activate()
 
 void MainInfotaimentPresenter::deactivate()
 {
-
+	
 }
 
 void MainInfotaimentPresenter::gearChanged()

@@ -3,6 +3,7 @@
 
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
+#include "main.h"
 
 using namespace touchgfx;
 
@@ -25,6 +26,8 @@ public:
      */
     virtual void deactivate();
 
+    void requestMission(MissionType type);
+
     virtual ~MissionSelectPresenter() {};
 
 private:
@@ -32,5 +35,7 @@ private:
 
     MissionSelectView& view;
 };
+
+
 
 #endif // MISSIONSELECTPRESENTER_HPP

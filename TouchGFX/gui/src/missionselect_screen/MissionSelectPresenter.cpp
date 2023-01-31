@@ -7,6 +7,7 @@ MissionSelectPresenter::MissionSelectPresenter(MissionSelectView& v)
 
 }
 
+
 void MissionSelectPresenter::activate()
 {
 
@@ -15,4 +16,9 @@ void MissionSelectPresenter::activate()
 void MissionSelectPresenter::deactivate()
 {
 
+}
+
+void MissionSelectPresenter::requestMission(MissionType missionType)
+{
+    model->requestMission(missionType);
 }

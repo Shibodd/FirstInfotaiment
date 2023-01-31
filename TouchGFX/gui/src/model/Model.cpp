@@ -4,7 +4,9 @@
 #include "cmsis_os.h"
 #include "main.h"
 
+extern osMessageQueueId_t guiToMainMsgQueue;
 extern osMessageQueueId_t mainToGuiMsgQueue;
+
 displayInfo info;
 
 Model::Model() : modelListener(0)
@@ -38,5 +40,13 @@ void Model::tick()
 
 		modelListener->infoChanged();
 	}
+}
 
+
+void Model::requestMission(MissionType missionType) {
+	guiToMainMsg msg {
+		.missionType = missionType
+	};
+
+	osMessageQueuePut(guiToMainMsgQueue, &missionType, 0, 0);
 }

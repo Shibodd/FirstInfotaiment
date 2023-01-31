@@ -180,7 +180,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
-  if ((guiToMainMsgQueue = osMessageQueueNew(10, sizeof(gfxToMainMsg), NULL)) == NULL)
+  if ((guiToMainMsgQueue = osMessageQueueNew(10, sizeof(guiToMainMsg), NULL)) == NULL)
 	  return -1;
   if ((mainToGuiMsgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
 	  return -1;
@@ -821,8 +821,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void process_gui_message(gfxToMainMsg* msg) {
-
+void process_gui_message(guiToMainMsg* msg) {
+  // do stuff
 }
 
 void process_can_message(MmrCanMessage* msg) {
@@ -965,7 +965,7 @@ void StartDefaultTask(void *argument)
 
     if (osMessageQueueGetCount(guiToMainMsgQueue) > 0)
     {
-      gfxToMainMsg msg;
+      guiToMainMsg msg;
       osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
       process_gui_message(&msg);
     }

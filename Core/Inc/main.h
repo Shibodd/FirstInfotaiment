@@ -68,14 +68,14 @@ typedef struct {
 } displayInfo;
 
 typedef enum {
-  MissionManual,
-  MissionTrackdrive,
-  MissionAcceleration
+  MISSION_MANUAL,
+  MISSION_TRACKDRIVE,
+  MISSION_ACCELERATION
 } MissionType;
 
 typedef struct {
   MissionType missionType;
-} gfxToMainMsg;
+} guiToMainMsg;
 
 /* USER CODE END EM */
 

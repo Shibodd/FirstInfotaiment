@@ -7,6 +7,10 @@
 class MissionSelectView : public MissionSelectViewBase
 {
 public:
+    virtual void startManualMission();
+    virtual void startTrackdriveMission();
+    virtual void startAccelerationMission();
+
     MissionSelectView();
     virtual ~MissionSelectView() {}
     virtual void setupScreen();

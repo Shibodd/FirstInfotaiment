@@ -1,6 +1,8 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
+#include "main.h"
+
 class ModelListener;
 
 class Model
@@ -43,6 +45,8 @@ public:
 
     void setBattery_v(float recvBattery_v) { battery_v = recvBattery_v; }
     float getBattery_v() { return battery_v; }
+
+    void requestMission(MissionType missionType);
 
     /* TODO: string variables */
 
