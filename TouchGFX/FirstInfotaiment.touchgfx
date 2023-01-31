@@ -1172,10 +1172,12 @@
     "DisplayOrientation": "Landscape",
     "Family": "STM32F4",
     "SubFamily": "STM32F469/479",
+    "Toolchain": "STM32CubeIDE",
     "Platform": "m4",
     "ProjectFile": "../STM32F469I-disco.ioc",
     "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
-    "OptionalComponents": []
+    "OptionalComponents": [],
+    "AdditionalFeatures": []
   },
   "Version": "4.21.1",
   "CreatedBy": "4.20.0"

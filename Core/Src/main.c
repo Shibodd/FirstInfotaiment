@@ -28,6 +28,12 @@
 #include "stm32469i_discovery_sdram.h"
 #include "stm32469i_discovery_qspi.h"
 
+#include "pin.h"
+#include "spi.h"
+#include "mcp2515.h"
+
+#include "stm_pin.h"
+#include "spi0.h"
 
 /* USER CODE END Includes */
 
@@ -62,7 +68,6 @@ LTDC_HandleTypeDef hltdc;
 QSPI_HandleTypeDef hqspi;
 
 SPI_HandleTypeDef hspi2;
-DMA_HandleTypeDef hdma_spi2_rx;
 
 UART_HandleTypeDef huart6;
 
@@ -85,15 +90,15 @@ const osThreadAttr_t TouchGFXTask_attributes = {
 /* USER CODE BEGIN PV */
 
 displayInfo msgDisplayInfo;
-osMessageQueueId_t msgQueue;
-unsigned char RX_Buffer[BUFFER_SIZE];
+osMessageQueueId_t guiToMainMsgQueue;
+osMessageQueueId_t mainToGuiMsgQueue;
+
 int gear_six_count = 0, gear_mem = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DMA_Init(void);
 static void MX_CRC_Init(void);
 static void MX_DMA2D_Init(void);
 static void MX_DSIHOST_DSI_Init(void);
@@ -142,7 +147,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_CRC_Init();
   MX_DMA2D_Init();
   MX_DSIHOST_DSI_Init();
@@ -153,6 +157,8 @@ int main(void)
   MX_USART6_UART_Init();
   MX_SPI2_Init();
   MX_TouchGFX_Init();
+  /* Call PreOsInit function */
+  MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -174,7 +180,9 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
-  if ((msgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
+  if ((guiToMainMsgQueue = osMessageQueueNew(10, sizeof(gfxToMainMsg), NULL)) == NULL)
+	  return -1;
+  if ((mainToGuiMsgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
 	  return -1;
   /* USER CODE END RTOS_QUEUES */
 
@@ -619,12 +627,13 @@ static void MX_SPI2_Init(void)
   /* USER CODE END SPI2_Init 1 */
   /* SPI2 parameter configuration*/
   hspi2.Instance = SPI2;
-  hspi2.Init.Mode = SPI_MODE_SLAVE;
+  hspi2.Init.Mode = SPI_MODE_MASTER;
   hspi2.Init.Direction = SPI_DIRECTION_2LINES;
   hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -669,22 +678,6 @@ static void MX_USART6_UART_Init(void)
   /* USER CODE BEGIN USART6_Init 2 */
 
   /* USER CODE END USART6_Init 2 */
-
-}
-
-/**
-  * Enable DMA controller clock
-  */
-static void MX_DMA_Init(void)
-{
-
-  /* DMA controller clock enable */
-  __HAL_RCC_DMA1_CLK_ENABLE();
-
-  /* DMA interrupt init */
-  /* DMA1_Stream3_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
 
 }
 
@@ -774,7 +767,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, FRAME_RATE_Pin|VSYNC_FREQ_Pin|RENDER_TIME_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7|MCP2515_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : MCU_ACTIVE_Pin */
   GPIO_InitStruct.Pin = MCU_ACTIVE_Pin;
@@ -818,68 +811,102 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : MCP2515_CS_Pin */
+  GPIO_InitStruct.Pin = MCP2515_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(MCP2515_CS_GPIO_Port, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
-{
+void process_gui_message(gfxToMainMsg* msg) {
 
-	if (RX_Buffer[0] == 0x00)
-	{
-		HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 1);
-		/* READ GEAR */
-		gear_mem = RX_Buffer[1];
-		if (gear_mem == 6)
-		{
-			gear_six_count++;
-			if (gear_six_count == 3)
-				msgDisplayInfo.gear = gear_mem;
-		}
-		else
-		{
-			gear_six_count = 0;
-			msgDisplayInfo.gear = gear_mem;
-		}
-		/* ***** */
+}
 
-		/* READ SPEED */
-		msgDisplayInfo.speed = RX_Buffer[2];
-		/* ***** */
+void process_can_message(MmrCanMessage* msg) {
+  if (msg->isStandardId) {
+    switch (msg->id) {
+      /* RES */
+      case 0x191:
+        msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
+        break;
 
-		/* READ RPM */
-		msgDisplayInfo.rpm = RX_Buffer[3];
-		msgDisplayInfo.rpm <<= 8;
-		msgDisplayInfo.rpm |= RX_Buffer[4];
-		/* ***** */
+      default:
+        return;
+    }
+  } else {
+    switch (msg->id) {
+      /* RPM, SPEED, GEAR, ATH */
+      case 0x008000C2:
+      case 0x108000C2:
+        msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
 
-		/* READ THROTTLE AND BRAKE % */
-		msgDisplayInfo.throttle_perc = RX_Buffer[5];
-		msgDisplayInfo.brake_perc = RX_Buffer[6];
-		/* ***** */
+        uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
+        msgDisplayInfo.speed = (unsigned char)(speed / 100);
 
-		/* READ T_WATER, T_OIL AND P_OIL */
-		msgDisplayInfo.T_water = RX_Buffer[7];
-		msgDisplayInfo.T_oil = RX_Buffer[8];
-		msgDisplayInfo.P_oil = *(float *)(&RX_Buffer[9]);
-		/* ***** */
+        uint8_t gear = msg->payload[4]; /* No need to read msg->payload[5] since it will ALWAYS be 0! */
+        if (gear == 6)
+        {
+          gear_six_count++;
+          if (gear_six_count == 3)
+            msgDisplayInfo.gear = gear;
+        }
+        else
+        {
+          gear_six_count = 0;
+          msgDisplayInfo.gear = gear;
+        }
 
-		/* READ RES, LC, CLT */
-		msgDisplayInfo.RES = RX_Buffer[13];
-		msgDisplayInfo.LC = RX_Buffer[14];
-		msgDisplayInfo.CLT = RX_Buffer[15];
-		/* ***** */
+        uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
+        msgDisplayInfo.throttle_perc = (unsigned char)(throttle / 100);
+        break;
 
-		/* BATTERY VOLTAGE */
-		msgDisplayInfo.battery_v = *(float *)(&RX_Buffer[16]);
+      /* TOIL, TWATER */
+      case 0x008000C1:
+      case 0x108000C1:
+        msgDisplayInfo.T_oil = (msg->payload[0] - 40);/* No need to read RxData[1] since it will ALWAYS be 0! */
+        msgDisplayInfo.T_water = (msg->payload[2] - 40); /* No need to read RxData[3] since it will ALWAYS be 0! */
+        break;
 
+      /* POIL */
+      case 0x008000C3:
+      case 0x108000C3: {
+        short p_oil = (msg->payload[1] << 8) | msg->payload[0];
+        msgDisplayInfo.P_oil = (float)p_oil / 20;
+        break;
+      }
 
-		/* TODO: String variables */
+      /* battery_V * 1000 | .. | .. | launchsw */
+      case 0x008000C4:
+      case 0x108000C4: {
+        short bat = (msg->payload[1] << 8) | msg->payload[0];
+        msgDisplayInfo.battery_v = (float)bat / 1000;
+        msgDisplayInfo.LC = msg->payload[6]; /* No need to read RxData[7] since it will ALWAYS be 0! */
+        break;
+      }
 
-		RX_Buffer[0] = 0xFF;
+      /* CLUTCH PULL OK */
+      case 0x004000E1:
+      case 0x104000E1:
+        msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
+        break;
+      
+      /* CLUTCH RELEASE OK */
+      case 0x004000E3:
+      case 0x104000E3:
+        msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
+        break;
 
-		/* Invia messaggio al thread del display */
-    osMessageQueuePut(msgQueue, &msgDisplayInfo, 0U, 0U);
-	}
+      default:
+        return;
+    }
+  }
+
+  // If no case matched (only the default case did), this is not reached.
+  // Send a message containing the updated data to the display thread.
+  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
 /* USER CODE END 4 */
 
@@ -893,17 +920,55 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	int state = 0;
+
+  // Initialize the MMR libraries
+  static MmrPin csPin;
+	static MmrPin* csPins[1];
+	csPin = MMR_Pin(MCP2515_CS_GPIO_Port, MCP2515_CS_Pin, true);
+	csPins[0] = &csPin;
+  
+	if (!MMR_SPI0_Init(&hspi2, &csPins, 1))
+		Error_Handler();
+
+	MMR_MCP2515_Init(&spi0, 0);
+
+  // MCP2515 setup
+  MmrCanFilter fil = MMR_CAN_Filter(0, 0, false);
+  if (!(
+    MMR_MCP2515_Reset()
+    && MMR_MCP2515_ConfigureCANTimings(MMR_MCP2515_TIMINGS_8MHz_1000kBPS)
+    && MMR_CAN_SetFilter(&mcp2515, &fil)
+    && MMR_MCP2515_RequestMode(MMR_MCP2515_MODE_NORMAL)
+    ))
+      Error_Handler();
+
+  // Wait for the MCP2515 to go into the correct mode
+  while (true) {
+    MmrMcp2515Mode mode;
+    if (!MMR_MCP2515_ReadMode(&mode))
+      Error_Handler();
+    else if (mode == MMR_MCP2515_MODE_NORMAL)
+      break;
+    else
+      osDelay(100);
+  }
 
   /* Infinite loop */
   for(;;)
   {
-  	HAL_GPIO_WritePin(GPIOG, GPIO_PIN_6, 0);
+    if (MMR_CAN_GetPendingMessages(&mcp2515) > 0)
+    {
+      MmrCanMessage msg;
+      MMR_CAN_Receive(&mcp2515, &msg);
+      process_can_message(&msg);
+    }
 
-  	state++;
-  	state %= 2;
-
-  	HAL_SPI_Receive_DMA(&hspi2, RX_Buffer, 20);
+    if (osMessageQueueGetCount(guiToMainMsgQueue) > 0)
+    {
+      gfxToMainMsg msg;
+      osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
+      process_gui_message(&msg);
+    }
 
 	  osDelay(100);
   }

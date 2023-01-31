@@ -4,7 +4,7 @@
 #include "cmsis_os.h"
 #include "main.h"
 
-extern osMessageQueueId_t msgQueue;
+extern osMessageQueueId_t mainToGuiMsgQueue;
 displayInfo info;
 
 Model::Model() : modelListener(0)
@@ -14,7 +14,7 @@ Model::Model() : modelListener(0)
 void Model::tick()
 {
 	osStatus_t status;
-	status = osMessageQueueGet(msgQueue, &info, NULL, 0);
+	status = osMessageQueueGet(mainToGuiMsgQueue, &info, NULL, 0);
 	if (status == osOK)
 	{
 		gear = info.gear;

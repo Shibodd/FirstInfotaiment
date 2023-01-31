@@ -67,6 +67,16 @@ typedef struct {
 	/* TODO: String variables */
 } displayInfo;
 
+typedef enum {
+  MissionManual,
+  MissionTrackdrive,
+  MissionAcceleration
+} MissionType;
+
+typedef struct {
+  MissionType missionType;
+} gfxToMainMsg;
+
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -85,6 +95,8 @@ void Error_Handler(void);
 #define VSYNC_FREQ_GPIO_Port GPIOA
 #define RENDER_TIME_Pin GPIO_PIN_6
 #define RENDER_TIME_GPIO_Port GPIOA
+#define MCP2515_CS_Pin GPIO_PIN_6
+#define MCP2515_CS_GPIO_Port GPIOH
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

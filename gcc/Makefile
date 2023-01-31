@@ -183,11 +183,21 @@ include_paths := $(library_includes) \
     $(foreach comp, $(touchgfx_generator_components), $(comp)/generated) \
     $(framework_includes) \
     $(source_Middlewares_paths) \
-    $(touchgfx_generator_components)
+    $(touchgfx_generator_components) \
+	mmr_core/app/stm/inc \
+	mmr_core/app/lib/can/inc \
+	mmr_core/app/lib/mcp2515/inc \
+	mmr_core/app/lib/spi/inc \
+	mmr_core/app/lib/gpio/inc \
+	mmr_core/app/lib/util/inc
 
 source_paths = $(foreach comp, $(all_components), $(comp)/src) \
     $(foreach comp, $(cubemx_components), $(comp)/Src) \
-    $(touchgfx_generator_components)
+    $(touchgfx_generator_components) \
+	mmr_core/app/stm \
+	mmr_core/app/lib/can \
+	mmr_core/app/lib/mcp2515 \
+	mmr_core/app/lib/spi
 
 # Finds files that matches the specified pattern. The directory list
 # is searched recursively. It is safe to invoke this function with an
