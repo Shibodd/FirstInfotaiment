@@ -821,6 +821,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 void process_gui_message(guiToMainMsg* msg) {
   // do stuff
   MmrCanMessage txMsg;
@@ -917,18 +918,27 @@ void process_can_message(MmrCanMessage* msg) {
   // Send a message containing the updated data to the display thread.
   osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
+
+bool waitForMcp2515Mode(MmrMcp2515Mode targetMode, int attempts, int pollingIntervalTicks) {
+  for (int attempt = 0; attempt < attempts; ++attempt) {
+	MmrMcp2515Mode mode;
+	if (!MMR_MCP2515_ReadMode(&mode))
+	  Error_Handler();
+
+	if (mode == targetMode)
+	  return true;
+    osDelay(pollingIntervalTicks);
+}
+  return false;
+}
+
 /* USER CODE END 4 */
 
 
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 
-void suca(int id) {
-  displayInfo disp;
-  memset(&disp, 0, sizeof(disp));
-  disp.rpm = id;
-  osMessageQueuePut(mainToGuiMsgQueue, &disp, 0U, 0U);
-}
+
 /**
   * @brief  Function implementing the defaultTask thread.
   * @param  argument: Not used
@@ -945,38 +955,31 @@ void StartDefaultTask(void *argument)
   pins[0] = &csPin;
 
   if (!MMR_SPI0_Init(&hspi2, &pins, 1))
-	  Error_Handler();
+    Error_Handler();
 
   MMR_MCP2515_Init(&spi0, 0);
 
   if (!MMR_MCP2515_Reset())
-  {
-    Error_Handler();
-  }
+	  Error_Handler();
+
   osDelay(1000);
+
+  while (!waitForMcp2515Mode(MMR_MCP2515_MODE_CONFIGURATION, 2, 100)) {
+    if (!MMR_MCP2515_Reset())
+	    Error_Handler();
+  }
 
   const MmrMcp2515Mode MCP2515_MODE = MMR_MCP2515_MODE_NORMAL;
 
   // MCP2515 setup
   MmrCanFilter fil = MMR_CAN_Filter(0, 0, true);
-  if (!(
-    MMR_MCP2515_ConfigureCANTimings(MMR_MCP2515_TIMINGS_8MHz_1000kBPS)
-    && MMR_CAN_SetFilter(&mcp2515, &fil)
-    && MMR_MCP2515_RequestMode(MCP2515_MODE)
-    ))
-      Error_Handler();
+  if (!MMR_MCP2515_ConfigureCANTimings(MMR_MCP2515_TIMINGS_8MHz_1000kBPS) ||
+      !MMR_CAN_SetFilter(&mcp2515, &fil) ||
+      !MMR_MCP2515_RequestMode(MCP2515_MODE))
+    Error_Handler();
 
   // Wait for the MCP2515 to go into the correct mode
-  while (true) {
-    MmrMcp2515Mode mode;
-    if (!MMR_MCP2515_ReadMode(&mode))
-      Error_Handler();
-    
-    if (mode != MCP2515_MODE)
-      osDelay(100);
-    else
-      break;
-  }
+  waitForMcp2515Mode(MCP2515_MODE, 10, 100);
 
   uint8_t rxBuf[8];
   MmrCanMessage rxMsg;
@@ -986,6 +989,9 @@ void StartDefaultTask(void *argument)
     while (MMR_CAN_Receive(&mcp2515, &rxMsg))
       process_can_message(&rxMsg);
       
+    if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
+    	Error_Handler();
+
     while (osMessageQueueGetCount(guiToMainMsgQueue) > 0)
     {
       guiToMainMsg msg;
@@ -1025,10 +1031,9 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-  
-  while(true) {
-    suca(999);
-    osDelay(500);
+  __disable_irq();
+  while (1)
+  {
   }
 
   /* USER CODE END Error_Handler_Debug */
