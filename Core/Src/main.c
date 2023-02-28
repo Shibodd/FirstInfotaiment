@@ -920,7 +920,7 @@ void process_can_message(MmrCanMessage* msg) {
 }
 
 bool waitForMcp2515Mode(MmrMcp2515Mode targetMode, int attempts, int pollingIntervalTicks) {
-  for (int attempt = 0; attempt < attempts; ++attempt) {
+  for (int attempt = 0; attempt < attempts || attempts < 0; ++attempt) { // if attempts < 0 then run indefinitely
 	MmrMcp2515Mode mode;
 	if (!MMR_MCP2515_ReadMode(&mode))
 	  Error_Handler();
@@ -959,14 +959,10 @@ void StartDefaultTask(void *argument)
 
   MMR_MCP2515_Init(&spi0, 0);
 
-  if (!MMR_MCP2515_Reset())
-	  Error_Handler();
-
-  osDelay(1000);
-
-  while (!waitForMcp2515Mode(MMR_MCP2515_MODE_CONFIGURATION, 2, 100)) {
+  for (int i = 0; i < 20; ++i) {
     if (!MMR_MCP2515_Reset())
 	    Error_Handler();
+    osDelay(100);
   }
 
   const MmrMcp2515Mode MCP2515_MODE = MMR_MCP2515_MODE_NORMAL;
@@ -979,20 +975,21 @@ void StartDefaultTask(void *argument)
     Error_Handler();
 
   // Wait for the MCP2515 to go into the correct mode
-  waitForMcp2515Mode(MCP2515_MODE, 10, 100);
+  waitForMcp2515Mode(MCP2515_MODE, -1, 100);
 
   uint8_t rxBuf[8];
   MmrCanMessage rxMsg;
   MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
 
   while (true) {
-    while (MMR_CAN_Receive(&mcp2515, &rxMsg))
-      process_can_message(&rxMsg);
-      
-    if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
-    	Error_Handler();
+    for (int i = 0; i < MMR_CAN_GetPendingMessages(&mcp2515); ++i) {
+      if (MMR_CAN_Receive(&mcp2515, &rxMsg))
+    	  process_can_message(&rxMsg);
+      else if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
+    	  Error_Handler();
+    }
 
-    while (osMessageQueueGetCount(guiToMainMsgQueue) > 0)
+    for (int i = 0; i < osMessageQueueGetCount(guiToMainMsgQueue); ++i)
     {
       guiToMainMsg msg;
       osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
