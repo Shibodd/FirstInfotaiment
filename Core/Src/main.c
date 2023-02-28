@@ -959,11 +959,22 @@ void StartDefaultTask(void *argument)
 
   MMR_MCP2515_Init(&spi0, 0);
 
-  for (int i = 0; i < 20; ++i) {
-    if (!MMR_MCP2515_Reset())
-	    Error_Handler();
-    osDelay(100);
-  }
+  // For some reason the reset operation sometimes does nothing on the MCP2515.
+  do {
+    // Repeat the MCP2515 reset some times
+    for (int i = 0; i < 20; ++i) {
+      if (!MMR_MCP2515_Reset())
+        Error_Handler();
+      osDelay(100);
+    }
+
+    MmrMcp2515Mode mode;
+    if (!MMR_MCP2515_ReadMode(&mode))
+    	Error_Handler();
+    if (mode == MMR_MCP2515_MODE_CONFIGURATION)
+    	break;
+  } // If the mode is not CONFIGURATION, then the reset operation did nothing.
+  while (true);
 
   const MmrMcp2515Mode MCP2515_MODE = MMR_MCP2515_MODE_NORMAL;
 
