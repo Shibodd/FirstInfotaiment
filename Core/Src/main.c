@@ -836,84 +836,82 @@ void process_gui_message(guiToMainMsg* msg) {
 }
 
 void process_can_message(MmrCanMessage* msg) {
-  if (msg->isStandardId) {
-    switch (msg->id) {
-      /* RES */
-      case 0x191:
-        msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
-        break;
+  if (!msg->isStandardId)
+    return;
+  
+  switch (msg->id) {
+    /* RES */
+    case 0x191:
+      msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
+      break;
 
-      default:
-        return;
-    }
-  } else {
-    switch (msg->id) {
-      /* RPM, SPEED, GEAR, ATH */
-      case 0x008000C2:
-      case 0x108000C2:
-        msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
+    /* RPM, SPEED, GEAR, ATH */
+    case 0x702:
+      msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
 
-        uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
-        msgDisplayInfo.speed = (unsigned char)(speed / 100);
+      uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
+      msgDisplayInfo.speed = (unsigned char)(speed / 100);
 
-        uint8_t gear = msg->payload[4]; /* No need to read msg->payload[5] since it will ALWAYS be 0! */
-        if (gear == 6)
-        {
-          gear_six_count++;
-          if (gear_six_count == 3)
-            msgDisplayInfo.gear = gear;
-        }
-        else
-        {
-          gear_six_count = 0;
+      uint8_t gear = msg->payload[4]; /* No need to read msg->payload[5] since it will ALWAYS be 0! */
+      if (gear == 6)
+      {
+        gear_six_count++;
+        if (gear_six_count == 3)
           msgDisplayInfo.gear = gear;
-        }
-
-        uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
-        msgDisplayInfo.throttle_perc = (unsigned char)(throttle / 100);
-        break;
-
-      /* TOIL, TWATER */
-      case 0x008000C1:
-      case 0x108000C1:
-        msgDisplayInfo.T_oil = (msg->payload[0] - 40);/* No need to read RxData[1] since it will ALWAYS be 0! */
-        msgDisplayInfo.T_water = (msg->payload[2] - 40); /* No need to read RxData[3] since it will ALWAYS be 0! */
-        break;
-
-      /* POIL */
-      case 0x008000C3:
-      case 0x108000C3: {
-        short p_oil = (msg->payload[1] << 8) | msg->payload[0];
-        msgDisplayInfo.P_oil = (float)p_oil / 20;
-        break;
+      }
+      else
+      {
+        gear_six_count = 0;
+        msgDisplayInfo.gear = gear;
       }
 
-      /* battery_V * 1000 | .. | .. | launchsw */
-      case 0x008000C4:
-      case 0x108000C4: {
-        short bat = (msg->payload[1] << 8) | msg->payload[0];
-        msgDisplayInfo.battery_v = (float)bat / 1000;
-        msgDisplayInfo.LC = msg->payload[6]; /* No need to read RxData[7] since it will ALWAYS be 0! */
-        break;
-      }
+      uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
+      msgDisplayInfo.throttle_perc = (unsigned char)(throttle / 100);
+      break;
 
-      /* CLUTCH PULL OK */
-      case 0x004000E1:
-      case 0x104000E1:
-        msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
-        break;
-      
-      /* CLUTCH RELEASE OK */
-      case 0x004000E3:
-      case 0x104000E3:
-        msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
-        break;
+    /* TOIL, TWATER */
+    case 0x701:
+      msgDisplayInfo.T_oil = (msg->payload[0] - 40);/* No need to read RxData[1] since it will ALWAYS be 0! */
+      msgDisplayInfo.T_water = (msg->payload[2] - 40); /* No need to read RxData[3] since it will ALWAYS be 0! */
+      break;
 
-      default:
-        return;
+    /* POIL */
+    case 0x703: {
+      short p_oil = (msg->payload[1] << 8) | msg->payload[0];
+      msgDisplayInfo.P_oil = (float)p_oil / 20;
+      break;
     }
-  }
 
+    /* battery_V * 1000 */
+    case 0x704: {
+      short bat = (msg->payload[1] << 8) | msg->payload[0];
+      msgDisplayInfo.battery_v = (float)bat / 1000;
+      break;
+    }
+
+    /* LAUNCH CONTROL ACTIVE */
+    case 0x70C:
+      msgDisplayInfo.LC = msg->payload[0] & 0x1;
+      break;
+
+    /* CLUTCH PULL OK */
+    // TODO: check IDS!  
+    case 0x004000E1:
+    case 0x104000E1:
+      msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
+      break;
+    
+    /* CLUTCH RELEASE OK */
+    // TODO: check IDS!
+    case 0x004000E3:
+    case 0x104000E3:
+      msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
+      break;
+
+    default:
+      return;
+  }
+  
   // If no case matched (only the default case did), this is not reached.
   // Send a message containing the updated data to the display thread.
   osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
