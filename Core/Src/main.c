@@ -977,7 +977,7 @@ void StartDefaultTask(void *argument)
   const MmrMcp2515Mode MCP2515_MODE = MMR_MCP2515_MODE_NORMAL;
 
   // MCP2515 setup
-  MmrCanFilter fil = MMR_CAN_Filter(0, 0, true);
+  MmrCanFilter fil = MMR_CAN_Filter(0, 0, false);
   if (!MMR_MCP2515_ConfigureCANTimings(MMR_MCP2515_TIMINGS_8MHz_1000kBPS) ||
       !MMR_CAN_SetFilter(&mcp2515, &fil) ||
       !MMR_MCP2515_RequestMode(MCP2515_MODE))
