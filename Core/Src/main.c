@@ -28,6 +28,7 @@
 #include "stm32469i_discovery_sdram.h"
 #include "stm32469i_discovery_qspi.h"
 
+#include "button.h"
 #include "pin.h"
 #include "spi.h"
 #include "mcp2515.h"
@@ -849,10 +850,46 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void steering_button_gear_up_handler() {
+
+}
+void steering_button_gear_down_handler() {
+
+}
+
+typedef struct {
+  int pendingPresses;
+  MmrButton mmr_button;
+  void (*handler)();
+} SteeringButton;
+
+MmrPin steeringGearUpPin;
+MmrPin steeringGearDownPin;
+
+#define STEERING_WHEEL_BUTTONS_COUNT 2
+
+SteeringButton steeringWheelButtons[STEERING_WHEEL_BUTTONS_COUNT];
+void register_steering_button(MmrPin* pinPtr, GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic, void (*handler)()) {
+	static int i = 0;
+	if (i >= STEERING_WHEEL_BUTTONS_COUNT)
+		Error_Handler();
+
+	*pinPtr = MMR_Pin(port, pin, hasInvertedLogic);
+	steeringWheelButtons[i++] = (SteeringButton) { .pendingPresses = 0, .mmr_button = MMR_Button(pinPtr), .handler = handler };
+}
+
+void initialize_steering_buttons() {
+	register_steering_button(&steeringGearUpPin, STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, steering_button_gear_up_handler);
+	register_steering_button(&steeringGearDownPin, STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, steering_button_gear_down_handler);
+}
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-
+  for (int i = 0; i < STEERING_WHEEL_BUTTONS_COUNT; ++i) {
+    SteeringButton btn = steeringWheelButtons[i]; 
+    if (GPIO_Pin == btn.mmr_button.pin->pin && MMR_BUTTON_Read(&btn.mmr_button) == MMR_BUTTON_JUST_PRESSED)
+		  ++btn.pendingPresses;
+  }
 }
 
 void process_gui_message(guiToMainMsg* msg) {
@@ -963,6 +1000,10 @@ bool waitForMcp2515Mode(MmrMcp2515Mode targetMode, int attempts, int pollingInte
   return false;
 }
 
+
+MmrPin mcp2515csPin;
+MmrPin* spiSlavePins[] = { &mcp2515csPin };
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -978,12 +1019,11 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   // Initialize the MMR libraries
-  static MmrPin csPin;
-  static MmrPin* pins[1];
-  csPin = MMR_Pin(MCP2515_CS_GPIO_Port, MCP2515_CS_Pin, true);
-  pins[0] = &csPin;
 
-  if (!MMR_SPI0_Init(&hspi2, &pins, 1))
+  initialize_steering_buttons();
+
+  mcp2515csPin = MMR_Pin(MCP2515_CS_GPIO_Port, MCP2515_CS_Pin, true);
+  if (!MMR_SPI0_Init(&hspi2, spiSlavePins, 1))
     Error_Handler();
 
   MMR_MCP2515_Init(&spi0, 0);
@@ -1022,18 +1062,31 @@ void StartDefaultTask(void *argument)
   MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
 
   while (true) {
-    for (int i = 0; i < MMR_CAN_GetPendingMessages(&mcp2515); ++i) {
+    int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
+    for (int i = 0; i < pendingCanMsgs; ++i) {
       if (MMR_CAN_Receive(&mcp2515, &rxMsg))
     	  process_can_message(&rxMsg);
       else if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
     	  Error_Handler();
     }
 
-    for (int i = 0; i < osMessageQueueGetCount(guiToMainMsgQueue); ++i)
+    int pendingGuiMsgs = osMessageQueueGetCount(guiToMainMsgQueue);
+    for (int i = 0; i < pendingGuiMsgs; ++i)
     {
       guiToMainMsg msg;
       osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
       process_gui_message(&msg);
+    }
+
+    for (int i = 0; i < STEERING_WHEEL_BUTTONS_COUNT; ++i) {
+      SteeringButton btn = steeringWheelButtons[i];
+
+      int pendingPresses = btn.pendingPresses;
+      while (pendingPresses > 0) {
+		btn.handler();
+		--pendingPresses;
+		--btn.pendingPresses;
+      }
     }
   }  
   /* USER CODE END 5 */
