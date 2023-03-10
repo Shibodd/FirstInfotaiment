@@ -850,10 +850,25 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+// STEERING WHEEL BUTTONS
+
 void steering_button_gear_up_handler() {
 
 }
 void steering_button_gear_down_handler() {
+
+}
+void steering_button_green_handler() {
+
+}
+void steering_button_black_handler() {
+
+}
+void steering_button_left_red_handler() {
+
+}
+void steering_button_right_red_handler() {
 
 }
 
@@ -863,30 +878,39 @@ typedef struct {
   void (*handler)();
 } SteeringButton;
 
-MmrPin steeringGearUpPin;
-MmrPin steeringGearDownPin;
+MmrPin steeringButtonGearUpPin;
+MmrPin steeringButtonGearDownPin;
+MmrPin steeringButtonBlackPin;
+MmrPin steeringButtonGreenPin;
+MmrPin steeringButtonLeftRedPin;
+MmrPin steeringButtonRightRedPin;
 
-#define STEERING_WHEEL_BUTTONS_COUNT 2
 
-SteeringButton steeringWheelButtons[STEERING_WHEEL_BUTTONS_COUNT];
+#define STEERING_BUTTONS_COUNT 2
+
+SteeringButton steeringButtons[STEERING_BUTTONS_COUNT];
 void register_steering_button(MmrPin* pinPtr, GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic, void (*handler)()) {
 	static int i = 0;
-	if (i >= STEERING_WHEEL_BUTTONS_COUNT)
+	if (i >= STEERING_BUTTONS_COUNT)
 		Error_Handler();
 
 	*pinPtr = MMR_Pin(port, pin, hasInvertedLogic);
-	steeringWheelButtons[i++] = (SteeringButton) { .pendingPresses = 0, .mmr_button = MMR_Button(pinPtr), .handler = handler };
+	steeringButtons[i++] = (SteeringButton) { .pendingPresses = 0, .mmr_button = MMR_Button(pinPtr), .handler = handler };
 }
 
 void initialize_steering_buttons() {
-	register_steering_button(&steeringGearUpPin, STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, steering_button_gear_up_handler);
-	register_steering_button(&steeringGearDownPin, STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, steering_button_gear_down_handler);
+	register_steering_button(&steeringButtonGearUpPin, STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, steering_button_gear_up_handler);
+	register_steering_button(&steeringButtonGearDownPin, STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, steering_button_gear_down_handler);
+	register_steering_button(&steeringButtonBlackPin, STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true, steering_button_black_handler);
+	register_steering_button(&steeringButtonGreenPin, STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true, steering_button_green_handler);
+	register_steering_button(&steeringButtonLeftRedPin, STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true, steering_button_left_red_handler);
+	register_steering_button(&steeringButtonRightRedPin, STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true, steering_button_right_red_handler);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  for (int i = 0; i < STEERING_WHEEL_BUTTONS_COUNT; ++i) {
-    SteeringButton btn = steeringWheelButtons[i]; 
+  for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
+    SteeringButton btn = steeringButtons[i]; 
     if (GPIO_Pin == btn.mmr_button.pin->pin && MMR_BUTTON_Read(&btn.mmr_button) == MMR_BUTTON_JUST_PRESSED)
 		  ++btn.pendingPresses;
   }
@@ -1078,15 +1102,13 @@ void StartDefaultTask(void *argument)
       process_gui_message(&msg);
     }
 
-    for (int i = 0; i < STEERING_WHEEL_BUTTONS_COUNT; ++i) {
-      SteeringButton btn = steeringWheelButtons[i];
+    for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
+      SteeringButton* btn = &steeringButtons[i];
 
-      int pendingPresses = btn.pendingPresses;
-      while (pendingPresses > 0) {
-		btn.handler();
-		--pendingPresses;
-		--btn.pendingPresses;
-      }
+      int pendingPresses = btn->pendingPresses;
+      for (int i = 0; i < pendingPresses; ++i)
+        btn->handler();
+      btn->pendingPresses -= pendingPresses;
     }
   }  
   /* USER CODE END 5 */
