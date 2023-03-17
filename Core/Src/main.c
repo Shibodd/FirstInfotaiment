@@ -858,14 +858,14 @@ typedef struct SteeringButton {
   MmrButton mmr_button;
   MmrPin mmr_pin;
   void (*handler)(struct SteeringButton*);
+  uint32_t last_press_tick;
 } SteeringButton;
 
-
-void btnGearUpHandler(SteeringButton *btn) {
-  if (btn->pendingPresses > 0 && MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem))
-    btn->pendingPresses = 0;
+void voidHandler(SteeringButton * btn) {
+  btn->pendingPresses = 0;
+  ++msgDisplayInfo.rpm;
+  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
-
 
 #define STEERING_BUTTONS_COUNT 6
 SteeringButton steeringButtons[STEERING_BUTTONS_COUNT];
@@ -876,17 +876,18 @@ void register_steering_button(GPIO_TypeDef* port, uint16_t pin, bool hasInverted
 
 	SteeringButton* btn = &steeringButtons[i++];
 	btn->mmr_pin = MMR_Pin(port, pin, hasInvertedLogic);
-  btn->mmr_button = MMR_Button(&btn->mmr_pin);
-  btn->handler = handler;
+	btn->mmr_button = MMR_Button(&btn->mmr_pin);
+	btn->handler = handler;
+	btn->last_press_tick = 0;
 }
 
 void initialize_steering_buttons() {
-	register_steering_button(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, btnGearUpHandler);
-	register_steering_button(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, btnGearUpHandler);
-	register_steering_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true, btnGearUpHandler);
-	register_steering_button(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true, btnGearUpHandler);
-	register_steering_button(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true, btnGearUpHandler);
-	register_steering_button(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true, btnGearUpHandler);
+	register_steering_button(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, voidHandler);
+	register_steering_button(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, voidHandler);
+	register_steering_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true, voidHandler);
+	register_steering_button(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true, voidHandler);
+	register_steering_button(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true, voidHandler);
+	register_steering_button(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true, voidHandler);
 }
 
 void process_steering_buttons() {
@@ -896,13 +897,27 @@ void process_steering_buttons() {
       btn->handler(btn);
   }
 }
-
+MmrPinState dbgPinState;
+#define DEBOUNCE_TICKS 200
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = &steeringButtons[i]; 
-    if (GPIO_Pin == btn->mmr_pin.pin && MMR_BUTTON_Read(&btn->mmr_button) == MMR_BUTTON_JUST_PRESSED)
-		  ++btn->pendingPresses;
+    SteeringButton* btn = &steeringButtons[i];
+    if (GPIO_Pin == btn->mmr_pin.pin) {
+    	// Debounce the interrupt, because the board implements no debounce at all
+    	uint32_t tick = HAL_GetTick();
+		if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
+
+			// Check if the button is actually pressed:
+			// Another button on the same pin (but different port) may have triggered the interrupt;
+			// Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
+			MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
+			if (state == MMR_PIN_HIGH) {
+				++btn->pendingPresses;
+				btn->last_press_tick = tick;
+			}
+		}
+    }
   }
 }
 
