@@ -7,7 +7,7 @@
 #include "spi0.h"
 #include "stm_pin.h"
 
-
+extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
 extern osMessageQueueId_t mainToGuiMsgQueue;
 extern SPI_HandleTypeDef hspi2;
@@ -20,11 +20,14 @@ MmrPin* spiSlavePins[] = { &mcp2515csPin };
 
 
 void userMessage(const char* msg) {
-
+	osMessageQueuePut(dbgMsgQueue, msg, 0U, 0U);
 }
 
 void userError(const char* msg) {
-
+	userMessage(msg);
+	while (true) {
+		osDelay(1000);
+	}
 }
 
 
@@ -33,52 +36,44 @@ void userError(const char* msg) {
 typedef struct SteeringButton {
   int pendingPresses;
   MmrPin mmr_pin;
-  void (*handler)(struct SteeringButton*);
   uint32_t last_press_tick;
 } SteeringButton;
 
-void voidHandler(SteeringButton * btn) {
-  btn->pendingPresses = 0;
-  ++msgDisplayInfo.rpm;
-  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
+#define STEERING_BUTTON(port, pin, hasInvertedLogic) (SteeringButton) { \
+	.pendingPresses = 0,\
+	.last_press_tick = 0,\
+	.mmr_pin = MMR_Pin(port, pin, hasInvertedLogic),\
 }
 
-#define STEERING_BUTTONS_COUNT 6
-SteeringButton steeringButtons[STEERING_BUTTONS_COUNT];
-void register_steering_button(GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic, void (*handler)(SteeringButton*)) {
-	static int i = 0;
-	if (i >= STEERING_BUTTONS_COUNT)
-		Error_Handler();
+SteeringButton gearUpButton;
+SteeringButton gearDownButton;
+SteeringButton blackButton;
+SteeringButton greenButton;
+SteeringButton leftRedButton;
+SteeringButton rightRedButton;
 
-	SteeringButton* btn = &steeringButtons[i++];
-	btn->mmr_pin = MMR_Pin(port, pin, hasInvertedLogic);
-	btn->handler = handler;
-	btn->last_press_tick = 0;
-}
+SteeringButton* const steeringButtons[] = {
+  &gearUpButton, &gearDownButton,
+  &blackButton,
+  &greenButton,
+  &leftRedButton, &rightRedButton
+};
+const uint32_t STEERING_BUTTONS_COUNT = sizeof(steeringButtons) / sizeof(SteeringButton*);
 
 void initialize_steering_buttons() {
-	register_steering_button(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, voidHandler);
-	register_steering_button(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, voidHandler);
-	register_steering_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true, voidHandler);
+	gearUpButton = STEERING_BUTTON(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true);
+	gearDownButton = STEERING_BUTTON(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true);
+	blackButton = STEERING_BUTTON(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true);
+	greenButton = STEERING_BUTTON(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true);
+	leftRedButton = STEERING_BUTTON(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true);
+	rightRedButton = STEERING_BUTTON(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true);
 }
 
-void process_steering_buttons() {
-  for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = &steeringButtons[i];
-    if (btn->pendingPresses > 0)
-      btn->handler(btn);
-  }
-}
-
-MmrPinState dbgPinState;
 #define DEBOUNCE_TICKS 200
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = &steeringButtons[i];
+    SteeringButton* btn = steeringButtons[i];
     if (GPIO_Pin == btn->mmr_pin.pin) {
     	// Debounce the interrupt, because the board implements no debounce at all
     	uint32_t tick = HAL_GetTick();
@@ -262,7 +257,10 @@ void userDefaultTask() {
       process_gui_message(&msg);
     }
 
-    process_steering_buttons();
+    if (gearUpButton.pendingPresses > 0) {
+    	userMessage("Gear up pressed");
+    	gearUpButton.pendingPresses = 0;
+    }
   }
 }
 

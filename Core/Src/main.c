@@ -81,6 +81,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
+osMessageQueueId_t dbgMsgQueue;
 osMessageQueueId_t guiToMainMsgQueue;
 osMessageQueueId_t mainToGuiMsgQueue;
 /* USER CODE END PV */
@@ -172,6 +173,8 @@ int main(void)
   if ((guiToMainMsgQueue = osMessageQueueNew(10, sizeof(guiToMainMsg), NULL)) == NULL)
 	  return -1;
   if ((mainToGuiMsgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
+	  return -1;
+  if ((dbgMsgQueue = osMessageQueueNew(5, sizeof(char*), NULL)) == NULL)
 	  return -1;
   /* USER CODE END RTOS_QUEUES */
 
