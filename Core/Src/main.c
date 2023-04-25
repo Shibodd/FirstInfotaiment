@@ -28,14 +28,6 @@
 #include "stm32469i_discovery_sdram.h"
 #include "stm32469i_discovery_qspi.h"
 
-#include "button.h"
-#include "pin.h"
-#include "spi.h"
-#include "mcp2515.h"
-
-#include "stm_pin.h"
-#include "spi0.h"
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,12 +81,8 @@ const osThreadAttr_t TouchGFXTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
-
-displayInfo msgDisplayInfo;
 osMessageQueueId_t guiToMainMsgQueue;
 osMessageQueueId_t mainToGuiMsgQueue;
-
-int gear_six_count = 0, gear_mem = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -851,193 +839,10 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-// STEERING WHEEL BUTTONS
-
-typedef struct SteeringButton {
-  int pendingPresses;
-  MmrButton mmr_button;
-  MmrPin mmr_pin;
-  void (*handler)(struct SteeringButton*);
-  uint32_t last_press_tick;
-} SteeringButton;
-
-void voidHandler(SteeringButton * btn) {
-  btn->pendingPresses = 0;
-  ++msgDisplayInfo.rpm;
-  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
-}
-
-#define STEERING_BUTTONS_COUNT 6
-SteeringButton steeringButtons[STEERING_BUTTONS_COUNT];
-void register_steering_button(GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic, void (*handler)(SteeringButton*)) {
-	static int i = 0;
-	if (i >= STEERING_BUTTONS_COUNT)
-		Error_Handler();
-
-	SteeringButton* btn = &steeringButtons[i++];
-	btn->mmr_pin = MMR_Pin(port, pin, hasInvertedLogic);
-	btn->mmr_button = MMR_Button(&btn->mmr_pin);
-	btn->handler = handler;
-	btn->last_press_tick = 0;
-}
-
-void initialize_steering_buttons() {
-	register_steering_button(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true, voidHandler);
-	register_steering_button(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true, voidHandler);
-	register_steering_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true, voidHandler);
-	register_steering_button(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true, voidHandler);
-}
-
-void process_steering_buttons() {
-  for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = &steeringButtons[i];
-    if (btn->pendingPresses > 0)
-      btn->handler(btn);
-  }
-}
-MmrPinState dbgPinState;
-#define DEBOUNCE_TICKS 200
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = &steeringButtons[i];
-    if (GPIO_Pin == btn->mmr_pin.pin) {
-    	// Debounce the interrupt, because the board implements no debounce at all
-    	uint32_t tick = HAL_GetTick();
-		if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
-
-			// Check if the button is actually pressed:
-			// Another button on the same pin (but different port) may have triggered the interrupt;
-			// Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
-			MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
-			if (state == MMR_PIN_HIGH) {
-				++btn->pendingPresses;
-				btn->last_press_tick = tick;
-			}
-		}
-    }
-  }
-}
-
-void process_gui_message(guiToMainMsg* msg) {
-  // do stuff
-  MmrCanMessage txMsg;
-	uint8_t txPayload[] = { msg->missionType };
-
-	MMR_CAN_MESSAGE_SetId(&txMsg, 254);
-	MMR_CAN_MESSAGE_SetStandardId(&txMsg, true);
-	MMR_CAN_MESSAGE_SetPayload(&txMsg, txPayload, sizeof(txPayload));
-
-	if (!MMR_CAN_Send(&mcp2515, &txMsg))
-    Error_Handler();
-}
-
-void process_can_message(MmrCanMessage* msg) {
-  if (!msg->isStandardId)
-    return;
-  
-  switch (msg->id) {
-    /* RES */
-    case 0x191:
-      msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
-      break;
-
-    /* RPM, SPEED, GEAR, ATH */
-    case 0x702:
-      msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
-
-      uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
-      msgDisplayInfo.speed = (unsigned char)(speed / 100);
-
-      uint8_t gear = msg->payload[4]; /* No need to read msg->payload[5] since it will ALWAYS be 0! */
-      gear_mem = gear;
-      if (gear == 6)
-      {
-        gear_six_count++;
-        if (gear_six_count == 3)
-          msgDisplayInfo.gear = gear;
-      }
-      else
-      {
-        gear_six_count = 0;
-        msgDisplayInfo.gear = gear;
-      }
-
-      uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
-      msgDisplayInfo.throttle_perc = (unsigned char)(throttle / 100);
-      break;
-
-    /* TOIL, TWATER */
-    case 0x701:
-      msgDisplayInfo.T_oil = (msg->payload[0] - 40);/* No need to read RxData[1] since it will ALWAYS be 0! */
-      msgDisplayInfo.T_water = (msg->payload[2] - 40); /* No need to read RxData[3] since it will ALWAYS be 0! */
-      break;
-
-    /* POIL */
-    case 0x703: {
-      short p_oil = (msg->payload[1] << 8) | msg->payload[0];
-      msgDisplayInfo.P_oil = (float)p_oil / 20;
-      break;
-    }
-
-    /* battery_V * 1000 */
-    case 0x704: {
-      short bat = (msg->payload[1] << 8) | msg->payload[0];
-      msgDisplayInfo.battery_v = (float)bat / 1000;
-      break;
-    }
-
-    /* LAUNCH CONTROL ACTIVE */
-    case 0x70C:
-      msgDisplayInfo.LC = msg->payload[0] & 0x1;
-      break;
-
-    /* CLUTCH PULL OK */
-    // TODO: check IDS!  
-    case 0x004000E1:
-    case 0x104000E1:
-      msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
-      break;
-    
-    /* CLUTCH RELEASE OK */
-    // TODO: check IDS!
-    case 0x004000E3:
-    case 0x104000E3:
-      msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
-      break;
-
-    default:
-      return;
-  }
-  
-  // If no case matched (only the default case did), this is not reached.
-  // Send a message containing the updated data to the display thread.
-  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
-}
-
-bool waitForMcp2515Mode(MmrMcp2515Mode targetMode, int attempts, int pollingIntervalTicks) {
-  for (int attempt = 0; attempt < attempts || attempts < 0; ++attempt) { // if attempts < 0 then run indefinitely
-	MmrMcp2515Mode mode;
-	if (!MMR_MCP2515_ReadMode(&mode))
-	  Error_Handler();
-
-	if (mode == targetMode)
-	  return true;
-    osDelay(pollingIntervalTicks);
-}
-  return false;
-}
-
-
-MmrPin mcp2515csPin;
-MmrPin* spiSlavePins[] = { &mcp2515csPin };
-
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
-
+extern void userDefaultTask();
 
 /**
   * @brief  Function implementing the defaultTask thread.
@@ -1048,68 +853,7 @@ MmrPin* spiSlavePins[] = { &mcp2515csPin };
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-  // Initialize the MMR libraries
-
-  initialize_steering_buttons();
-
-  mcp2515csPin = MMR_Pin(MCP2515_CS_GPIO_Port, MCP2515_CS_Pin, true);
-  if (!MMR_SPI0_Init(&hspi2, spiSlavePins, 1))
-    Error_Handler();
-
-  MMR_MCP2515_Init(&spi0, 0);
-
-  // For some reason the reset operation sometimes does nothing on the MCP2515.
-  do {
-    // Repeat the MCP2515 reset some times
-    for (int i = 0; i < 20; ++i) {
-      if (!MMR_MCP2515_Reset())
-        Error_Handler();
-      osDelay(100);
-    }
-
-    MmrMcp2515Mode mode;
-    if (!MMR_MCP2515_ReadMode(&mode))
-    	Error_Handler();
-    if (mode == MMR_MCP2515_MODE_CONFIGURATION)
-    	break;
-  } // If the mode is not CONFIGURATION, then the reset operation did nothing.
-  while (true);
-
-  const MmrMcp2515Mode MCP2515_MODE = MMR_MCP2515_MODE_NORMAL;
-
-  // MCP2515 setup
-  MmrCanFilter fil = MMR_CAN_Filter(0, 0, false);
-  if (!MMR_MCP2515_ConfigureCANTimings(MMR_MCP2515_TIMINGS_8MHz_1000kBPS) ||
-      !MMR_CAN_SetFilter(&mcp2515, &fil) ||
-      !MMR_MCP2515_RequestMode(MCP2515_MODE))
-    Error_Handler();
-
-  // Wait for the MCP2515 to go into the correct mode
-  waitForMcp2515Mode(MCP2515_MODE, -1, 100);
-
-  uint8_t rxBuf[8];
-  MmrCanMessage rxMsg;
-  MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
-
-  while (true) {
-    int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
-    for (int i = 0; i < pendingCanMsgs; ++i) {
-      if (MMR_CAN_Receive(&mcp2515, &rxMsg))
-    	  process_can_message(&rxMsg);
-      else if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
-    	  Error_Handler();
-    }
-
-    int pendingGuiMsgs = osMessageQueueGetCount(guiToMainMsgQueue);
-    for (int i = 0; i < pendingGuiMsgs; ++i)
-    {
-      guiToMainMsg msg;
-      osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
-      process_gui_message(&msg);
-    }
-
-    process_steering_buttons();
-  }  
+  userDefaultTask();
   /* USER CODE END 5 */
 }
 
