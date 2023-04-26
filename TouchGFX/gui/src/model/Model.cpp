@@ -1,11 +1,16 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 
+// #define SIMULATOR
+
+#ifndef SIMULATOR
+
 #include "cmsis_os.h"
 #include "main.h"
-
 extern osMessageQueueId_t guiToMainMsgQueue;
 extern osMessageQueueId_t mainToGuiMsgQueue;
+
+#endif
 
 displayInfo info;
 
@@ -15,6 +20,7 @@ Model::Model() : modelListener(0)
 
 void Model::tick()
 {
+#ifndef SIMULATOR
 	osStatus_t status;
 	status = osMessageQueueGet(mainToGuiMsgQueue, &info, NULL, 0);
 	if (status == osOK)
@@ -40,13 +46,16 @@ void Model::tick()
 
 		modelListener->infoChanged();
 	}
+#endif
 }
 
 
-void Model::requestMission(MissionType missionType) {
+void Model::requestMission(MmrMission missionType) {
+#ifndef SIMULATOR
 	guiToMainMsg msg {
 		.missionType = missionType
 	};
 
 	osMessageQueuePut(guiToMainMsgQueue, &missionType, 0, 0);
+#endif
 }

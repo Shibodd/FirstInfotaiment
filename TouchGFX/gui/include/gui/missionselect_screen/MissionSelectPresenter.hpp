@@ -3,7 +3,7 @@
 
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
-#include "main.h"
+#include "gui_shared_defs.h"
 
 using namespace touchgfx;
 
@@ -26,7 +26,7 @@ public:
      */
     virtual void deactivate();
 
-    void requestMission(MissionType type);
+    void requestMission(MmrMission type);
 
     virtual ~MissionSelectPresenter() {};
 

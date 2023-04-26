@@ -18,7 +18,7 @@ void MissionSelectPresenter::deactivate()
 
 }
 
-void MissionSelectPresenter::requestMission(MissionType missionType)
+void MissionSelectPresenter::requestMission(MmrMission missionType)
 {
     model->requestMission(missionType);
 }

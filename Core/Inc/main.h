@@ -49,34 +49,6 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef struct {
-	uint8_t speed;
-	uint8_t gear;
-	uint16_t rpm;
-	uint8_t T_water;
-	uint8_t T_oil;
-	uint8_t throttle_perc;
-	uint8_t brake_perc;
-	float P_oil;
-	int RES;
-	bool LC;
-	bool CLT;
-	float battery_v;
-	/* TODO: String variables */
-} displayInfo;
-
-typedef enum {
-  MISSION_MANUAL,
-  MISSION_TRACKDRIVE,
-  MISSION_ACCELERATION
-} MissionType;
-
-typedef struct {
-  MissionType missionType;
-} guiToMainMsg;
-
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

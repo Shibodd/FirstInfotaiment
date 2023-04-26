@@ -1,4 +1,5 @@
 #include "main.h"
+#include "gui_shared_defs.h"
 #include "cmsis_os.h"
 
 #include "pin.h"
@@ -6,6 +7,47 @@
 #include "mcp2515.h"
 #include "spi0.h"
 #include "stm_pin.h"
+
+#include "delay.h"
+
+
+// This will most likely be moved somewhere else
+bool MMR_SwitchMissionAsync(MmrCan* can, MmrMission mission) {
+  const bool MISSION_SELECTED_CANID_IS_STD = true;
+  const uint32_t MISSION_SELECTED_CANID = 0x40;
+  const uint32_t INTERVAL = 50;
+  const int REPEAT_COUNT = 5;
+
+  static MmrDelay intervalDelay;
+  static int i = 0;
+
+  if (i >= REPEAT_COUNT) {
+    i = 0;
+    return true;
+  }
+
+  if (i == 0) {
+    // TODO: Move this somewhere else, pls, for the love of god.
+    intervalDelay = MMR_Delay(INTERVAL);
+  }
+
+  if (i == 0 || MMR_DELAY_WaitAsync(&intervalDelay)) {
+    MmrCanMessage txMsg;
+    uint8_t txPayload[] = { mission };
+
+    MMR_CAN_MESSAGE_SetId(&txMsg, MISSION_SELECTED_CANID);
+    MMR_CAN_MESSAGE_SetStandardId(&txMsg, MISSION_SELECTED_CANID_IS_STD);
+    MMR_CAN_MESSAGE_SetPayload(&txMsg, txPayload, sizeof(txPayload));
+
+    // TODO: handle errors!
+    MMR_CAN_Send(&mcp2515, &txMsg);
+
+    ++i;
+  }
+
+  return false;
+}
+
 
 extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
@@ -78,26 +120,52 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if (GPIO_Pin == btn->mmr_pin.pin) {
     	// Debounce the interrupt, because the board implements no debounce at all
     	uint32_t tick = HAL_GetTick();
-		if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
-
-			// Check if the button is actually pressed:
-			// Another button on the same pin (but different port) may have triggered the interrupt;
-			// Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
-			MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
-			if (state == MMR_PIN_HIGH) {
-				++btn->pendingPresses;
-				btn->last_press_tick = tick;
-			}
-		}
+      if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
+        // Check if the button is actually pressed:
+        // Another button on the same pin (but different port) may have triggered the interrupt;
+        // Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
+        MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
+        if (state == MMR_PIN_HIGH) {
+          ++btn->pendingPresses;
+          btn->last_press_tick = tick;
+        }
+      }
     }
   }
 }
 
+bool isSwitchingMission;
+MmrMission selectedMission;
+
+void performTasks() {
+  if (isSwitchingMission && MMR_SwitchMissionAsync(&mcp2515, selectedMission)) {
+    userMessage("INFO: Mission switched.");
+    isSwitchingMission = false;
+  }
+}
+
+void handleButtons() {
+  if (gearUpButton.pendingPresses > 0) {
+    userMessage("INFO: Gear up pressed.");
+    gearUpButton.pendingPresses = 0;
+  }
+
+  if (gearDownButton.pendingPresses > 0) {
+    userMessage("INFO: Gear down pressed.");
+    gearDownButton.pendingPresses = 0;
+  }
+}
+
+
 
 // Main logic
-
 void process_gui_message(guiToMainMsg* msg) {
-  // do stuff
+  if (!isSwitchingMission) {
+    userMessage("INFO: Switching mission...");
+
+    selectedMission = msg->missionType;
+    isSwitchingMission = true;
+  }
 }
 
 void process_can_message(MmrCanMessage* msg) {
@@ -249,10 +317,8 @@ void userDefaultTask() {
       process_gui_message(&msg);
     }
 
-    if (gearUpButton.pendingPresses > 0) {
-    	userMessage("Gear up pressed");
-    	gearUpButton.pendingPresses = 0;
-    }
+    handleButtons();
+    performTasks();
   }
 }
 
