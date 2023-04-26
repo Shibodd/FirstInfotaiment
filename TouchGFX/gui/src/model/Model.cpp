@@ -1,8 +1,6 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 
-// #define SIMULATOR
-
 #ifndef SIMULATOR
 
 #include "cmsis_os.h"
