@@ -1,10 +1,17 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 
+#ifdef SIMULATOR
+#include <stdio.h>
+
+#endif
+
 #ifndef SIMULATOR
 
 #include "cmsis_os.h"
 #include "main.h"
+
+extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
 extern osMessageQueueId_t mainToGuiMsgQueue;
 
@@ -15,6 +22,8 @@ displayInfo info;
 Model::Model() : modelListener(0)
 {
 }
+
+
 
 void Model::tick()
 {
@@ -44,6 +53,10 @@ void Model::tick()
 
 		modelListener->infoChanged();
 	}
+
+	status = osMessageQueueGet(mainToGuiMsgQueue, &dbgMessage, NULL, 0);
+	if (status == osOK)
+		modelListener->debugMessageChanged();
 #endif
 }
 
@@ -55,5 +68,10 @@ void Model::requestMission(MmrMission missionType) {
 	};
 
 	osMessageQueuePut(guiToMainMsgQueue, &missionType, 0, 0);
+#else
+	static char buf[32];
+	snprintf(buf, 32, "Mission requested: %d", missionType);
+	dbgMessage = buf;
+	modelListener->debugMessageChanged();
 #endif
 }

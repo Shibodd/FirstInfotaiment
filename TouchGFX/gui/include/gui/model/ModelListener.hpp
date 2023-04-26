@@ -12,6 +12,7 @@ public:
 
     virtual void gearChanged() {};
     virtual void infoChanged() {};
+    virtual void debugMessageChanged() {};
 
     void bind(Model* m)
     {

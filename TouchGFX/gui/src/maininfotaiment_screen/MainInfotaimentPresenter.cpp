@@ -14,9 +14,8 @@ void MainInfotaimentPresenter::TESTFUNCTION()
 
 void MainInfotaimentPresenter::activate()
 {
-	view.setGear(0);
-	view.setRpm(0);
-	view.setSpeed(0);
+	infoChanged();
+	debugMessageChanged();
 }
 
 void MainInfotaimentPresenter::deactivate()
@@ -49,4 +48,9 @@ void MainInfotaimentPresenter::infoChanged()
 	view.setBattery_V(model->getBattery_v());
 
 	/* TODO: String variables */
+}
+
+
+void MainInfotaimentPresenter::debugMessageChanged() {
+	view.setDebugMessage(model->getDebugMessage());
 }

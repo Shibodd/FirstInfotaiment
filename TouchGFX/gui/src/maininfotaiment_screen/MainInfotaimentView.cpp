@@ -8,12 +8,12 @@ MainInfotaimentView::MainInfotaimentView()
 
 void MainInfotaimentView::setupScreen()
 {
-    MainInfotaimentViewBase::setupScreen();
+  MainInfotaimentViewBase::setupScreen();
 }
 
 void MainInfotaimentView::tearDownScreen()
 {
-    MainInfotaimentViewBase::tearDownScreen();
+  MainInfotaimentViewBase::tearDownScreen();
 }
 
 void MainInfotaimentView::setGear(int gear)
@@ -218,3 +218,14 @@ void MainInfotaimentView::setBattery_V(float battery_v)
 	imgBatteryV.invalidate();
 }
 /* TODO: String variables */
+
+
+void MainInfotaimentView::setDebugMessage(const char* msg) {
+	if (msg == nullptr) {
+		Unicode::snprintf(dbgTextAreaBuffer, DBGTEXTAREA_SIZE, "");
+	} else {
+		Unicode::snprintf(dbgTextAreaBuffer, DBGTEXTAREA_SIZE, msg);
+	}
+
+	dbgTextArea.invalidate();
+}

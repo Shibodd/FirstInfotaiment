@@ -18,6 +18,7 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     178, // T_TOIL: "T_oil"
     172, // T_POIL: "P_oil"
     151, // T_TWATER: "T_water"
+    149, // T___SINGLEUSE_F2RY: "<>"
     159, // T___SINGLEUSE_WA28: "MANUAL"
     114, // T___SINGLEUSE_9YCJ: "TRACKDRIVE"
     66,  // T___SINGLEUSE_32A3: "ACCELERATION"

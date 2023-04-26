@@ -419,6 +419,14 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     btnNextPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID), touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID));
     btnNextPage.setAction(buttonCallback);
     add(btnNextPage);
+
+    dbgTextArea.setPosition(5, 454, 741, 23);
+    dbgTextArea.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    dbgTextArea.setLinespacing(0);
+    dbgTextAreaBuffer[0] = 0;
+    dbgTextArea.setWildcard(dbgTextAreaBuffer);
+    dbgTextArea.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F2RY));
+    add(dbgTextArea);
 }
 
 MainInfotaimentViewBase::~MainInfotaimentViewBase()

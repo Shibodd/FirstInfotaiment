@@ -32,6 +32,7 @@ public:
     //from model
     virtual void gearChanged();
     virtual void infoChanged();
+    virtual void debugMessageChanged();
 
 private:
     MainInfotaimentPresenter();

@@ -42,6 +42,8 @@ public:
 
     void setBattery_V(float battery_v);
 
+    void setDebugMessage(const char* msg);
+
     /* TODO: String variables */
 
 protected:

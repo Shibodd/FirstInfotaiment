@@ -48,10 +48,14 @@ public:
 
     void requestMission(MmrMission missionType);
 
+    const char* getDebugMessage() { return dbgMessage; }
+
     /* TODO: string variables */
 
 protected:
     ModelListener* modelListener;
+
+    const char* dbgMessage;
     int gear, speed, rpm, T_water, T_oil, throttle_perc, brake_perc;
 
     float P_oil;

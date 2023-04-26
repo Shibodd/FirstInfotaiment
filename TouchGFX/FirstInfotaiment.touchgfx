@@ -959,6 +959,25 @@
             "Height": 35,
             "Pressed": "btn_next_raw-removebg-preview.png",
             "Released": "btn_next_raw-removebg-preview.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "dbgTextArea",
+            "X": 5,
+            "Y": 454,
+            "Width": 741,
+            "Height": 23,
+            "TextId": "__SingleUse_F2RY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 32
+            }
           }
         ],
         "Interactions": [

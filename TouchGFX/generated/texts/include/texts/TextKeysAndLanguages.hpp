@@ -20,6 +20,7 @@ enum TEXTS
     T_TOIL,
     T_POIL,
     T_TWATER,
+    T___SINGLEUSE_F2RY,
     T___SINGLEUSE_WA28,
     T___SINGLEUSE_9YCJ,
     T___SINGLEUSE_32A3,

@@ -31,6 +31,9 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_F2RY" Alignment="Left" TypographyId="Medium">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_WA28" Alignment="Center" TypographyId="Medium">
         <Translation Language="GB">MANUAL</Translation>
       </Text>
@@ -140,7 +143,7 @@
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Gear" Font="verdana.ttf" Size="60" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Speed" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="Medium" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
+    <Typography Id="Medium" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=": ." WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="little_medium" Font="verdana.ttf" Size="15" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Med_Large" Font="verdana.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
   </Typographies>
