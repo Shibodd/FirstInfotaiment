@@ -10,7 +10,8 @@
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/widgets/ButtonWithLabel.hpp>
+#include <touchgfx/containers/scrollers/ScrollList.hpp>
+#include <gui/containers/missionBtnContainer.hpp>
 
 class MissionSelectViewBase : public touchgfx::View<MissionSelectPresenter>
 {
@@ -18,6 +19,11 @@ public:
     MissionSelectViewBase();
     virtual ~MissionSelectViewBase();
     virtual void setupScreen();
+
+    virtual void missionScrollListUpdateItem(missionBtnContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in MissionSelect
+    }
 
     /*
      * Virtual Action Handlers
@@ -46,20 +52,21 @@ protected:
     touchgfx::Box __background;
     touchgfx::Button btnPrevPage;
     touchgfx::TextArea labelSelectMission;
-    touchgfx::ButtonWithLabel btnAccelerationMission;
-    touchgfx::ButtonWithLabel btnTrackdriveMission;
-    touchgfx::ButtonWithLabel btnManualMission;
+    touchgfx::ScrollList missionScrollList;
+    touchgfx::DrawableListItems<missionBtnContainer, 10> missionScrollListListItems;
 
 private:
 
     /*
      * Callback Declarations
      */
+    touchgfx::Callback<MissionSelectViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
     touchgfx::Callback<MissionSelectViewBase, const touchgfx::AbstractButton&> buttonCallback;
 
     /*
      * Callback Handler Declarations
      */
+    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };

@@ -7,13 +7,14 @@
 #include <texts/TextKeysAndLanguages.hpp>
 
 MissionSelectViewBase::MissionSelectViewBase() :
+    updateItemCallback(this, &MissionSelectViewBase::updateItemCallbackHandler),
     buttonCallback(this, &MissionSelectViewBase::buttonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    btnPrevPage.setXY(759, 442);
+    btnPrevPage.setXY(749, 432);
     btnPrevPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_PREV_RAW_REMOVEBG_PREVIEW_ID), touchgfx::Bitmap(BITMAP_BTN_PREV_RAW_REMOVEBG_PREVIEW_ID));
     btnPrevPage.setAction(buttonCallback);
     add(btnPrevPage);
@@ -24,29 +25,18 @@ MissionSelectViewBase::MissionSelectViewBase() :
     labelSelectMission.setTypedText(touchgfx::TypedText(T___SINGLEUSE_U2AM));
     add(labelSelectMission);
 
-    btnAccelerationMission.setXY(315, 94);
-    btnAccelerationMission.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    btnAccelerationMission.setLabelText(touchgfx::TypedText(T___SINGLEUSE_32A3));
-    btnAccelerationMission.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnAccelerationMission.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnAccelerationMission.setAction(buttonCallback);
-    add(btnAccelerationMission);
-
-    btnTrackdriveMission.setXY(315, 171);
-    btnTrackdriveMission.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    btnTrackdriveMission.setLabelText(touchgfx::TypedText(T___SINGLEUSE_9YCJ));
-    btnTrackdriveMission.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnTrackdriveMission.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnTrackdriveMission.setAction(buttonCallback);
-    add(btnTrackdriveMission);
-
-    btnManualMission.setXY(315, 250);
-    btnManualMission.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    btnManualMission.setLabelText(touchgfx::TypedText(T___SINGLEUSE_WA28));
-    btnManualMission.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnManualMission.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnManualMission.setAction(buttonCallback);
-    add(btnManualMission);
+    missionScrollList.setPosition(280, 76, 214, 377);
+    missionScrollList.setHorizontal(false);
+    missionScrollList.setCircular(false);
+    missionScrollList.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
+    missionScrollList.setSwipeAcceleration(10);
+    missionScrollList.setDragAcceleration(10);
+    missionScrollList.setNumberOfItems(1);
+    missionScrollList.setPadding(0, 0);
+    missionScrollList.setSnapping(false);
+    missionScrollList.setDrawableSize(36, 7);
+    missionScrollList.setDrawables(missionScrollListListItems, updateItemCallback);
+    add(missionScrollList);
 }
 
 MissionSelectViewBase::~MissionSelectViewBase()
@@ -56,7 +46,11 @@ MissionSelectViewBase::~MissionSelectViewBase()
 
 void MissionSelectViewBase::setupScreen()
 {
-
+    missionScrollList.initialize();
+    for (int i = 0; i < missionScrollListListItems.getNumberOfDrawables(); i++)
+    {
+        missionScrollListListItems[i].initialize();
+    }
 }
 
 void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
@@ -66,27 +60,28 @@ void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //fromMissionSelectToLiveData
         //When btnPrevPage clicked change screen to MainInfotaiment
         //Go to MainInfotaiment with screen transition towards West
-        application().gotoMainInfotaimentScreenSlideTransitionWest();
-    }
-    if (&src == &btnManualMission)
-    {
+        application().gotoMainInfotaimentScreenSlideTransitionWest();
         //startManualMission
-        //When btnManualMission clicked call virtual function
+        //When btnPrevPage clicked call virtual function
         //Call startManualMission
-        startManualMission();
-    }
-    if (&src == &btnTrackdriveMission)
-    {
+        startManualMission();
         //startTrackdriveMission
-        //When btnTrackdriveMission clicked call virtual function
+        //When btnPrevPage clicked call virtual function
         //Call startTrackdriveMission
-        startTrackdriveMission();
-    }
-    if (&src == &btnAccelerationMission)
-    {
+        startTrackdriveMission();
         //startAccelerationMission
-        //When btnAccelerationMission clicked call virtual function
+        //When btnPrevPage clicked call virtual function
         //Call startAccelerationMission
         startAccelerationMission();
+    }
+}
+
+void MissionSelectViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
+{
+    if (items == &missionScrollListListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        missionBtnContainer* cc = (missionBtnContainer*)d;
+        missionScrollListUpdateItem(*cc, itemIndex);
     }
 }

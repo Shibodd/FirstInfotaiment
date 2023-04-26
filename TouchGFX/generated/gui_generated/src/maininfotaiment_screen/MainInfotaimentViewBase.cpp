@@ -415,7 +415,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     imgBatteryV.setBitmap(touchgfx::Bitmap(BITMAP_BATTERY_OK_ID));
     add(imgBatteryV);
 
-    btnNextPage.setXY(759, 442);
+    btnNextPage.setXY(749, 432);
     btnNextPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID), touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID));
     btnNextPage.setAction(buttonCallback);
     add(btnNextPage);

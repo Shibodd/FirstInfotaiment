@@ -2,20 +2,24 @@
 #define MISSIONSELECTVIEW_HPP
 
 #include <gui_generated/missionselect_screen/MissionSelectViewBase.hpp>
+#include <gui/containers/missionBtnContainer.hpp>
 #include <gui/missionselect_screen/MissionSelectPresenter.hpp>
+#include <touchgfx/Callback.hpp>
 
 class MissionSelectView : public MissionSelectViewBase
 {
 public:
-    virtual void startManualMission();
-    virtual void startTrackdriveMission();
-    virtual void startAccelerationMission();
-
     MissionSelectView();
+    
     virtual ~MissionSelectView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    virtual void missionScrollListUpdateItem(missionBtnContainer& item, int16_t itemIndex);
 protected:
+
+    Callback<MissionSelectView, int16_t> scrollListItemSelectedCallback;
+    void scrollListItemSelectedHandler(int16_t itemSelected);
 };
 
 #endif // MISSIONSELECTVIEW_HPP

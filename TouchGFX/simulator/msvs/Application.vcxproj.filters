@@ -208,6 +208,18 @@
     <Filter Include="Source Files\generated\gui_generated\missionselect_screen">
       <UniqueIdentifier>2C68D100-0A0F-6D8B-BE9B-1726383ABCA7</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\containers">
+      <UniqueIdentifier>0593917F-FE7B-2F73-A7AA-1335FCFD8D3E</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\containers">
+      <UniqueIdentifier>B189D24C-79EE-DEF5-0AB7-29A239BC1C73</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\containers">
+      <UniqueIdentifier>B9D8E1C0-3A5E-064D-95FA-C806AE1F3A7D</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\containers">
+      <UniqueIdentifier>10E6F00C-7A8D-1796-66DC-931F59FBD574</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -266,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\missionselect_screen\MissionSelectViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\missionselect_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\missionBtnContainer.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\missionBtnContainerBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -735,6 +753,12 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\missionselect_screen\MissionSelectViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\missionselect_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\missionBtnContainer.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\missionBtnContainerBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

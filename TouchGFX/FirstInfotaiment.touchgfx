@@ -953,8 +953,8 @@
           {
             "Type": "Button",
             "Name": "btnNextPage",
-            "X": 759,
-            "Y": 442,
+            "X": 749,
+            "Y": 432,
             "Width": 38,
             "Height": 35,
             "Pressed": "btn_next_raw-removebg-preview.png",
@@ -1002,8 +1002,8 @@
           {
             "Type": "Button",
             "Name": "btnPrevPage",
-            "X": 759,
-            "Y": 442,
+            "X": 749,
+            "Y": 432,
             "Width": 38,
             "Height": 35,
             "Pressed": "btn_prev_raw-removebg-preview.png",
@@ -1026,70 +1026,19 @@
             "AutoSize": true
           },
           {
-            "Type": "ButtonWithLabel",
-            "Name": "btnAccelerationMission",
-            "X": 315,
-            "Y": 94,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "TextId": "__SingleUse_32A3",
-            "ReleasedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "PressedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "TextRotation": "0"
-          },
-          {
-            "Type": "ButtonWithLabel",
-            "Name": "btnTrackdriveMission",
-            "X": 315,
-            "Y": 171,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "TextId": "__SingleUse_9YCJ",
-            "ReleasedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "PressedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "TextRotation": "0"
-          },
-          {
-            "Type": "ButtonWithLabel",
-            "Name": "btnManualMission",
-            "X": 315,
-            "Y": 250,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "TextId": "__SingleUse_WA28",
-            "ReleasedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "PressedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "TextRotation": "0"
+            "Type": "ScrollList",
+            "Name": "missionScrollList",
+            "X": 280,
+            "Y": 76,
+            "Width": 214,
+            "Height": 377,
+            "ItemTemplateName": "missionBtnContainer",
+            "NumberofItems": 1,
+            "ItemMargin": 7,
+            "Easing": "Back",
+            "EasingOption": "Out",
+            "SwipeAcceleration": 1.0,
+            "DragAcceleration": 1.0
           }
         ],
         "Interactions": [
@@ -1110,7 +1059,7 @@
             "InteractionName": "startManualMission",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "btnManualMission"
+              "TriggerComponent": "btnPrevPage"
             },
             "Action": {
               "Type": "ActionCustom",
@@ -1121,7 +1070,7 @@
             "InteractionName": "startTrackdriveMission",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "btnTrackdriveMission"
+              "TriggerComponent": "btnPrevPage"
             },
             "Action": {
               "Type": "ActionCustom",
@@ -1132,7 +1081,7 @@
             "InteractionName": "startAccelerationMission",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "btnAccelerationMission"
+              "TriggerComponent": "btnPrevPage"
             },
             "Action": {
               "Type": "ActionCustom",
@@ -1142,7 +1091,39 @@
         ]
       }
     ],
-    "CustomContainerDefinitions": [],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "missionBtnContainer",
+        "Width": 214,
+        "Height": 36,
+        "Components": [
+          {
+            "Type": "AnimatedImage",
+            "Name": "animatedImage1",
+            "Width": 214,
+            "Height": 36,
+            "FileNameFirst": "__generated\\alternate_theme_images_widgets_button_regular_height_36_medium_rounded_normal.png",
+            "FileNameLast": "__generated\\alternate_theme_images_widgets_button_regular_height_36_medium_rounded_pressed.png",
+            "UpdateTicksInterval": 200
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "Y": 6,
+            "Width": 214,
+            "Height": 24,
+            "TextId": "__SingleUse_9IUL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          }
+        ],
+        "Interactions": []
+      }
+    ],
     "Name": "FirstInfotaiment",
     "Resolution": {
       "Width": 800,

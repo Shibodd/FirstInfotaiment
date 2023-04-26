@@ -3,19 +3,17 @@
 
 #ifdef SIMULATOR
 #include <stdio.h>
+#endif // SIMULATOR
 
-#endif
 
 #ifndef SIMULATOR
-
 #include "cmsis_os.h"
 #include "main.h"
 
 extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
 extern osMessageQueueId_t mainToGuiMsgQueue;
-
-#endif
+#endif // NOT SIMULATOR
 
 displayInfo info;
 
@@ -57,7 +55,7 @@ void Model::tick()
 	status = osMessageQueueGet(mainToGuiMsgQueue, &dbgMessage, NULL, 0);
 	if (status == osOK)
 		modelListener->debugMessageChanged();
-#endif
+#endif // NOT SIMULATOR
 }
 
 
@@ -68,10 +66,12 @@ void Model::requestMission(MmrMission missionType) {
 	};
 
 	osMessageQueuePut(guiToMainMsgQueue, &missionType, 0, 0);
-#else
+#endif // NOT SIMULATOR
+
+#ifdef SIMULATOR
 	static char buf[32];
 	snprintf(buf, 32, "Mission requested: %d", missionType);
 	dbgMessage = buf;
 	modelListener->debugMessageChanged();
-#endif
+#endif // SIMULATOR
 }

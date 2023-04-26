@@ -30,6 +30,8 @@
     <ClCompile Include="..\..\gui\src\missionselect_screen\MissionSelectPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\missionselect_screen\MissionSelectView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\missionselect_screen\MissionSelectViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\missionBtnContainer.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\missionBtnContainerBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -189,6 +191,8 @@
     <ClInclude Include="..\..\gui\include\gui\missionselect_screen\MissionSelectPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\missionselect_screen\MissionSelectView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\missionselect_screen\MissionSelectViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\missionBtnContainer.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\missionBtnContainerBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

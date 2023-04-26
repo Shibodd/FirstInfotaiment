@@ -4,6 +4,35 @@
     <Language Id="GB" />
   </Languages>
   <Texts>
+    <TextGroup Id="Missions">
+      <Text Id="missionIdle" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Idle</Translation>
+      </Text>
+      <Text Id="missionManual" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Manual</Translation>
+      </Text>
+      <Text Id="missionDebug" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Debug</Translation>
+      </Text>
+      <Text Id="missionAutocross" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Autocross</Translation>
+      </Text>
+      <Text Id="missionInspection" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Inspection</Translation>
+      </Text>
+      <Text Id="missionEbsTest" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Ebs test</Translation>
+      </Text>
+      <Text Id="missionTrackdrive" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Trackdrive</Translation>
+      </Text>
+      <Text Id="missionSkidpad" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Skidpad</Translation>
+      </Text>
+      <Text Id="missionAcceleration" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Acceleration</Translation>
+      </Text>
+    </TextGroup>
     <TextGroup Id="Group1">
       <Text Id="Battery_V" Alignment="Left" TypographyId="Medium">
         <Translation Language="GB">Battery_V</Translation>
@@ -31,17 +60,11 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_9IUL" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">New Text</Translation>
+      </Text>
       <Text Id="__SingleUse_F2RY" Alignment="Left" TypographyId="Medium">
         <Translation Language="GB">&lt;value&gt;</Translation>
-      </Text>
-      <Text Id="__SingleUse_WA28" Alignment="Center" TypographyId="Medium">
-        <Translation Language="GB">MANUAL</Translation>
-      </Text>
-      <Text Id="__SingleUse_9YCJ" Alignment="Center" TypographyId="Medium">
-        <Translation Language="GB">TRACKDRIVE</Translation>
-      </Text>
-      <Text Id="__SingleUse_32A3" Alignment="Center" TypographyId="Medium">
-        <Translation Language="GB">ACCELERATION</Translation>
       </Text>
       <Text Id="__SingleUse_U2AM" Alignment="Left" TypographyId="Large">
         <Translation Language="GB">Select Mission</Translation>
