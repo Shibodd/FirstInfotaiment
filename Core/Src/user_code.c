@@ -21,6 +21,7 @@ MmrPin* spiSlavePins[] = { &mcp2515csPin };
 
 void userMessage(const char* msg) {
 	osMessageQueuePut(dbgMsgQueue, msg, 0U, 0U);
+  osThreadYield();
 }
 
 void userError(const char* msg) {
@@ -97,15 +98,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void process_gui_message(guiToMainMsg* msg) {
   // do stuff
-  MmrCanMessage txMsg;
-	uint8_t txPayload[] = { msg->missionType };
-
-	MMR_CAN_MESSAGE_SetId(&txMsg, 254);
-	MMR_CAN_MESSAGE_SetStandardId(&txMsg, true);
-	MMR_CAN_MESSAGE_SetPayload(&txMsg, txPayload, sizeof(txPayload));
-
-	if (!MMR_CAN_Send(&mcp2515, &txMsg))
-    Error_Handler();
 }
 
 void process_can_message(MmrCanMessage* msg) {
@@ -245,7 +237,7 @@ void userDefaultTask() {
     for (int i = 0; i < pendingCanMsgs; ++i) {
       if (MMR_CAN_Receive(&mcp2515, &rxMsg))
         process_can_message(&rxMsg);
-      else if (MMR_MCP2515_GetLastError() != MMR_MCP2515_ERROR_NO_PENDING_MESSAGE)
+      else
         userMessage("WARN: Message reception failed.");
     }
 
