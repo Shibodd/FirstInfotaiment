@@ -122,7 +122,7 @@ protected:
     touchgfx::Unicode::UnicodeChar txtEBSBuffer[TXTEBS_SIZE];
     static const uint16_t TXTBATTERY_V_SIZE = 6;
     touchgfx::Unicode::UnicodeChar txtBattery_VBuffer[TXTBATTERY_V_SIZE];
-    static const uint16_t DBGTEXTAREA_SIZE = 32;
+    static const uint16_t DBGTEXTAREA_SIZE = 64;
     touchgfx::Unicode::UnicodeChar dbgTextAreaBuffer[DBGTEXTAREA_SIZE];
 
 private:

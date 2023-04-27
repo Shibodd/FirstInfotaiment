@@ -976,7 +976,7 @@
             },
             "Wildcard1": {
               "UseBuffer": true,
-              "BufferSize": 32
+              "BufferSize": 64
             }
           }
         ],
@@ -1179,6 +1179,6 @@
     "OptionalComponents": [],
     "AdditionalFeatures": []
   },
-  "Version": "4.21.1",
+  "Version": "4.21.4",
   "CreatedBy": "4.20.0"
 }

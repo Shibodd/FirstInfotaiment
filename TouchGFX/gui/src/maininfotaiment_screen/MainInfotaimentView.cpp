@@ -222,9 +222,9 @@ void MainInfotaimentView::setBattery_V(float battery_v)
 
 void MainInfotaimentView::setDebugMessage(const char* msg) {
 	if (msg == nullptr) {
-		Unicode::snprintf(dbgTextAreaBuffer, DBGTEXTAREA_SIZE, "");
+		Unicode::strncpy(dbgTextAreaBuffer, "", DBGTEXTAREA_SIZE);
 	} else {
-		Unicode::snprintf(dbgTextAreaBuffer, DBGTEXTAREA_SIZE, msg);
+		Unicode::strncpy(dbgTextAreaBuffer, msg, DBGTEXTAREA_SIZE);
 	}
 
 	dbgTextArea.invalidate();

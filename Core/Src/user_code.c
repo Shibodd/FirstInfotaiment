@@ -8,6 +8,7 @@
 #include "spi0.h"
 #include "stm_pin.h"
 
+#include "timing.h"
 #include "delay.h"
 
 
@@ -60,9 +61,9 @@ int gear_six_count = 0, gear_mem = 0;
 MmrPin mcp2515csPin;
 MmrPin* spiSlavePins[] = { &mcp2515csPin };
 
-
+#include <string.h>
 void userMessage(const char* msg) {
-	osMessageQueuePut(dbgMsgQueue, msg, 0U, 0U);
+  osMessageQueuePut(dbgMsgQueue, &msg, 0U, 0U);
   osThreadYield();
 }
 
@@ -254,6 +255,8 @@ void process_can_message(MmrCanMessage* msg) {
 void userDefaultTask() {
   // Initialize the MMR libraries
   userMessage("INFO: Initialization...");
+
+  MMR_SetTickProvider(HAL_GetTick);
 
   initialize_steering_buttons();
 

@@ -19,6 +19,7 @@ displayInfo info;
 
 Model::Model() : modelListener(0)
 {
+	dbgMessage = nullptr;
 }
 
 
@@ -52,7 +53,7 @@ void Model::tick()
 		modelListener->infoChanged();
 	}
 
-	status = osMessageQueueGet(mainToGuiMsgQueue, &dbgMessage, NULL, 0);
+	status = osMessageQueueGet(dbgMsgQueue, &dbgMessage, NULL, 0);
 	if (status == osOK)
 		modelListener->debugMessageChanged();
 #endif // NOT SIMULATOR
@@ -65,7 +66,7 @@ void Model::requestMission(MmrMission missionType) {
 		.missionType = missionType
 	};
 
-	osMessageQueuePut(guiToMainMsgQueue, &missionType, 0, 0);
+	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
 #endif // NOT SIMULATOR
 
 #ifdef SIMULATOR
