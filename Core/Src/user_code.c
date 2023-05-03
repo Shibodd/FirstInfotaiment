@@ -11,6 +11,8 @@
 #include "timing.h"
 #include "delay.h"
 
+#include "net.h"
+
 
 // This will most likely be moved somewhere else
 bool MMR_SwitchMissionAsync(MmrCan* can, MmrMission mission) {
@@ -137,27 +139,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 bool isSwitchingMission;
 MmrMission selectedMission;
-
-void performTasks() {
-  if (isSwitchingMission && MMR_SwitchMissionAsync(&mcp2515, selectedMission)) {
-    userMessage("INFO: Mission switched.");
-    isSwitchingMission = false;
-  }
-}
-
-void handleButtons() {
-  if (gearUpButton.pendingPresses > 0) {
-    userMessage("INFO: Gear up pressed.");
-    gearUpButton.pendingPresses = 0;
-  }
-
-  if (gearDownButton.pendingPresses > 0) {
-    userMessage("INFO: Gear down pressed.");
-    gearDownButton.pendingPresses = 0;
-  }
-}
-
-
 
 // Main logic
 void process_gui_message(guiToMainMsg* msg) {
@@ -299,11 +280,19 @@ void userDefaultTask() {
 
   userMessage("INFO: Running.");
 
+
   uint8_t rxBuf[8];
   MmrCanMessage rxMsg;
   MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
 
+  // uint16_t last_tick = HAL_GetTick();
   while (true) {
+    /*
+      const uint16_t tick = HAL_GetTick();
+      const uint16_t dt = tick - last_tick;
+      last_tick = tick;
+    */
+
     int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
     for (int i = 0; i < pendingCanMsgs; ++i) {
       if (MMR_CAN_Receive(&mcp2515, &rxMsg))
@@ -311,7 +300,7 @@ void userDefaultTask() {
       else
         userMessage("WARN: Message reception failed.");
     }
-
+    
     int pendingGuiMsgs = osMessageQueueGetCount(guiToMainMsgQueue);
     for (int i = 0; i < pendingGuiMsgs; ++i)
     {
@@ -320,8 +309,20 @@ void userDefaultTask() {
       process_gui_message(&msg);
     }
 
-    handleButtons();
-    performTasks();
+    if (isSwitchingMission && MMR_SwitchMissionAsync(&mcp2515, selectedMission)) {
+      userMessage("INFO: Mission switched.");
+      isSwitchingMission = false;
+    }
+
+    if (gearUpButton.pendingPresses > 0 && MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem)) {
+      userMessage("INFO: Shifted up.");
+      gearUpButton.pendingPresses = 0;
+    }
+
+    if (gearDownButton.pendingPresses > 0 && MMR_NET_GEAR_ShiftDownAsync(&mcp2515, gear_mem)) {
+      userMessage("INFO: Shifted down.");
+      gearDownButton.pendingPresses = 0;
+    }
   }
 }
 
