@@ -121,15 +121,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
     SteeringButton* btn = steeringButtons[i];
     if (GPIO_Pin == btn->mmr_pin.pin) {
-    	// Debounce the interrupt, because the board implements no debounce at all
-    	uint32_t tick = HAL_GetTick();
+      // Debounce the interrupt, because the board implements no debounce at all
+      uint32_t tick = HAL_GetTick();
       if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
         // Check if the button is actually pressed:
         // Another button on the same pin (but different port) may have triggered the interrupt;
         // Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
         MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
         if (state == MMR_PIN_HIGH) {
-          ++btn->pendingPresses;
+          btn->pendingPresses = btn->pendingPresses + 1;
           btn->last_press_tick = tick;
         }
       }
@@ -285,14 +285,7 @@ void userDefaultTask() {
   MmrCanMessage rxMsg;
   MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
 
-  // uint16_t last_tick = HAL_GetTick();
   while (true) {
-    /*
-      const uint16_t tick = HAL_GetTick();
-      const uint16_t dt = tick - last_tick;
-      last_tick = tick;
-    */
-
     int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
     for (int i = 0; i < pendingCanMsgs; ++i) {
       if (MMR_CAN_Receive(&mcp2515, &rxMsg))

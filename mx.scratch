@@ -14,7 +14,14 @@
       <ProjectName>STM32F469I-disco</ProjectName>
       <ProjectNature>Cpp</ProjectNature>
       <Secure/>
-      <filestoremove/>
+      <filestoremove>
+        <file>
+          <name>Core/Inc/nema_hal.c</name>
+        </file>
+        <file>
+          <name>..\Src\custom.c</name>
+        </file>
+      </filestoremove>
       <configs>
         <config>
           <name>STM32F469I-disco</name>
