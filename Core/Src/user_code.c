@@ -137,18 +137,78 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   }
 }
 
-bool isSwitchingMission;
-MmrMission selectedMission;
 
-// Main logic
-void process_gui_message(guiToMainMsg* msg) {
-  if (!isSwitchingMission) {
-    userMessage("INFO: Switching mission...");
+typedef enum EcuTask {
+	ECU_Task_None,
+	ECU_Task_ShiftingUp,
+	ECU_Task_ShiftingDown,
+	ECU_Task_ShiftingNtrl,
+	ECU_Task_SetLaunchCtrl
+} EcuTask;
 
-    selectedMission = msg->missionType;
-    isSwitchingMission = true;
+EcuTask runningEcuTask = ECU_Task_None;
+void ecu_task_request(EcuTask task) {
+  if (runningEcuTask == ECU_Task_None)
+    runningEcuTask = task;
+}
+
+void handle_ecu_task_button(SteeringButton* btn, EcuTask task) {
+  if (btn->pendingPresses > 0) {
+	  ecu_task_request(task);
+	  btn->pendingPresses = 0;
   }
 }
+
+void run_ecu_tasks() {
+	bool finished = false;
+	switch (runningEcuTask) {
+		case ECU_Task_None:
+			return;
+
+		case ECU_Task_ShiftingUp:
+			if ((finished = MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem)))
+			  userMessage("INFO: Shifted up.");
+			break;
+
+		case ECU_Task_ShiftingDown:
+			if ((finished = MMR_NET_GEAR_ShiftDownAsync(&mcp2515, gear_mem)))
+			  userMessage("INFO: Shifted down.");
+			break;
+
+		case ECU_Task_ShiftingNtrl:
+			if ((finished = MMR_NET_GEAR_ShiftToNeutralAsync(&mcp2515, gear_mem)))
+			  userMessage("INFO: Shifted to neutral.");
+			break;
+
+		case ECU_Task_SetLaunchCtrl:
+			finished = true;
+			//if ((finished = MMR_NET_LaunchControlSetAsync(&mcp2515)))
+			//	userMessage("INFO: Launch control set.");
+			break;
+	}
+
+	if (finished)
+		runningEcuTask = ECU_Task_None;
+}
+
+
+bool isSwitchingMission = false;
+MmrMission selectedMission;
+void mission_request(MmrMission mission) {
+  if (!isSwitchingMission) {
+	userMessage("INFO: Switching mission...");
+
+	selectedMission = mission;
+	isSwitchingMission = true;
+  }
+}
+
+// Main logic
+
+void process_gui_message(guiToMainMsg* msg) {
+  mission_request(msg->missionType);
+}
+
 
 void process_can_message(MmrCanMessage* msg) {
   if (!msg->isStandardId)
@@ -233,6 +293,8 @@ void process_can_message(MmrCanMessage* msg) {
   osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
 
+
+
 void userDefaultTask() {
   // Initialize the MMR libraries
   userMessage("INFO: Initialization...");
@@ -302,19 +364,24 @@ void userDefaultTask() {
       process_gui_message(&msg);
     }
 
+    // Button handling
+    if (leftRedButton.pendingPresses > 0) {
+      mission_request(MMR_MISSION_MANUAL);
+      leftRedButton.pendingPresses = 0;
+    }
+
+    handle_ecu_task_button(&gearUpButton, ECU_Task_ShiftingUp);
+    handle_ecu_task_button(&gearDownButton, ECU_Task_ShiftingDown);
+    handle_ecu_task_button(&greenButton, ECU_Task_ShiftingNtrl);
+    handle_ecu_task_button(&rightRedButton, ECU_Task_SetLaunchCtrl);
+
+
+    // Tasks
+    run_ecu_tasks();
+
     if (isSwitchingMission && MMR_SwitchMissionAsync(&mcp2515, selectedMission)) {
       userMessage("INFO: Mission switched.");
       isSwitchingMission = false;
-    }
-
-    if (gearUpButton.pendingPresses > 0 && MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem)) {
-      userMessage("INFO: Shifted up.");
-      gearUpButton.pendingPresses = 0;
-    }
-
-    if (gearDownButton.pendingPresses > 0 && MMR_NET_GEAR_ShiftDownAsync(&mcp2515, gear_mem)) {
-      userMessage("INFO: Shifted down.");
-      gearDownButton.pendingPresses = 0;
     }
   }
 }
