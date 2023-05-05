@@ -71,7 +71,7 @@ SDRAM_HandleTypeDef hsdram1;
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 128 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for TouchGFXTask */
@@ -175,7 +175,7 @@ int main(void)
 	  return -1;
   if ((mainToGuiMsgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
 	  return -1;
-  if ((dbgMsgQueue = osMessageQueueNew(5, sizeof(char*), NULL)) == NULL)
+  if ((dbgMsgQueue = osMessageQueueNew(10, sizeof(char*), NULL)) == NULL)
 	  return -1;
   /* USER CODE END RTOS_QUEUES */
 
@@ -744,8 +744,8 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOK_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOJ_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -763,11 +763,11 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7|MCP2515_CS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : STEERING_RIGHT_RED_BUTTON_Pin STEERING_GREEN_BUTTON_Pin */
-  GPIO_InitStruct.Pin = STEERING_RIGHT_RED_BUTTON_Pin|STEERING_GREEN_BUTTON_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  /*Configure GPIO pin : STEERING_RIGHT_RED_BUTTON_Pin */
+  GPIO_InitStruct.Pin = STEERING_RIGHT_RED_BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(STEERING_RIGHT_RED_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : MCU_ACTIVE_Pin */
   GPIO_InitStruct.Pin = MCU_ACTIVE_Pin;
@@ -790,18 +790,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : STEERING_LEFT_RED_BUTTON_Pin STEERING_BLACK_BUTTON_Pin */
-  GPIO_InitStruct.Pin = STEERING_LEFT_RED_BUTTON_Pin|STEERING_BLACK_BUTTON_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : STEERING_GEAR_DOWN_Pin STEERING_GEAR_UP_Pin */
-  GPIO_InitStruct.Pin = STEERING_GEAR_DOWN_Pin|STEERING_GEAR_UP_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
   /*Configure GPIO pin : PB12 */
   GPIO_InitStruct.Pin = GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -815,6 +803,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : STEERING_LEFT_RED_BUTTON_Pin */
+  GPIO_InitStruct.Pin = STEERING_LEFT_RED_BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(STEERING_LEFT_RED_BUTTON_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : STEERING_GREEN_BUTTON_Pin STEERING_RIGHT_PADDLE_BUTTON_Pin */
+  GPIO_InitStruct.Pin = STEERING_GREEN_BUTTON_Pin|STEERING_RIGHT_PADDLE_BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PH7 */
   GPIO_InitStruct.Pin = GPIO_PIN_7;
@@ -830,15 +830,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(MCP2515_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  /*Configure GPIO pin : STEERING_LEFT_PADDLE_BUTTON_Pin */
+  GPIO_InitStruct.Pin = STEERING_LEFT_PADDLE_BUTTON_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(STEERING_LEFT_PADDLE_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

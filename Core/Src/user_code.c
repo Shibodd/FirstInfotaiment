@@ -3,6 +3,7 @@
 #include "cmsis_os.h"
 
 #include "pin.h"
+#include "button.h"
 #include "spi.h"
 #include "mcp2515.h"
 #include "spi0.h"
@@ -80,63 +81,39 @@ void userError(const char* msg) {
 // STEERING WHEEL BUTTONS
 
 typedef struct SteeringButton {
-  int pendingPresses;
   MmrPin mmr_pin;
-  uint32_t last_press_tick;
+  MmrButton mmr_button;
 } SteeringButton;
 
-#define STEERING_BUTTON(port, pin, hasInvertedLogic) (SteeringButton) { \
-	.pendingPresses = 0,\
-	.last_press_tick = 0,\
-	.mmr_pin = MMR_Pin(port, pin, hasInvertedLogic),\
+
+
+SteeringButton rightPaddleBtn;
+SteeringButton leftPaddleBtn;
+SteeringButton greenBtn;
+SteeringButton leftRedBtn;
+SteeringButton rightRedBtn;
+// SteeringButton blackButton;
+
+// Mappings
+#define SHIFT_UP_BTN rightPaddleBtn
+#define SHIFT_DOWN_BTN leftPaddleBtn
+#define SHIFT_NTRL_BTN greenBtn
+#define MISSION_MANUAL_BTN leftRedBtn
+#define SET_LAUNCHCTRL_BTN rightRedBtn
+
+void init_button(SteeringButton* btn, GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic) {
+	btn->mmr_pin = MMR_Pin(port, pin, hasInvertedLogic);
+	btn->mmr_button = MMR_Button(&btn->mmr_pin);
 }
-
-SteeringButton gearUpButton;
-SteeringButton gearDownButton;
-SteeringButton blackButton;
-SteeringButton greenButton;
-SteeringButton leftRedButton;
-SteeringButton rightRedButton;
-
-SteeringButton* const steeringButtons[] = {
-  &gearUpButton, &gearDownButton,
-  &blackButton,
-  &greenButton,
-  &leftRedButton, &rightRedButton
-};
-const uint32_t STEERING_BUTTONS_COUNT = sizeof(steeringButtons) / sizeof(SteeringButton*);
 
 void initialize_steering_buttons() {
-	gearUpButton = STEERING_BUTTON(STEERING_GEAR_UP_GPIO_Port, STEERING_GEAR_UP_Pin, true);
-	gearDownButton = STEERING_BUTTON(STEERING_GEAR_DOWN_GPIO_Port, STEERING_GEAR_DOWN_Pin, true);
-	blackButton = STEERING_BUTTON(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true);
-	greenButton = STEERING_BUTTON(STEERING_GREEN_BUTTON_GPIO_Port, STEERING_GREEN_BUTTON_Pin, true);
-	leftRedButton = STEERING_BUTTON(STEERING_LEFT_RED_BUTTON_GPIO_Port, STEERING_LEFT_RED_BUTTON_Pin, true);
-	rightRedButton = STEERING_BUTTON(STEERING_RIGHT_RED_BUTTON_GPIO_Port, STEERING_RIGHT_RED_BUTTON_Pin, true);
+	init_button(&leftPaddleBtn,  STEERING_LEFT_PADDLE_BUTTON_GPIO_Port,	 STEERING_LEFT_PADDLE_BUTTON_Pin,	false);
+	init_button(&rightPaddleBtn, STEERING_RIGHT_PADDLE_BUTTON_GPIO_Port, STEERING_RIGHT_PADDLE_BUTTON_Pin, 	false);
+	init_button(&greenBtn,	     STEERING_GREEN_BUTTON_GPIO_Port,	     STEERING_GREEN_BUTTON_Pin,			false);
+	init_button(&leftRedBtn,	 STEERING_LEFT_RED_BUTTON_GPIO_Port,     STEERING_LEFT_RED_BUTTON_Pin,  	false);
+	init_button(&rightRedBtn, 	 STEERING_RIGHT_RED_BUTTON_GPIO_Port,    STEERING_RIGHT_RED_BUTTON_Pin, 	false);
+	// blackButton = init_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true);
 }
-
-#define DEBOUNCE_TICKS 200
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  for (int i = 0; i < STEERING_BUTTONS_COUNT; ++i) {
-    SteeringButton* btn = steeringButtons[i];
-    if (GPIO_Pin == btn->mmr_pin.pin) {
-      // Debounce the interrupt, because the board implements no debounce at all
-      uint32_t tick = HAL_GetTick();
-      if (tick - btn->last_press_tick > DEBOUNCE_TICKS) {
-        // Check if the button is actually pressed:
-        // Another button on the same pin (but different port) may have triggered the interrupt;
-        // Also, the board is very trigger-happy and without this check it would trigger an interrupt multiple times even after the button is released.
-        MmrPinState state = MMR_PIN_Read(&btn->mmr_pin);
-        if (state == MMR_PIN_HIGH) {
-          btn->pendingPresses = btn->pendingPresses + 1;
-          btn->last_press_tick = tick;
-        }
-      }
-    }
-  }
-}
-
 
 typedef enum EcuTask {
 	ECU_Task_None,
@@ -152,10 +129,12 @@ void ecu_task_request(EcuTask task) {
     runningEcuTask = task;
 }
 
+
+int ecu_task_requests = 0;
 void handle_ecu_task_button(SteeringButton* btn, EcuTask task) {
-  if (btn->pendingPresses > 0) {
+  if (MMR_BUTTON_Read(&(btn->mmr_button)) == MMR_BUTTON_JUST_PRESSED) {
 	  ecu_task_request(task);
-	  btn->pendingPresses = 0;
+	  ++ecu_task_requests;
   }
 }
 
@@ -192,6 +171,7 @@ void run_ecu_tasks() {
 }
 
 
+int mission_requests = 0;
 bool isSwitchingMission = false;
 MmrMission selectedMission;
 void mission_request(MmrMission mission) {
@@ -200,6 +180,7 @@ void mission_request(MmrMission mission) {
 
 	selectedMission = mission;
 	isSwitchingMission = true;
+	++mission_requests;
   }
 }
 
@@ -365,15 +346,14 @@ void userDefaultTask() {
     }
 
     // Button handling
-    if (leftRedButton.pendingPresses > 0) {
+    if (MMR_BUTTON_Read(&MISSION_MANUAL_BTN.mmr_button) == MMR_BUTTON_JUST_PRESSED) {
       mission_request(MMR_MISSION_MANUAL);
-      leftRedButton.pendingPresses = 0;
     }
 
-    handle_ecu_task_button(&gearUpButton, ECU_Task_ShiftingUp);
-    handle_ecu_task_button(&gearDownButton, ECU_Task_ShiftingDown);
-    handle_ecu_task_button(&greenButton, ECU_Task_ShiftingNtrl);
-    handle_ecu_task_button(&rightRedButton, ECU_Task_SetLaunchCtrl);
+    handle_ecu_task_button(&SHIFT_UP_BTN, ECU_Task_ShiftingUp);
+    handle_ecu_task_button(&SHIFT_DOWN_BTN, ECU_Task_ShiftingDown);
+    handle_ecu_task_button(&SHIFT_NTRL_BTN, ECU_Task_ShiftingNtrl);
+    handle_ecu_task_button(&SET_LAUNCHCTRL_BTN, ECU_Task_SetLaunchCtrl);
 
 
     // Tasks
