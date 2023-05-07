@@ -120,25 +120,25 @@ typedef enum EcuTask {
 	ECU_Task_ShiftingUp,
 	ECU_Task_ShiftingDown,
 	ECU_Task_ShiftingNtrl,
-	ECU_Task_SetLaunchCtrl
+	ECU_Task_SetLaunchCtrl,
+	ECU_Task_UnsetLaunchCtrl
 } EcuTask;
 
-EcuTask runningEcuTask = ECU_Task_None;
-void ecu_task_request(EcuTask task) {
-  if (runningEcuTask == ECU_Task_None)
-    runningEcuTask = task;
-}
-
-
 int ecu_task_requests = 0;
-void handle_ecu_task_button(SteeringButton* btn, EcuTask task) {
-  if (MMR_BUTTON_Read(&(btn->mmr_button)) == MMR_BUTTON_JUST_PRESSED) {
-	  ecu_task_request(task);
-	  ++ecu_task_requests;
+EcuTask runningEcuTask = ECU_Task_None;
+bool ecu_task_request(EcuTask task) {
+  ++ecu_task_requests;
+
+  if (runningEcuTask == ECU_Task_None) {
+    runningEcuTask = task;
+    return true;
   }
+  return false;
 }
 
 void run_ecu_tasks() {
+	static MmrDelay lcTimeout = { .ms = 500 };
+
 	bool finished = false;
 	switch (runningEcuTask) {
 		case ECU_Task_None:
@@ -160,9 +160,29 @@ void run_ecu_tasks() {
 			break;
 
 		case ECU_Task_SetLaunchCtrl:
-			finished = true;
-			//if ((finished = MMR_NET_LaunchControlSetAsync(&mcp2515)))
-			//	userMessage("INFO: Launch control set.");
+		case ECU_Task_UnsetLaunchCtrl:
+			if ((finished = MMR_DELAY_WaitOnceAsync(&lcTimeout))) {
+				lcTimeout.start = 0;
+				userMessage("WARN: Launch control toggle FAILED.");
+				break;
+			}
+
+			MmrNetLaunchControlCarState cs = {
+				.rpm = msgDisplayInfo.rpm,
+				.gear = msgDisplayInfo.gear,
+				.launchControl = msgDisplayInfo.LC ? MMR_LAUNCH_CONTROL_SET : MMR_LAUNCH_CONTROL_NOT_SET
+			};
+
+			if (runningEcuTask == ECU_Task_SetLaunchCtrl) {
+				if ((finished = MMR_NET_LaunchControlSetAsync(&mcp2515, cs))) {
+					userMessage("INFO: Launch control set.");
+				}
+			} else {
+				if ((finished = MMR_NET_LaunchControlUnsetAsync(&mcp2515, cs))) {
+					userMessage("INFO: Launch control unset.");
+				}
+			}
+
 			break;
 	}
 
@@ -176,8 +196,6 @@ bool isSwitchingMission = false;
 MmrMission selectedMission;
 void mission_request(MmrMission mission) {
   if (!isSwitchingMission) {
-	userMessage("INFO: Switching mission...");
-
 	selectedMission = mission;
 	isSwitchingMission = true;
 	++mission_requests;
@@ -197,12 +215,12 @@ void process_can_message(MmrCanMessage* msg) {
 
   switch (msg->id) {
     /* RES */
-    case 0x191:
+    case MMR_CAN_MESSAGE_ID_RES:
       msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
       break;
 
     /* RPM, SPEED, GEAR, ATH */
-    case 0x702:
+    case MMR_CAN_MESSAGE_ID_ECU_ENGINE_FN1:
       msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
 
       uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
@@ -252,16 +270,12 @@ void process_can_message(MmrCanMessage* msg) {
       break;
 
     /* CLUTCH PULL OK */
-    // TODO: check IDS!
-    case 0x004000E1:
-    case 0x104000E1:
+    case MMR_CAN_MESSAGE_ID_CS_CLUTCH_PULL_OK:
       msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
       break;
 
     /* CLUTCH RELEASE OK */
-    // TODO: check IDS!
-    case 0x004000E3:
-    case 0x104000E3:
+    case MMR_CAN_MESSAGE_ID_CS_CLUTCH_RELEASE_OK:
       msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
       break;
 
@@ -346,14 +360,28 @@ void userDefaultTask() {
     }
 
     // Button handling
-    if (MMR_BUTTON_Read(&MISSION_MANUAL_BTN.mmr_button) == MMR_BUTTON_JUST_PRESSED) {
-      mission_request(MMR_MISSION_MANUAL);
+
+#define IS_JUST_PRESSED(x) MMR_BUTTON_Read(&x.mmr_button) == MMR_BUTTON_JUST_PRESSED
+
+    if (IS_JUST_PRESSED(SHIFT_UP_BTN)) {
+      ecu_task_request(ECU_Task_ShiftingUp);
     }
 
-    handle_ecu_task_button(&SHIFT_UP_BTN, ECU_Task_ShiftingUp);
-    handle_ecu_task_button(&SHIFT_DOWN_BTN, ECU_Task_ShiftingDown);
-    handle_ecu_task_button(&SHIFT_NTRL_BTN, ECU_Task_ShiftingNtrl);
-    handle_ecu_task_button(&SET_LAUNCHCTRL_BTN, ECU_Task_SetLaunchCtrl);
+    if (IS_JUST_PRESSED(SHIFT_DOWN_BTN)) {
+	  ecu_task_request(ECU_Task_ShiftingDown);
+	}
+
+    if (IS_JUST_PRESSED(SHIFT_NTRL_BTN)) {
+	  ecu_task_request(ECU_Task_ShiftingNtrl);
+	}
+
+    if (IS_JUST_PRESSED(SET_LAUNCHCTRL_BTN)) {
+	  ecu_task_request(msgDisplayInfo.LC? ECU_Task_UnsetLaunchCtrl : ECU_Task_SetLaunchCtrl);
+    }
+
+    if (IS_JUST_PRESSED(MISSION_MANUAL_BTN)) {
+	  mission_request(MMR_MISSION_MANUAL);
+	}
 
 
     // Tasks
