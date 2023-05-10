@@ -23,4 +23,4 @@ The [Core](https://github.com/Shibodd/FirstInfotaiment/tree/master/Core) folder 
 and [user_code.c](https://github.com/Shibodd/FirstInfotaiment/blob/master/Core/Src/user_code.c),
 which contains the main application logic.
 
-The TouchGFX folder contains all the GUI code. The entry point is [TouchGFX/gui/src/model/Model.cpp](https://github.com/Shibodd/FirstInfotaiment/blob/master/TouchGFX/gui/src/model/Model.cpp)
+The [TouchGFX/gui](https://github.com/Shibodd/FirstInfotaiment/tree/master/TouchGFX/gui) folder contains all the editable GUI code. The main loop is located in [TouchGFX/gui/src/model/Model.cpp](https://github.com/Shibodd/FirstInfotaiment/blob/master/TouchGFX/gui/src/model/Model.cpp)
