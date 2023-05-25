@@ -78,16 +78,16 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/texts/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/gui/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/videos/include"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/stm/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/can/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/gpio/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/mcp2515/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/spi/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/timing/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/util/inc"/>
 									<listOptionValue builtIn="false" value="../../Shared/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/buffer"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/core/net/inc"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/core/net/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/buffer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/util/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/timing/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/spi/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/mcp2515/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/gpio/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/can/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/stm/inc}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1036047372" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -120,16 +120,16 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/texts/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/gui/include"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/videos/include"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/can/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/gpio/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/mcp2515/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/spi/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/timing/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/util/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/stm/inc"/>
 									<listOptionValue builtIn="false" value="../../Shared/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/buffer"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/core/net"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/core/net/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/can/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/gpio/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/mcp2515/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/spi/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/timing/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/util/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/stm/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/buffer}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.otherflags.4365549957" name="Other flags" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.otherflags" useByScannerDiscovery="true" valueType="stringList">
 									<listOptionValue builtIn="false" value="-femit-class-debug-always"/>
@@ -256,16 +256,16 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../Drivers/STM32F4xx_HAL_Driver/Inc"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/videos/include"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/stm/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/can/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/gpio/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/mcp2515/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/spi/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/timing/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/util/inc"/>
 									<listOptionValue builtIn="false" value="../../Shared/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/buffer"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/core/net/inc"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/core/net/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/buffer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/util/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/timing/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/spi/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/mcp2515/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/gpio/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/can/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/stm/inc}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1751818057" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -297,16 +297,16 @@
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/fonts/include"/>
 									<listOptionValue builtIn="false" value="../../Drivers/STM32F4xx_HAL_Driver/Inc"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/generated/videos/include"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/can/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/gpio/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/mcp2515/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/spi/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/timing/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/util/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/stm/inc"/>
 									<listOptionValue builtIn="false" value="../../Shared/inc"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/lib/buffer"/>
-									<listOptionValue builtIn="false" value="../../mmr_core/app/core/net"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/core/net/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/can/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/gpio/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/mcp2515/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/spi/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/timing/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/util/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/stm/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/STM32F469I-DISCO/mmr_core-app/lib/buffer}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.otherflags.2774206786" name="Other flags" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.otherflags" useByScannerDiscovery="true" valueType="stringList">
 									<listOptionValue builtIn="false" value="-femit-class-debug-always"/>

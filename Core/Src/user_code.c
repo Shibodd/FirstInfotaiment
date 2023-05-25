@@ -2,55 +2,15 @@
 #include "gui_shared_defs.h"
 #include "cmsis_os.h"
 
-#include "pin.h"
-#include "button.h"
-#include "spi.h"
-#include "mcp2515.h"
-#include "spi0.h"
-#include "stm_pin.h"
-
-#include "timing.h"
-#include "delay.h"
-
-#include "net.h"
-
-
-// This will most likely be moved somewhere else
-bool MMR_SwitchMissionAsync(MmrCan* can, MmrMission mission) {
-  const bool MISSION_SELECTED_CANID_IS_STD = true;
-  const uint32_t MISSION_SELECTED_CANID = 0x40;
-  const uint32_t INTERVAL = 50;
-  const int REPEAT_COUNT = 5;
-
-  static MmrDelay intervalDelay;
-  static int i = 0;
-
-  if (i >= REPEAT_COUNT) {
-    i = 0;
-    return true;
-  }
-
-  if (i == 0) {
-    // TODO: Move this somewhere else, pls, for the love of god.
-    intervalDelay = MMR_Delay(INTERVAL);
-  }
-
-  if (i == 0 || MMR_DELAY_WaitAsync(&intervalDelay)) {
-    MmrCanMessage txMsg;
-    uint8_t txPayload[] = { mission };
-
-    MMR_CAN_MESSAGE_SetId(&txMsg, MISSION_SELECTED_CANID);
-    MMR_CAN_MESSAGE_SetStandardId(&txMsg, MISSION_SELECTED_CANID_IS_STD);
-    MMR_CAN_MESSAGE_SetPayload(&txMsg, txPayload, sizeof(txPayload));
-
-    // TODO: handle errors!
-    MMR_CAN_Send(&mcp2515, &txMsg);
-
-    ++i;
-  }
-
-  return false;
-}
+#include <pin.h>
+#include <button.h>
+#include <spi.h>
+#include <mcp2515.h>
+#include <spi0.h>
+#include <stm_pin.h>
+#include <timing.h>
+#include <delay.h>
+#include <net.h>
 
 
 extern osMessageQueueId_t dbgMsgQueue;
@@ -383,12 +343,16 @@ void userDefaultTask() {
 	  mission_request(MMR_MISSION_MANUAL);
 	}
 
-
     // Tasks
     run_ecu_tasks();
 
-    if (isSwitchingMission && MMR_SwitchMissionAsync(&mcp2515, selectedMission)) {
-      userMessage("INFO: Mission switched.");
+    if (isSwitchingMission) {
+      MmrTaskResult result = MMR_NET_SwitchMissionAsync(&mcp2515, selectedMission);
+      if (result == MMR_TASK_COMPLETED)
+    	  userMessage("INFO: Mission switched.");
+      else
+    	  userMessage("WARN: Mission switch failed.");
+
       isSwitchingMission = false;
     }
   }
