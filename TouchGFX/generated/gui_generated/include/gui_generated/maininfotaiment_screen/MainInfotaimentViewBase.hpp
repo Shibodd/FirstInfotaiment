@@ -43,16 +43,13 @@ protected:
     touchgfx::TextArea labelRpm;
     touchgfx::BoxWithBorder boxThrottle;
     touchgfx::BoxWithBorder boxBrake;
-    touchgfx::BoxWithBorder boxBrake_1;
     touchgfx::BoxProgress progressThrottle;
     touchgfx::BoxProgress progressBrakeFront;
+    touchgfx::BoxWithBorder boxBrake_1;
     touchgfx::BoxProgress progressBrakeRear;
     touchgfx::BoxWithBorder boxRES;
     touchgfx::Line line1_1;
     touchgfx::PainterRGB565 line1_1Painter;
-    touchgfx::TextArea labelTOil;
-    touchgfx::TextArea labelPOil;
-    touchgfx::TextArea labelTWater;
     touchgfx::TextArea labelRES;
     touchgfx::BoxProgress progressRpmLow;
     touchgfx::BoxProgress progressRpmMed;
@@ -94,6 +91,9 @@ protected:
     touchgfx::Image imgOilPres;
     touchgfx::Image imgOilTemp;
     touchgfx::Image imgWaterTemp;
+    touchgfx::BoxWithBorder boxTOrin;
+    touchgfx::Image imgTOrin;
+    touchgfx::TextAreaWithOneWildcard txtTOrin;
     touchgfx::Image imgBatteryV;
     touchgfx::Button btnNextPage;
     touchgfx::TextAreaWithOneWildcard dbgTextArea;
@@ -121,6 +121,8 @@ protected:
     touchgfx::Unicode::UnicodeChar txtEBSBuffer[TXTEBS_SIZE];
     static const uint16_t TXTBATTERY_V_SIZE = 6;
     touchgfx::Unicode::UnicodeChar txtBattery_VBuffer[TXTBATTERY_V_SIZE];
+    static const uint16_t TXTTORIN_SIZE = 4;
+    touchgfx::Unicode::UnicodeChar txtTOrinBuffer[TXTTORIN_SIZE];
     static const uint16_t DBGTEXTAREA_SIZE = 64;
     touchgfx::Unicode::UnicodeChar dbgTextAreaBuffer[DBGTEXTAREA_SIZE];
 

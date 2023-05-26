@@ -60,6 +60,12 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_IMBT" Alignment="Left" TypographyId="little_medium">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_9UXZ" Alignment="Center" TypographyId="little_medium">
+        <Translation Language="GB">&lt;value&gt; °C</Translation>
+      </Text>
       <Text Id="__SingleUse_9IUL" Alignment="Center" TypographyId="Medium">
         <Translation Language="GB">New Text</Translation>
       </Text>
@@ -117,19 +123,19 @@
       <Text Id="__SingleUse_1M75" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">0.00</Translation>
       </Text>
-      <Text Id="__SingleUse_5NKC" Alignment="Left" TypographyId="little_medium">
+      <Text Id="__SingleUse_5NKC" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">&lt;value&gt; bar</Translation>
       </Text>
       <Text Id="__SingleUse_ZRFT" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">100</Translation>
       </Text>
-      <Text Id="__SingleUse_YR52" Alignment="Left" TypographyId="little_medium">
+      <Text Id="__SingleUse_YR52" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">&lt;value&gt; °C</Translation>
       </Text>
       <Text Id="__SingleUse_K6X0" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">100</Translation>
       </Text>
-      <Text Id="__SingleUse_ROYB" Alignment="Left" TypographyId="little_medium">
+      <Text Id="__SingleUse_ROYB" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">&lt;value&gt; °C</Translation>
       </Text>
       <Text Id="__SingleUse_4SAL" Alignment="Center" TypographyId="little_medium">
