@@ -10,7 +10,8 @@ Model::Model() : modelListener(0)
 
 
 #ifdef SIMULATOR
-static int t;
+
+static int t = 0;
 
 void Model::tick() {
   // Some random data
@@ -19,6 +20,7 @@ void Model::tick() {
   setFrontBrakePerc(t % 100);
   setRearBrakePerc(100 - (t % 100));
   setOrinTemperature(t % 100);
+  setVoltage24v(18.0f);
 
   ++t;
   modelListener->infoChanged();

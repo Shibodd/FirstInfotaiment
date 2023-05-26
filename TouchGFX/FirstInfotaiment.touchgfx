@@ -386,7 +386,7 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxTWater",
-            "X": 158,
+            "X": 150,
             "Y": 345,
             "Width": 90,
             "Height": 38,
@@ -399,7 +399,7 @@
           {
             "Type": "TextArea",
             "Name": "txtTWater",
-            "X": 165,
+            "X": 157,
             "Y": 355,
             "Width": 75,
             "Height": 19,
@@ -419,7 +419,7 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxTOil",
-            "X": 158,
+            "X": 150,
             "Y": 305,
             "Width": 90,
             "Height": 38,
@@ -432,7 +432,7 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxPOil",
-            "X": 158,
+            "X": 150,
             "Y": 265,
             "Width": 90,
             "Height": 38,
@@ -445,7 +445,7 @@
           {
             "Type": "TextArea",
             "Name": "txtTOil",
-            "X": 165,
+            "X": 157,
             "Y": 315,
             "Width": 75,
             "Height": 19,
@@ -465,7 +465,7 @@
           {
             "Type": "TextArea",
             "Name": "txtPOil",
-            "X": 165,
+            "X": 157,
             "Y": 275,
             "Width": 75,
             "Height": 19,
@@ -586,7 +586,7 @@
             "Type": "Line",
             "Name": "line1_2_1",
             "X": 751,
-            "Y": 213,
+            "Y": 195,
             "Width": 15,
             "Height": 42,
             "Color": {
@@ -615,7 +615,7 @@
             "Type": "TextArea",
             "Name": "labelAS",
             "X": 766,
-            "Y": 225,
+            "Y": 207,
             "Width": 19,
             "Height": 20,
             "TextId": "__SingleUse_MIUL",
@@ -631,7 +631,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxAS",
             "X": 586,
-            "Y": 213,
+            "Y": 195,
             "Width": 145,
             "Height": 42,
             "BorderColor": {
@@ -644,7 +644,7 @@
             "Type": "Line",
             "Name": "line1_2_2",
             "X": 751,
-            "Y": 272,
+            "Y": 240,
             "Width": 15,
             "Height": 42,
             "Color": {
@@ -660,7 +660,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxAMI",
             "X": 586,
-            "Y": 272,
+            "Y": 240,
             "Width": 145,
             "Height": 42,
             "BorderColor": {
@@ -673,7 +673,7 @@
             "Type": "Line",
             "Name": "line1_2_1_1_1",
             "X": 751,
-            "Y": 335,
+            "Y": 284,
             "Width": 15,
             "Height": 42,
             "Color": {
@@ -689,7 +689,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxEBS",
             "X": 586,
-            "Y": 335,
+            "Y": 284,
             "Width": 145,
             "Height": 42,
             "BorderColor": {
@@ -702,7 +702,7 @@
             "Type": "TextArea",
             "Name": "labelAS_1",
             "X": 767,
-            "Y": 279,
+            "Y": 247,
             "Width": 19,
             "Height": 29,
             "TextId": "__SingleUse_D9LL",
@@ -718,7 +718,7 @@
             "Type": "TextArea",
             "Name": "labelAS_2",
             "X": 766,
-            "Y": 341,
+            "Y": 290,
             "Width": 19,
             "Height": 30,
             "TextId": "__SingleUse_W7WZ",
@@ -755,7 +755,7 @@
             "Type": "TextArea",
             "Name": "txtAS",
             "X": 595,
-            "Y": 220,
+            "Y": 202,
             "Width": 112,
             "Height": 25,
             "TextId": "__SingleUse_0J70",
@@ -774,7 +774,7 @@
             "Type": "TextArea",
             "Name": "txtAMI",
             "X": 595,
-            "Y": 279,
+            "Y": 247,
             "Width": 122,
             "Height": 25,
             "TextId": "__SingleUse_74WN",
@@ -795,7 +795,7 @@
             "Type": "TextArea",
             "Name": "txtEBS",
             "X": 595,
-            "Y": 344,
+            "Y": 293,
             "Width": 30,
             "Height": 25,
             "TextId": "__SingleUse_HJ17",
@@ -813,27 +813,10 @@
             }
           },
           {
-            "Type": "TextArea",
-            "Name": "labelBattery_V",
-            "X": 536,
-            "Y": 411,
-            "Width": 100,
-            "Height": 24,
-            "Visible": false,
-            "TextId": "Battery_V",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
             "Type": "BoxWithBorder",
             "Name": "boxBattery_V",
-            "X": 644,
-            "Y": 404,
+            "X": 552,
+            "Y": 397,
             "Width": 87,
             "Height": 38,
             "BorderColor": {
@@ -845,9 +828,9 @@
           {
             "Type": "TextArea",
             "Name": "txtBattery_V",
-            "X": 662,
-            "Y": 414,
-            "Width": 50,
+            "X": 562,
+            "Y": 407,
+            "Width": 70,
             "Height": 19,
             "TextId": "__SingleUse_J87C",
             "TextRotation": "0",
@@ -856,7 +839,6 @@
               "Green": 255,
               "Blue": 255
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "__SingleUse_G99E",
               "UseBuffer": true,
@@ -866,7 +848,7 @@
           {
             "Type": "Image",
             "Name": "imgOilPres",
-            "X": 250,
+            "X": 242,
             "Y": 265,
             "Width": 43,
             "Height": 38,
@@ -875,7 +857,7 @@
           {
             "Type": "Image",
             "Name": "imgOilTemp",
-            "X": 250,
+            "X": 242,
             "Y": 302,
             "Width": 43,
             "Height": 41,
@@ -884,7 +866,7 @@
           {
             "Type": "Image",
             "Name": "imgWaterTemp",
-            "X": 250,
+            "X": 242,
             "Y": 349,
             "Width": 43,
             "Height": 31,
@@ -893,7 +875,7 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxTOrin",
-            "X": 158,
+            "X": 150,
             "Y": 385,
             "Width": 90,
             "Height": 38,
@@ -904,18 +886,9 @@
             "BorderSize": 5
           },
           {
-            "Type": "Image",
-            "Name": "imgTOrin",
-            "X": 250,
-            "Y": 389,
-            "Width": 43,
-            "Height": 31,
-            "RelativeFilename": "water_low.png"
-          },
-          {
             "Type": "TextArea",
             "Name": "txtTOrin",
-            "X": 165,
+            "X": 157,
             "Y": 395,
             "Width": 75,
             "Height": 19,
@@ -935,11 +908,53 @@
           {
             "Type": "Image",
             "Name": "imgBatteryV",
-            "X": 573,
-            "Y": 399,
+            "X": 552,
+            "Y": 347,
             "Width": 83,
             "Height": 48,
             "RelativeFilename": "battery_ok.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "img24v",
+            "X": 634,
+            "Y": 347,
+            "Width": 83,
+            "Height": 48,
+            "RelativeFilename": "battery_ok.png"
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "box24v",
+            "X": 634,
+            "Y": 397,
+            "Width": 87,
+            "Height": 38,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 234
+            },
+            "BorderSize": 5
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txt24v",
+            "X": 642,
+            "Y": 407,
+            "Width": 70,
+            "Height": 19,
+            "TextId": "__SingleUse_JG35",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_8BB2",
+              "UseBuffer": true,
+              "BufferSize": 6
+            }
           },
           {
             "Type": "Button",
@@ -969,6 +984,54 @@
               "UseBuffer": true,
               "BufferSize": 64
             }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 656,
+            "Y": 435,
+            "Width": 39,
+            "Height": 49,
+            "TextId": "__SingleUse_J3QN",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1",
+            "X": 578,
+            "Y": 437,
+            "Width": 39,
+            "Height": 25,
+            "TextId": "__SingleUse_BU43",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_1",
+            "X": 246,
+            "Y": 392,
+            "Width": 42,
+            "Height": 25,
+            "TextId": "__SingleUse_ZWI4",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
           }
         ],
         "Interactions": [

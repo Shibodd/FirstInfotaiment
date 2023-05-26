@@ -158,13 +158,13 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     progressRpmHigh.setValue(0);
     add(progressRpmHigh);
 
-    boxTWater.setPosition(158, 345, 90, 38);
+    boxTWater.setPosition(150, 345, 90, 38);
     boxTWater.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxTWater.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxTWater.setBorderSize(5);
     add(boxTWater);
 
-    txtTWater.setPosition(165, 355, 75, 19);
+    txtTWater.setPosition(157, 355, 75, 19);
     txtTWater.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtTWater.setLinespacing(0);
     Unicode::snprintf(txtTWaterBuffer, TXTTWATER_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_K6X0).getText());
@@ -172,19 +172,19 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtTWater.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ROYB));
     add(txtTWater);
 
-    boxTOil.setPosition(158, 305, 90, 38);
+    boxTOil.setPosition(150, 305, 90, 38);
     boxTOil.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxTOil.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxTOil.setBorderSize(5);
     add(boxTOil);
 
-    boxPOil.setPosition(158, 265, 90, 38);
+    boxPOil.setPosition(150, 265, 90, 38);
     boxPOil.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxPOil.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxPOil.setBorderSize(5);
     add(boxPOil);
 
-    txtTOil.setPosition(165, 315, 75, 19);
+    txtTOil.setPosition(157, 315, 75, 19);
     txtTOil.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtTOil.setLinespacing(0);
     Unicode::snprintf(txtTOilBuffer, TXTTOIL_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZRFT).getText());
@@ -192,7 +192,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtTOil.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YR52));
     add(txtTOil);
 
-    txtPOil.setPosition(165, 275, 75, 19);
+    txtPOil.setPosition(157, 275, 75, 19);
     txtPOil.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtPOil.setLinespacing(0);
     Unicode::snprintf(txtPOilBuffer, TXTPOIL_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1M75).getText());
@@ -245,7 +245,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     line1_2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     add(line1_2);
 
-    line1_2_1.setPosition(751, 213, 15, 42);
+    line1_2_1.setPosition(751, 195, 15, 42);
     line1_2_1Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     line1_2_1.setPainter(line1_2_1Painter);
     line1_2_1.setStart(0, 0);
@@ -260,20 +260,20 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     boxDS.setBorderSize(5);
     add(boxDS);
 
-    labelAS.setXY(766, 225);
+    labelAS.setXY(766, 207);
     labelAS.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelAS.setLinespacing(0);
     labelAS.setRotation(touchgfx::TEXT_ROTATE_90);
     labelAS.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MIUL));
     add(labelAS);
 
-    boxAS.setPosition(586, 213, 145, 42);
+    boxAS.setPosition(586, 195, 145, 42);
     boxAS.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxAS.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxAS.setBorderSize(5);
     add(boxAS);
 
-    line1_2_2.setPosition(751, 272, 15, 42);
+    line1_2_2.setPosition(751, 240, 15, 42);
     line1_2_2Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     line1_2_2.setPainter(line1_2_2Painter);
     line1_2_2.setStart(0, 0);
@@ -282,13 +282,13 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     line1_2_2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     add(line1_2_2);
 
-    boxAMI.setPosition(586, 272, 145, 42);
+    boxAMI.setPosition(586, 240, 145, 42);
     boxAMI.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxAMI.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxAMI.setBorderSize(5);
     add(boxAMI);
 
-    line1_2_1_1_1.setPosition(751, 335, 15, 42);
+    line1_2_1_1_1.setPosition(751, 284, 15, 42);
     line1_2_1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     line1_2_1_1_1.setPainter(line1_2_1_1_1Painter);
     line1_2_1_1_1.setStart(0, 0);
@@ -297,20 +297,20 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     line1_2_1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     add(line1_2_1_1_1);
 
-    boxEBS.setPosition(586, 335, 145, 42);
+    boxEBS.setPosition(586, 284, 145, 42);
     boxEBS.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxEBS.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxEBS.setBorderSize(5);
     add(boxEBS);
 
-    labelAS_1.setXY(767, 279);
+    labelAS_1.setXY(767, 247);
     labelAS_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelAS_1.setLinespacing(0);
     labelAS_1.setRotation(touchgfx::TEXT_ROTATE_90);
     labelAS_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D9LL));
     add(labelAS_1);
 
-    labelAS_2.setXY(766, 341);
+    labelAS_2.setXY(766, 290);
     labelAS_2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelAS_2.setLinespacing(0);
     labelAS_2.setRotation(touchgfx::TEXT_ROTATE_90);
@@ -326,7 +326,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtDS.setTypedText(touchgfx::TypedText(T___SINGLEUSE_J40F));
     add(txtDS);
 
-    txtAS.setXY(595, 220);
+    txtAS.setXY(595, 202);
     txtAS.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtAS.setLinespacing(0);
     txtAS.setWildcard(touchgfx::TypedText(T___SINGLEUSE_MCPR).getText());
@@ -334,7 +334,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtAS.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0J70));
     add(txtAS);
 
-    txtAMI.setXY(595, 279);
+    txtAMI.setXY(595, 247);
     txtAMI.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtAMI.setLinespacing(0);
     Unicode::snprintf(txtAMIBuffer, TXTAMI_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VLUE).getText());
@@ -343,7 +343,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtAMI.setTypedText(touchgfx::TypedText(T___SINGLEUSE_74WN));
     add(txtAMI);
 
-    txtEBS.setXY(595, 344);
+    txtEBS.setXY(595, 293);
     txtEBS.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtEBS.setLinespacing(0);
     Unicode::snprintf(txtEBSBuffer, TXTEBS_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_V415).getText());
@@ -352,51 +352,39 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtEBS.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HJ17));
     add(txtEBS);
 
-    labelBattery_V.setXY(536, 411);
-    labelBattery_V.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    labelBattery_V.setLinespacing(0);
-    labelBattery_V.setTypedText(touchgfx::TypedText(T_BATTERY_V));
-    labelBattery_V.setVisible(false);
-    add(labelBattery_V);
-
-    boxBattery_V.setPosition(644, 404, 87, 38);
+    boxBattery_V.setPosition(552, 397, 87, 38);
     boxBattery_V.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxBattery_V.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxBattery_V.setBorderSize(5);
     add(boxBattery_V);
 
-    txtBattery_V.setXY(662, 414);
+    txtBattery_V.setPosition(562, 407, 70, 19);
     txtBattery_V.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtBattery_V.setLinespacing(0);
     Unicode::snprintf(txtBattery_VBuffer, TXTBATTERY_V_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_G99E).getText());
     txtBattery_V.setWildcard(txtBattery_VBuffer);
-    txtBattery_V.resizeToCurrentText();
     txtBattery_V.setTypedText(touchgfx::TypedText(T___SINGLEUSE_J87C));
     add(txtBattery_V);
 
-    imgOilPres.setXY(250, 265);
+    imgOilPres.setXY(242, 265);
     imgOilPres.setBitmap(touchgfx::Bitmap(BITMAP_OIL_PRES_OK_ID));
     add(imgOilPres);
 
-    imgOilTemp.setXY(250, 302);
+    imgOilTemp.setXY(242, 302);
     imgOilTemp.setBitmap(touchgfx::Bitmap(BITMAP_OIL_TEMP_OK_ID));
     add(imgOilTemp);
 
-    imgWaterTemp.setXY(250, 349);
+    imgWaterTemp.setXY(242, 349);
     imgWaterTemp.setBitmap(touchgfx::Bitmap(BITMAP_WATER_LOW_ID));
     add(imgWaterTemp);
 
-    boxTOrin.setPosition(158, 385, 90, 38);
+    boxTOrin.setPosition(150, 385, 90, 38);
     boxTOrin.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxTOrin.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxTOrin.setBorderSize(5);
     add(boxTOrin);
 
-    imgTOrin.setXY(250, 389);
-    imgTOrin.setBitmap(touchgfx::Bitmap(BITMAP_WATER_LOW_ID));
-    add(imgTOrin);
-
-    txtTOrin.setPosition(165, 395, 75, 19);
+    txtTOrin.setPosition(157, 395, 75, 19);
     txtTOrin.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     txtTOrin.setLinespacing(0);
     Unicode::snprintf(txtTOrinBuffer, TXTTORIN_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_IMBT).getText());
@@ -404,9 +392,27 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtTOrin.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9UXZ));
     add(txtTOrin);
 
-    imgBatteryV.setXY(573, 399);
+    imgBatteryV.setXY(552, 347);
     imgBatteryV.setBitmap(touchgfx::Bitmap(BITMAP_BATTERY_OK_ID));
     add(imgBatteryV);
+
+    img24v.setXY(634, 347);
+    img24v.setBitmap(touchgfx::Bitmap(BITMAP_BATTERY_OK_ID));
+    add(img24v);
+
+    box24v.setPosition(634, 397, 87, 38);
+    box24v.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    box24v.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
+    box24v.setBorderSize(5);
+    add(box24v);
+
+    txt24v.setPosition(642, 407, 70, 19);
+    txt24v.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    txt24v.setLinespacing(0);
+    Unicode::snprintf(txt24vBuffer, TXT24V_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8BB2).getText());
+    txt24v.setWildcard(txt24vBuffer);
+    txt24v.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JG35));
+    add(txt24v);
 
     btnNextPage.setXY(749, 432);
     btnNextPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID), touchgfx::Bitmap(BITMAP_BTN_NEXT_RAW_REMOVEBG_PREVIEW_ID));
@@ -420,6 +426,24 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     dbgTextArea.setWildcard(dbgTextAreaBuffer);
     dbgTextArea.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F2RY));
     add(dbgTextArea);
+
+    textArea1.setXY(656, 435);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_J3QN));
+    add(textArea1);
+
+    textArea1_1.setXY(578, 437);
+    textArea1_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    textArea1_1.setLinespacing(0);
+    textArea1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BU43));
+    add(textArea1_1);
+
+    textArea1_1_1.setXY(246, 392);
+    textArea1_1_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    textArea1_1_1.setLinespacing(0);
+    textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZWI4));
+    add(textArea1_1_1);
 }
 
 MainInfotaimentViewBase::~MainInfotaimentViewBase()

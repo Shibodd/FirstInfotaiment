@@ -119,7 +119,7 @@ void MainInfotaimentView::setP_Oil(float p_oil)
 {
 	/* Update P_OIL img */
 	if (p_oil <= OIL_PRESS_LOW_VAL )
-    imgOilPres.setBitmap(touchgfx::Bitmap(BITMAP_OIL_PRES_LOW_ID));
+    	imgOilPres.setBitmap(touchgfx::Bitmap(BITMAP_OIL_PRES_LOW_ID));
 	else if (p_oil <= OIL_PRESS_OK_VAL )
 		imgOilPres.setBitmap(touchgfx::Bitmap(BITMAP_OIL_PRES_OK_ID));
 	else
@@ -148,11 +148,32 @@ void MainInfotaimentView::setRearBrake_Perc(int brake_perc)
 }
 
 void MainInfotaimentView::setOrinTemperature(float orinTemperature) {
+  //if (orinTemperature <= ORIN_T_OK_VAL)
+  //  imgTOrin.setBitmap(touchgfx::Bitmap(BITMAP_ORIN_T_OK_ID));
+  //else
+  //  imgTOrin.setBitmap(touchgfx::Bitmap(BITMAP_ORIN_T_HIGH_ID));
 
+  Unicode::snprintfFloat(txtTOrinBuffer, TXTTORIN_SIZE, "%.f", orinTemperature);
+
+  //imgTOrin.invalidate();
+  txtTOrin.invalidate();
 }
 
+#define BITMAP_24V_OK_ID BITMAP_BATTERY_OK_ID
+#define BITMAP_24V_LOW_ID BITMAP_BATTERY_LOW_ID
+#define BITMAP_24V_HIGH_ID BITMAP_BATTERY_HIGH_ID
+
 void MainInfotaimentView::setVoltage24v(float voltage24v) {
-	
+  if (voltage24v <= VOLTAGE_24V_OK_VAL)  
+    img24v.setBitmap(touchgfx::Bitmap(BITMAP_24V_OK_ID));
+  else if (voltage24v <= VOLTAGE_24V_LOW_VAL)
+	img24v.setBitmap(touchgfx::Bitmap(BITMAP_24V_LOW_ID));
+  else
+    img24v.setBitmap(touchgfx::Bitmap(BITMAP_24V_HIGH_ID));
+
+  Unicode::snprintfFloat(txt24vBuffer, TXT24V_SIZE, "%2.1f", voltage24v);
+  img24v.invalidate();
+  txt24v.invalidate();
 }
 
 void MainInfotaimentView::setRES(int RES)

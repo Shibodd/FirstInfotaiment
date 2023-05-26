@@ -60,6 +60,21 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_ZWI4" Alignment="Left" TypographyId="Medium">
+        <Translation Language="GB">Orin</Translation>
+      </Text>
+      <Text Id="__SingleUse_BU43" Alignment="Left" TypographyId="Medium">
+        <Translation Language="GB">12V</Translation>
+      </Text>
+      <Text Id="__SingleUse_J3QN" Alignment="Left" TypographyId="Medium">
+        <Translation Language="GB">24V</Translation>
+      </Text>
+      <Text Id="__SingleUse_8BB2" Alignment="Left" TypographyId="little_medium">
+        <Translation Language="GB">00.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_JG35" Alignment="Center" TypographyId="little_medium">
+        <Translation Language="GB">&lt;value&gt; V</Translation>
+      </Text>
       <Text Id="__SingleUse_IMBT" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">100</Translation>
       </Text>
@@ -78,7 +93,7 @@
       <Text Id="__SingleUse_G99E" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">00.0</Translation>
       </Text>
-      <Text Id="__SingleUse_J87C" Alignment="Left" TypographyId="little_medium">
+      <Text Id="__SingleUse_J87C" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">&lt;value&gt; V</Translation>
       </Text>
       <Text Id="__SingleUse_RP6T" Alignment="Left" TypographyId="Small">

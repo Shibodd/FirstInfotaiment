@@ -85,18 +85,22 @@ protected:
     touchgfx::TextAreaWithOneWildcard txtAS;
     touchgfx::TextAreaWithOneWildcard txtAMI;
     touchgfx::TextAreaWithOneWildcard txtEBS;
-    touchgfx::TextArea labelBattery_V;
     touchgfx::BoxWithBorder boxBattery_V;
     touchgfx::TextAreaWithOneWildcard txtBattery_V;
     touchgfx::Image imgOilPres;
     touchgfx::Image imgOilTemp;
     touchgfx::Image imgWaterTemp;
     touchgfx::BoxWithBorder boxTOrin;
-    touchgfx::Image imgTOrin;
     touchgfx::TextAreaWithOneWildcard txtTOrin;
     touchgfx::Image imgBatteryV;
+    touchgfx::Image img24v;
+    touchgfx::BoxWithBorder box24v;
+    touchgfx::TextAreaWithOneWildcard txt24v;
     touchgfx::Button btnNextPage;
     touchgfx::TextAreaWithOneWildcard dbgTextArea;
+    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textArea1_1;
+    touchgfx::TextArea textArea1_1_1;
 
     /*
      * Wildcard Buffers
@@ -123,6 +127,8 @@ protected:
     touchgfx::Unicode::UnicodeChar txtBattery_VBuffer[TXTBATTERY_V_SIZE];
     static const uint16_t TXTTORIN_SIZE = 4;
     touchgfx::Unicode::UnicodeChar txtTOrinBuffer[TXTTORIN_SIZE];
+    static const uint16_t TXT24V_SIZE = 6;
+    touchgfx::Unicode::UnicodeChar txt24vBuffer[TXT24V_SIZE];
     static const uint16_t DBGTEXTAREA_SIZE = 64;
     touchgfx::Unicode::UnicodeChar dbgTextAreaBuffer[DBGTEXTAREA_SIZE];
 
