@@ -20,8 +20,16 @@ typedef struct {
 	/* TODO: String variables */
 } displayInfo;
 
+typedef enum {
+  GUI_TO_MAIN_MSG_MISSIONSELECT,
+  GUI_TO_MAIN_MSG_SETRESOPMODE
+} GuiToMainMsgType;
+
 typedef struct {
-  MmrMission missionType;
+  GuiToMainMsgType type;
+  union {
+  	MmrMission selectedMission;
+  } content;
 } guiToMainMsg;
 
 #endif // GUI_SHARED_DEFS_H

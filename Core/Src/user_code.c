@@ -11,6 +11,7 @@
 #include <timing.h>
 #include <delay.h>
 #include <net.h>
+#include <util.h>
 
 
 extern osMessageQueueId_t dbgMsgQueue;
@@ -96,7 +97,7 @@ bool ecu_task_request(EcuTask task) {
   return false;
 }
 
-void run_ecu_tasks() {
+void task_run_ecu_tasks() {
 	static MmrDelay lcTimeout = { .ms = 500 };
 
 	bool finished = false;
@@ -151,25 +152,107 @@ void run_ecu_tasks() {
 }
 
 
+
+// Helpers for CAN
+typedef struct {
+  bool (*action)();
+  MmrDelay interval;
+  int repetitions;
+
+  // State
+  int __currentRepetition;
+} RepeatAsyncParams;
+
+MmrTaskResult RepeatAsync(RepeatAsyncParams* params) {
+  if (params->__currentRepetition >= params->repetitions) {
+    params->__currentRepetition = 0;
+    return MMR_TASK_COMPLETED;
+  }
+  
+  if (MMR_DELAY_WaitAsync(&params->interval)) {
+    if (!params->action) {
+      params->__currentRepetition = 0;
+      return MMR_TASK_ERROR;
+    }
+    ++params->__currentRepetition;
+  }
+  return MMR_TASK_PENDING;
+}
+
+bool sendCanMessage(MmrCanMessageId id, uint8_t* buf, uint8_t length) {
+  MmrCanMessage txMsg;
+  MMR_CAN_MESSAGE_SetId(&txMsg, id);
+  MMR_CAN_MESSAGE_SetStandardId(&txMsg, true);
+  MMR_CAN_MESSAGE_SetPayload(&txMsg, buf, length);
+  return MMR_CAN_Send(&mcp2515, &txMsg);
+}
+
+
+// Mission request
 int mission_requests = 0;
 bool isSwitchingMission = false;
 MmrMission selectedMission;
+
 void mission_request(MmrMission mission) {
   if (!isSwitchingMission) {
-	selectedMission = mission;
-	isSwitchingMission = true;
-	++mission_requests;
+	  selectedMission = mission;
+	  isSwitchingMission = true;
+	  ++mission_requests;
   }
 }
 
-// Main logic
-
-void process_gui_message(guiToMainMsg* msg) {
-  mission_request(msg->missionType);
+bool sendMissionRequest() {
+  return sendCanMessage(MMR_CAN_MESSAGE_ID_M_MISSION_SELECTED, &selectedMission, 1);
 }
 
+RepeatAsyncParams sendMissionRequestRepeatAsync = {
+  .action = sendMissionRequest,
+  .interval = (MmrDelay) { .ms = 50 },
+  .repetitions = 5
+};
 
-void process_can_message(MmrCanMessage* msg) {
+
+// RES operational mode
+bool isSendingResOpMode;
+void resOpMode_request() {
+  isSendingResOpMode = true;
+}
+
+bool sendResOpMode() {
+  static uint8_t buf[1] = { 0x01 };
+  return sendCanMessage(MMR_CAN_MESSAGE_ID_RES_NMT, buf, sizeof(buf));
+}
+
+RepeatAsyncParams sendResOpModeRepeatAsync = {
+  .action = sendResOpMode,
+  .interval = (MmrDelay) { .ms = 50 },
+  .repetitions = 5
+};
+
+
+// Main logic
+void process_single_gui_message(guiToMainMsg* msg) {
+  switch (msg->type) {
+    case GUI_TO_MAIN_MSG_MISSIONSELECT:
+      mission_request(msg->content.selectedMission);
+      break;
+    case GUI_TO_MAIN_MSG_SETRESOPMODE:
+      resOpMode_request();
+      break;
+  }
+}
+
+void task_process_gui_messages_rx() {
+  int pendingGuiMsgs = osMessageQueueGetCount(guiToMainMsgQueue);
+  for (int i = 0; i < pendingGuiMsgs; ++i)
+  {
+    guiToMainMsg msg;
+    osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
+    process_single_gui_message(&msg);
+  }
+}
+
+void process_single_can_message(MmrCanMessage* msg) {
   if (!msg->isStandardId)
     return;
 
@@ -248,9 +331,70 @@ void process_can_message(MmrCanMessage* msg) {
   osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
 
+void task_process_can_rx() {
+  static uint8_t rxBuf[8];
+
+  MmrCanMessage rxMsg;
+  MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
+  
+  int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
+  
+  for (int i = 0; i < pendingCanMsgs; ++i) {
+    if (MMR_CAN_Receive(&mcp2515, &rxMsg))
+      process_single_can_message(&rxMsg);
+    else
+      userMessage("WARN: Message reception failed.");
+  }
+}
+
+void task_process_buttons() {
+#define IS_JUST_PRESSED(x) MMR_BUTTON_Read(&x.mmr_button) == MMR_BUTTON_JUST_PRESSED
+
+  if (IS_JUST_PRESSED(SHIFT_UP_BTN)) {
+    ecu_task_request(ECU_Task_ShiftingUp);
+  }
+  if (IS_JUST_PRESSED(SHIFT_DOWN_BTN)) {
+    ecu_task_request(ECU_Task_ShiftingDown);
+  }
+  if (IS_JUST_PRESSED(SHIFT_NTRL_BTN)) {
+    ecu_task_request(ECU_Task_ShiftingNtrl);
+  }
+  if (IS_JUST_PRESSED(SET_LAUNCHCTRL_BTN)) {
+    ecu_task_request(msgDisplayInfo.LC? ECU_Task_UnsetLaunchCtrl : ECU_Task_SetLaunchCtrl);
+  }
+  if (IS_JUST_PRESSED(MISSION_MANUAL_BTN)) {
+    mission_request(MMR_MISSION_MANUAL);
+  }
+}
+
+void task_send_missionrequest() {
+  if (isSwitchingMission) {
+    MmrTaskResult result = RepeatAsync(&sendMissionRequestRepeatAsync);
+    if (result != MMR_TASK_PENDING) {
+      if (result == MMR_TASK_COMPLETED)
+        userMessage("INFO: Mission switched.");
+      else
+        userMessage("WARN: Mission switch failed.");
+      isSwitchingMission = false;
+    }
+  }
+}
+
+void task_send_resopmode() {
+  if (isSendingResOpMode) {
+    MmrTaskResult result = RepeatAsync(&sendResOpModeRepeatAsync);
+    if (result != MMR_TASK_PENDING) {
+      if (result == MMR_TASK_COMPLETED)
+        userMessage("INFO: Sent res operational mode.");
+      else
+        userMessage("WARN: RES operational mode transmission failed.");
+      isSwitchingMission = false;
+    }
+  }
+}
 
 
-void userDefaultTask() {
+void configuration() {
   // Initialize the MMR libraries
   userMessage("INFO: Initialization...");
 
@@ -293,68 +437,23 @@ void userDefaultTask() {
 
     osDelay(200);
   }
+}
 
+
+void userDefaultTask() {
+  
+  configuration();
 
   userMessage("INFO: Running.");
 
-
-  uint8_t rxBuf[8];
-  MmrCanMessage rxMsg;
-  MMR_CAN_MESSAGE_SetPayload(&rxMsg, rxBuf, 8);
-
   while (true) {
-    int pendingCanMsgs = MMR_CAN_GetPendingMessages(&mcp2515);
-    for (int i = 0; i < pendingCanMsgs; ++i) {
-      if (MMR_CAN_Receive(&mcp2515, &rxMsg))
-        process_can_message(&rxMsg);
-      else
-        userMessage("WARN: Message reception failed.");
-    }
-    
-    int pendingGuiMsgs = osMessageQueueGetCount(guiToMainMsgQueue);
-    for (int i = 0; i < pendingGuiMsgs; ++i)
-    {
-      guiToMainMsg msg;
-      osMessageQueueGet(guiToMainMsgQueue, &msg, NULL, 0);
-      process_gui_message(&msg);
-    }
+    task_process_can_rx();
+    task_process_gui_messages_rx();
+    task_process_buttons();
 
-    // Button handling
-
-#define IS_JUST_PRESSED(x) MMR_BUTTON_Read(&x.mmr_button) == MMR_BUTTON_JUST_PRESSED
-
-    if (IS_JUST_PRESSED(SHIFT_UP_BTN)) {
-      ecu_task_request(ECU_Task_ShiftingUp);
-    }
-
-    if (IS_JUST_PRESSED(SHIFT_DOWN_BTN)) {
-	  ecu_task_request(ECU_Task_ShiftingDown);
-	}
-
-    if (IS_JUST_PRESSED(SHIFT_NTRL_BTN)) {
-	  ecu_task_request(ECU_Task_ShiftingNtrl);
-	}
-
-    if (IS_JUST_PRESSED(SET_LAUNCHCTRL_BTN)) {
-	  ecu_task_request(msgDisplayInfo.LC? ECU_Task_UnsetLaunchCtrl : ECU_Task_SetLaunchCtrl);
-    }
-
-    if (IS_JUST_PRESSED(MISSION_MANUAL_BTN)) {
-	  mission_request(MMR_MISSION_MANUAL);
-	}
-
-    // Tasks
-    run_ecu_tasks();
-
-    if (isSwitchingMission) {
-      MmrTaskResult result = MMR_NET_SwitchMissionAsync(&mcp2515, selectedMission);
-      if (result == MMR_TASK_COMPLETED)
-    	  userMessage("INFO: Mission switched.");
-      else
-    	  userMessage("WARN: Mission switch failed.");
-
-      isSwitchingMission = false;
-    }
+    task_run_ecu_tasks();
+    task_send_missionrequest();
+    task_send_resopmode();
   }
 }
 
