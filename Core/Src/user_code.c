@@ -12,6 +12,7 @@
 #include <delay.h>
 #include <net.h>
 #include <util.h>
+#include <buffer.h>
 
 
 extern osMessageQueueId_t dbgMsgQueue;
@@ -300,6 +301,13 @@ void process_single_can_message(MmrCanMessage* msg) {
       break;
     }
 
+    /* Brake pressure */
+    case MMR_CAN_MESSAGE_ID_ECU_BRAKE_PRESSURES:
+      msgDisplayInfo.brakePressureFront = (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 2, MMR_ENCODING_LITTLE_ENDIAN);
+      msgDisplayInfo.brakePressureRear = (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
+      break;
+
+
     /* battery_V * 1000 */
     case 0x704: {
       short bat = (msg->payload[1] << 8) | msg->payload[0];
@@ -315,6 +323,16 @@ void process_single_can_message(MmrCanMessage* msg) {
     /* CLUTCH PULL OK */
     case MMR_CAN_MESSAGE_ID_CS_CLUTCH_PULL_OK:
       msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
+      break;
+
+    /* ORIN TEMPERATURE */
+    case MMR_CAN_MESSAGE_ID_ORIN_TEMPERATURE:
+      msgDisplayInfo.orinTemperature = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
+      break;
+
+    /* 24V */
+    case MMR_CAN_MESSAGE_ID_24v:
+      msgDisplayInfo.voltage24v = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
       break;
 
     /* CLUTCH RELEASE OK */

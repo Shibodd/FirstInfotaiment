@@ -17,6 +17,10 @@ typedef struct {
 	bool LC;
 	bool CLT;
 	float battery_v;
+	float brakePressureFront;
+	float brakePressureRear;
+	float voltage24v;
+	float orinTemperature;
 	/* TODO: String variables */
 } displayInfo;
 
