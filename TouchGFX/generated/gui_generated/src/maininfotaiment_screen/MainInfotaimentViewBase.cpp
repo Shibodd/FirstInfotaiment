@@ -16,13 +16,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    labelGear.setXY(345, 79);
-    labelGear.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    labelGear.setLinespacing(0);
-    labelGear.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9I03));
-    add(labelGear);
-
-    txtGear.setXY(378, 152);
+    txtGear.setXY(367, 42);
     txtGear.setColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     txtGear.setLinespacing(0);
     Unicode::snprintf(txtGearBuffer, TXTGEAR_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_B1YM).getText());
@@ -71,19 +65,25 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     labelRpm.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4SAL));
     add(labelRpm);
 
-    boxThrottle.setPosition(305, 250, 190, 24);
+    boxThrottle.setPosition(305, 169, 190, 24);
     boxThrottle.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     boxThrottle.setBorderColor(touchgfx::Color::getColorFromRGB(244, 255, 31));
     boxThrottle.setBorderSize(4);
     add(boxThrottle);
 
-    boxBrake.setPosition(305, 297, 190, 24);
+    boxBrake.setPosition(305, 216, 190, 24);
     boxBrake.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     boxBrake.setBorderColor(touchgfx::Color::getColorFromRGB(244, 255, 31));
     boxBrake.setBorderSize(4);
     add(boxBrake);
 
-    progressThrottle.setXY(308, 252);
+    boxBrake_1.setPosition(305, 238, 190, 24);
+    boxBrake_1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    boxBrake_1.setBorderColor(touchgfx::Color::getColorFromRGB(244, 255, 31));
+    boxBrake_1.setBorderSize(4);
+    add(boxBrake_1);
+
+    progressThrottle.setXY(308, 171);
     progressThrottle.setProgressIndicatorPosition(2, 2, 180, 16);
     progressThrottle.setRange(0, 100);
     progressThrottle.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
@@ -92,14 +92,23 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     progressThrottle.setValue(0);
     add(progressThrottle);
 
-    progressBrake.setXY(308, 299);
-    progressBrake.setProgressIndicatorPosition(2, 2, 180, 16);
-    progressBrake.setRange(0, 100);
-    progressBrake.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    progressBrake.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
-    progressBrake.setColor(touchgfx::Color::getColorFromRGB(245, 15, 15));
-    progressBrake.setValue(0);
-    add(progressBrake);
+    progressBrakeFront.setXY(308, 218);
+    progressBrakeFront.setProgressIndicatorPosition(2, 2, 180, 16);
+    progressBrakeFront.setRange(0, 100);
+    progressBrakeFront.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
+    progressBrakeFront.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    progressBrakeFront.setColor(touchgfx::Color::getColorFromRGB(245, 15, 15));
+    progressBrakeFront.setValue(0);
+    add(progressBrakeFront);
+
+    progressBrakeRear.setXY(308, 240);
+    progressBrakeRear.setProgressIndicatorPosition(2, 2, 180, 16);
+    progressBrakeRear.setRange(0, 100);
+    progressBrakeRear.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
+    progressBrakeRear.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    progressBrakeRear.setColor(touchgfx::Color::getColorFromRGB(245, 15, 15));
+    progressBrakeRear.setValue(0);
+    add(progressBrakeRear);
 
     boxRES.setPosition(31, 259, 109, 50);
     boxRES.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -366,16 +375,6 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtEBS.resizeToCurrentText();
     txtEBS.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HJ17));
     add(txtEBS);
-
-    imgGearUp.setXY(436, 173);
-    imgGearUp.setBitmap(touchgfx::Bitmap(BITMAP_GEAR_UP_ID));
-    imgGearUp.setVisible(false);
-    add(imgGearUp);
-
-    imgGearUp_1.setXY(355, 173);
-    imgGearUp_1.setBitmap(touchgfx::Bitmap(BITMAP_GEAR_DOWN_ID));
-    imgGearUp_1.setVisible(false);
-    add(imgGearUp_1);
 
     labelBattery_V.setXY(536, 411);
     labelBattery_V.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));

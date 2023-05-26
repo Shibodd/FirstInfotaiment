@@ -156,15 +156,12 @@
       <Text Id="__SingleUse_8VH0" Alignment="Left" TypographyId="Gear">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_9I03" Alignment="Center" TypographyId="Large">
-        <Translation Language="GB">GEAR</Translation>
-      </Text>
     </TextGroup>
   </Texts>
   <Typographies>
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
-    <Typography Id="Gear" Font="verdana.ttf" Size="60" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
+    <Typography Id="Gear" Font="verdana.ttf" Size="90" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Speed" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="Medium" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=": ." WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="little_medium" Font="verdana.ttf" Size="15" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />

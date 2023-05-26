@@ -39,7 +39,9 @@ void MainInfotaimentPresenter::infoChanged()
 	view.setP_Oil(model->getP_oil());
 
 	view.setThrottle_Perc(model->getThrottle_perc());
-	view.setBrake_Perc(model->getBrake_perc());
+
+	view.setFrontBrake_Perc(model->getFrontBrakePerc());
+	view.setRearBrake_Perc(model->getRearBrakePerc());
 
 	view.setRES(model->getRES());
 	view.setLC(model->getLC());

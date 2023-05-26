@@ -33,8 +33,12 @@ public:
 
     void setThrottle_perc(int recvThrottle_perc) { throttle_perc= recvThrottle_perc; }
     int getThrottle_perc() { return throttle_perc; }
-    void setBrake_perc(int recvBrake_perc) { brake_perc= recvBrake_perc; }
-    int getBrake_perc() { return brake_perc; }
+
+    void setRearBrakePerc(int recvBrake_perc) { rearBrakePerc = recvBrake_perc; }
+    int getRearBrakePerc() { return rearBrakePerc; }
+
+    void setFrontBrakePerc(int recvBrake_perc) { frontBrakePerc = recvBrake_perc; }
+    int getFrontBrakePerc() { return frontBrakePerc; }
 
     void setRES(int recvRES) { RES = recvRES; }
     int getRES() { return RES; }
@@ -57,6 +61,7 @@ protected:
 
     const char* dbgMessage;
     int gear, speed, rpm, T_water, T_oil, throttle_perc, brake_perc;
+    int frontBrakePerc, rearBrakePerc;
 
     float P_oil;
 

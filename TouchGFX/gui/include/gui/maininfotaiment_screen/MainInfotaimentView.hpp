@@ -34,7 +34,8 @@ public:
     void setP_Oil(float p_oil);
 
     void setThrottle_Perc(int throttle_perc);
-    void setBrake_Perc(int brake_perc);
+    void setFrontBrake_Perc(int brake_perc);
+    void setRearBrake_Perc(int brake_perc);
 
     void setRES(int RES);
     void setLC(bool LC);

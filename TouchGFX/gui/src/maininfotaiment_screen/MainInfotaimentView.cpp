@@ -137,9 +137,14 @@ void MainInfotaimentView::setThrottle_Perc(int throttle_perc)
 	progressThrottle.setValue(throttle_perc);
 }
 
-void MainInfotaimentView::setBrake_Perc(int brake_perc)
+void MainInfotaimentView::setFrontBrake_Perc(int brake_perc)
 {
-	progressBrake.setValue(brake_perc);
+	progressBrakeFront.setValue(brake_perc);
+}
+
+void MainInfotaimentView::setRearBrake_Perc(int brake_perc)
+{
+	progressBrakeRear.setValue(brake_perc);
 }
 
 void MainInfotaimentView::setRES(int RES)

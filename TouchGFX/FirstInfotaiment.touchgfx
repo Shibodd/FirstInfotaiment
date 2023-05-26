@@ -65,7 +65,7 @@
             "X": 367,
             "Y": 42,
             "Width": 67,
-            "Height": 109,
+            "Height": 110,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -170,7 +170,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxThrottle",
             "X": 305,
-            "Y": 250,
+            "Y": 169,
             "Width": 190,
             "Height": 24,
             "Color": {
@@ -189,7 +189,26 @@
             "Type": "BoxWithBorder",
             "Name": "boxBrake",
             "X": 305,
-            "Y": 297,
+            "Y": 216,
+            "Width": 190,
+            "Height": 24,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 244,
+              "Green": 255,
+              "Blue": 31
+            },
+            "BorderSize": 4
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxBrake_1",
+            "X": 305,
+            "Y": 238,
             "Width": 190,
             "Height": 24,
             "Color": {
@@ -208,7 +227,7 @@
             "Type": "BoxProgress",
             "Name": "progressThrottle",
             "X": 308,
-            "Y": 252,
+            "Y": 171,
             "Width": 184,
             "Height": 20,
             "Color": {
@@ -225,9 +244,29 @@
           },
           {
             "Type": "BoxProgress",
-            "Name": "progressBrake",
+            "Name": "progressBrakeFront",
             "X": 308,
-            "Y": 299,
+            "Y": 218,
+            "Width": 184,
+            "Height": 20,
+            "Color": {
+              "Red": 245,
+              "Green": 15,
+              "Blue": 15
+            },
+            "Direction": "Right",
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 180,
+            "IndicatorPositionHeight": 16,
+            "ProgressRangeMax": 100
+          },
+          {
+            "Type": "BoxProgress",
+            "Name": "progressBrakeRear",
+            "X": 308,
+            "Y": 240,
             "Width": 184,
             "Height": 20,
             "Color": {
@@ -826,26 +865,6 @@
               "UseBuffer": true,
               "BufferSize": 10
             }
-          },
-          {
-            "Type": "Image",
-            "Name": "imgGearUp",
-            "X": 440,
-            "Y": 80,
-            "Width": 11,
-            "Height": 30,
-            "Visible": false,
-            "RelativeFilename": "Gear_Up.png"
-          },
-          {
-            "Type": "Image",
-            "Name": "imgGearUp_1",
-            "X": 350,
-            "Y": 80,
-            "Width": 11,
-            "Height": 30,
-            "Visible": false,
-            "RelativeFilename": "Gear_Down.png"
           },
           {
             "Type": "TextArea",

@@ -1,20 +1,6 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 
-#ifdef SIMULATOR
-#include <stdio.h>
-#endif // SIMULATOR
-
-
-#ifndef SIMULATOR
-#include "cmsis_os.h"
-#include "main.h"
-
-extern osMessageQueueId_t dbgMsgQueue;
-extern osMessageQueueId_t guiToMainMsgQueue;
-extern osMessageQueueId_t mainToGuiMsgQueue;
-#endif // NOT SIMULATOR
-
 displayInfo info;
 
 Model::Model() : modelListener(0)
@@ -23,10 +9,31 @@ Model::Model() : modelListener(0)
 }
 
 
+#ifdef SIMULATOR
+static int t;
+
+void Model::tick() {
+  // Some random data
+  rpm = (t * 60) % 12000; 
+  throttle_perc = (t + 50) % 100;
+  frontBrakePerc = t % 100;
+  rearBrakePerc = 100 - (t % 100);
+
+  ++t;
+  modelListener->infoChanged();
+}
+
+#else
+
+#include "cmsis_os.h"
+#include "main.h"
+
+extern osMessageQueueId_t dbgMsgQueue;
+extern osMessageQueueId_t guiToMainMsgQueue;
+extern osMessageQueueId_t mainToGuiMsgQueue;
 
 void Model::tick()
 {
-#ifndef SIMULATOR
 	osStatus_t status;
 	status = osMessageQueueGet(mainToGuiMsgQueue, &info, NULL, 0);
 	if (status == osOK)
@@ -48,6 +55,9 @@ void Model::tick()
 
 		battery_v = info.battery_v;
 
+		rearBrakePerc = info.brakePressureRear * (100.0 / 160.0);
+		frontBrakePerc = info.brakePressureFront * (100.0 / 160.0);
+
 		/* TODO: String variables */
 
 		modelListener->infoChanged();
@@ -56,23 +66,28 @@ void Model::tick()
 	status = osMessageQueueGet(dbgMsgQueue, &dbgMessage, NULL, 0);
 	if (status == osOK)
 		modelListener->debugMessageChanged();
-#endif // NOT SIMULATOR
+
 }
+#endif
 
-
-void Model::requestMission(MmrMission missionType) {
-#ifndef SIMULATOR
-	guiToMainMsg msg {
-		.missionType = missionType
-	};
-
-	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
-#endif // NOT SIMULATOR
 
 #ifdef SIMULATOR
-	static char buf[32];
-	snprintf(buf, 32, "Mission requested: %d", missionType);
-	dbgMessage = buf;
-	modelListener->debugMessageChanged();
-#endif // SIMULATOR
+#include <stdio.h>
+
+void Model::requestMission(MmrMission missionType) {
+  static char buf[32];
+  snprintf(buf, 32, "Mission requested: %d", missionType);
+  dbgMessage = buf;
+  modelListener->debugMessageChanged();
 }
+
+#else
+
+void Model::requestMission(MmrMission missionType) {
+  guiToMainMsg msg {
+	  .missionType = missionType
+  };
+
+  osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
+}
+#endif

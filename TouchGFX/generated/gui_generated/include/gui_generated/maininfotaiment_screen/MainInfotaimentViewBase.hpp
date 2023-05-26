@@ -8,8 +8,8 @@
 #include <mvp/View.hpp>
 #include <gui/maininfotaiment_screen/MainInfotaimentPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
@@ -34,7 +34,6 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::TextArea labelGear;
     touchgfx::TextAreaWithOneWildcard txtGear;
     touchgfx::TextAreaWithOneWildcard txtSpeed;
     touchgfx::TextArea labelSpeed;
@@ -44,8 +43,10 @@ protected:
     touchgfx::TextArea labelRpm;
     touchgfx::BoxWithBorder boxThrottle;
     touchgfx::BoxWithBorder boxBrake;
+    touchgfx::BoxWithBorder boxBrake_1;
     touchgfx::BoxProgress progressThrottle;
-    touchgfx::BoxProgress progressBrake;
+    touchgfx::BoxProgress progressBrakeFront;
+    touchgfx::BoxProgress progressBrakeRear;
     touchgfx::BoxWithBorder boxRES;
     touchgfx::Line line1_1;
     touchgfx::PainterRGB565 line1_1Painter;
@@ -87,8 +88,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard txtAS;
     touchgfx::TextAreaWithOneWildcard txtAMI;
     touchgfx::TextAreaWithOneWildcard txtEBS;
-    touchgfx::Image imgGearUp;
-    touchgfx::Image imgGearUp_1;
     touchgfx::TextArea labelBattery_V;
     touchgfx::BoxWithBorder boxBattery_V;
     touchgfx::TextAreaWithOneWildcard txtBattery_V;
