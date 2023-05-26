@@ -61,27 +61,11 @@
         "Components": [
           {
             "Type": "TextArea",
-            "Name": "labelGear",
-            "X": 345,
-            "Y": 79,
-            "Width": 111,
-            "Height": 49,
-            "TextId": "__SingleUse_9I03",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
             "Name": "txtGear",
-            "X": 378,
-            "Y": 152,
-            "Width": 45,
-            "Height": 73,
+            "X": 367,
+            "Y": 42,
+            "Width": 67,
+            "Height": 109,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -846,8 +830,8 @@
           {
             "Type": "Image",
             "Name": "imgGearUp",
-            "X": 436,
-            "Y": 173,
+            "X": 440,
+            "Y": 80,
             "Width": 11,
             "Height": 30,
             "Visible": false,
@@ -856,8 +840,8 @@
           {
             "Type": "Image",
             "Name": "imgGearUp_1",
-            "X": 355,
-            "Y": 173,
+            "X": 350,
+            "Y": 80,
             "Width": 11,
             "Height": 30,
             "Visible": false,
