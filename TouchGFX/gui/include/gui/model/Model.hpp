@@ -31,6 +31,12 @@ public:
     void setP_oil(float recvP_oil) { P_oil= recvP_oil; }
     float getP_oil() { return P_oil; }
 
+    void setOrinTemperature(float recvOrinTemperature) { orinTemperature = recvOrinTemperature; }
+    float getOrinTemperature() { return orinTemperature; }
+
+    void setVoltage24v(float recvVoltage24v) { voltage24v = recvVoltage24v; }
+    float getVoltage24v() { return voltage24v; }
+
     void setThrottle_perc(int recvThrottle_perc) { throttle_perc= recvThrottle_perc; }
     int getThrottle_perc() { return throttle_perc; }
 
@@ -60,15 +66,17 @@ protected:
     ModelListener* modelListener;
 
     const char* dbgMessage;
-    int gear, speed, rpm, T_water, T_oil, throttle_perc, brake_perc;
+    int gear, speed, rpm, T_water, T_oil, throttle_perc;
     int frontBrakePerc, rearBrakePerc;
+
+    float orinTemperature;
 
     float P_oil;
 
     int RES;
     bool LC, CLT;
 
-    float battery_v;
+    float battery_v, voltage24v;
 
     char DS[40], AS[40], AMI[40], EBS[10];
 };

@@ -14,10 +14,11 @@ static int t;
 
 void Model::tick() {
   // Some random data
-  rpm = (t * 60) % 12000; 
-  throttle_perc = (t + 50) % 100;
-  frontBrakePerc = t % 100;
-  rearBrakePerc = 100 - (t % 100);
+  setRpm((t * 60) % 12000); 
+  setThrottle_perc((t + 50) % 100);
+  setFrontBrakePerc(t % 100);
+  setRearBrakePerc(100 - (t % 100));
+  setOrinTemperature(t % 100);
 
   ++t;
   modelListener->infoChanged();
@@ -35,28 +36,31 @@ extern osMessageQueueId_t mainToGuiMsgQueue;
 void Model::tick()
 {
 	osStatus_t status;
+	
 	status = osMessageQueueGet(mainToGuiMsgQueue, &info, NULL, 0);
 	if (status == osOK)
 	{
-		gear = info.gear;
-		speed = info.speed;
-		rpm = info.rpm;
+		setGear(info.gear);
+		setSpeed(info.speed);
+		setRpm(info.rpm);
 
-		T_water = info.T_water;
-		T_oil = info.T_oil;
-		P_oil = info.P_oil;
+		setT_water(info.T_water);
+		setT_oil(info.T_oil);
+		setP_oil(info.P_oil);
 
-		throttle_perc = info.throttle_perc;
-		brake_perc = info.brake_perc;
+		setThrottle_perc(info.throttle_perc);
 
-		RES = info.RES;
-		LC = info.LC;
-		CLT = info.CLT;
+		setRES(info.RES);
+		setLC(info.LC);
+		setCLT(info.CLT);
 
-		battery_v = info.battery_v;
+		setBatteryV(info.battery_v);
 
-		rearBrakePerc = info.brakePressureRear * (100.0 / 160.0);
-		frontBrakePerc = info.brakePressureFront * (100.0 / 160.0);
+		setOrinTemperature(info.orinTemperature);
+		setVoltage24v(info.voltage24v);
+
+		setRearBrakePerc(info.brakePressureRear * (100.0 / 160.0));
+		setFrontBrakePerc(info.brakePressureFront * (100.0 / 160.0));
 
 		/* TODO: String variables */
 

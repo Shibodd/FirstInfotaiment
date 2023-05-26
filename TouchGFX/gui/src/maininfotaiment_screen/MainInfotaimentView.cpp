@@ -147,6 +147,14 @@ void MainInfotaimentView::setRearBrake_Perc(int brake_perc)
 	progressBrakeRear.setValue(brake_perc);
 }
 
+void MainInfotaimentView::setOrinTemperature(float orinTemperature) {
+
+}
+
+void MainInfotaimentView::setVoltage24v(float voltage24v) {
+	
+}
+
 void MainInfotaimentView::setRES(int RES)
 {
 	if(!RES)

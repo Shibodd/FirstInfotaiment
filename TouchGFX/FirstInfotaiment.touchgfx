@@ -205,25 +205,6 @@
             "BorderSize": 4
           },
           {
-            "Type": "BoxWithBorder",
-            "Name": "boxBrake_1",
-            "X": 305,
-            "Y": 238,
-            "Width": 190,
-            "Height": 24,
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "BorderColor": {
-              "Red": 244,
-              "Green": 255,
-              "Blue": 31
-            },
-            "BorderSize": 4
-          },
-          {
             "Type": "BoxProgress",
             "Name": "progressThrottle",
             "X": 308,
@@ -281,6 +262,25 @@
             "IndicatorPositionWidth": 180,
             "IndicatorPositionHeight": 16,
             "ProgressRangeMax": 100
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxBrake_1",
+            "X": 305,
+            "Y": 238,
+            "Width": 190,
+            "Height": 24,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderColor": {
+              "Red": 244,
+              "Green": 255,
+              "Blue": 31
+            },
+            "BorderSize": 4
           },
           {
             "Type": "BoxWithBorder",

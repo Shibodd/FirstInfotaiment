@@ -49,6 +49,9 @@ void MainInfotaimentPresenter::infoChanged()
 
 	view.setBattery_V(model->getBattery_v());
 
+	view.setOrinTemperature(model->getOrinTemperature());
+	view.setVoltage24v(model->getVoltage24v());
+
 	/* TODO: String variables */
 }
 

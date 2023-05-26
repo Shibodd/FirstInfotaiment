@@ -37,6 +37,9 @@ public:
     void setFrontBrake_Perc(int brake_perc);
     void setRearBrake_Perc(int brake_perc);
 
+    void setOrinTemperature(float orinTemperature);
+    void setVoltage24v(float voltage24v);
+
     void setRES(int RES);
     void setLC(bool LC);
     void setCLT(bool CLT);
