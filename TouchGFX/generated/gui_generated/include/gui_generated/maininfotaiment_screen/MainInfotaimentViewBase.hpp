@@ -90,6 +90,7 @@ protected:
     touchgfx::Image imgOilPres;
     touchgfx::Image imgOilTemp;
     touchgfx::Image imgWaterTemp;
+    touchgfx::Image imgTOrin;
     touchgfx::BoxWithBorder boxTOrin;
     touchgfx::TextAreaWithOneWildcard txtTOrin;
     touchgfx::Image imgBatteryV;
@@ -100,7 +101,6 @@ protected:
     touchgfx::TextAreaWithOneWildcard dbgTextArea;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea1_1;
-    touchgfx::TextArea textArea1_1_1;
 
     /*
      * Wildcard Buffers

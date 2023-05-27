@@ -815,8 +815,8 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxBattery_V",
-            "X": 552,
-            "Y": 397,
+            "X": 526,
+            "Y": 376,
             "Width": 87,
             "Height": 38,
             "BorderColor": {
@@ -828,8 +828,8 @@
           {
             "Type": "TextArea",
             "Name": "txtBattery_V",
-            "X": 562,
-            "Y": 407,
+            "X": 536,
+            "Y": 386,
             "Width": 70,
             "Height": 19,
             "TextId": "__SingleUse_J87C",
@@ -873,6 +873,15 @@
             "RelativeFilename": "water_low.png"
           },
           {
+            "Type": "Image",
+            "Name": "imgTOrin",
+            "X": 246,
+            "Y": 387,
+            "Width": 35,
+            "Height": 34,
+            "RelativeFilename": "orin_t_ok.png"
+          },
+          {
             "Type": "BoxWithBorder",
             "Name": "boxTOrin",
             "X": 150,
@@ -908,8 +917,8 @@
           {
             "Type": "Image",
             "Name": "imgBatteryV",
-            "X": 552,
-            "Y": 347,
+            "X": 529,
+            "Y": 337,
             "Width": 83,
             "Height": 48,
             "RelativeFilename": "battery_ok.png"
@@ -917,8 +926,8 @@
           {
             "Type": "Image",
             "Name": "img24v",
-            "X": 634,
-            "Y": 347,
+            "X": 609,
+            "Y": 337,
             "Width": 83,
             "Height": 48,
             "RelativeFilename": "battery_ok.png"
@@ -926,8 +935,8 @@
           {
             "Type": "BoxWithBorder",
             "Name": "box24v",
-            "X": 634,
-            "Y": 397,
+            "X": 608,
+            "Y": 376,
             "Width": 87,
             "Height": 38,
             "BorderColor": {
@@ -939,8 +948,8 @@
           {
             "Type": "TextArea",
             "Name": "txt24v",
-            "X": 642,
-            "Y": 407,
+            "X": 616,
+            "Y": 386,
             "Width": 70,
             "Height": 19,
             "TextId": "__SingleUse_JG35",
@@ -959,12 +968,12 @@
           {
             "Type": "Button",
             "Name": "btnNextPage",
-            "X": 749,
-            "Y": 432,
-            "Width": 38,
-            "Height": 35,
-            "Pressed": "btn_next_raw-removebg-preview.png",
-            "Released": "btn_next_raw-removebg-preview.png"
+            "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_next.png",
+            "Released": "btn_next.png"
           },
           {
             "Type": "TextArea",
@@ -988,10 +997,10 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 656,
-            "Y": 435,
-            "Width": 39,
-            "Height": 49,
+            "X": 635,
+            "Y": 414,
+            "Width": 29,
+            "Height": 19,
             "TextId": "__SingleUse_J3QN",
             "TextRotation": "0",
             "Color": {
@@ -1004,27 +1013,11 @@
           {
             "Type": "TextArea",
             "Name": "textArea1_1",
-            "X": 578,
-            "Y": 437,
-            "Width": 39,
-            "Height": 25,
+            "X": 557,
+            "Y": 414,
+            "Width": 29,
+            "Height": 19,
             "TextId": "__SingleUse_BU43",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "AutoSize": true
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1_1_1",
-            "X": 246,
-            "Y": 392,
-            "Width": 42,
-            "Height": 25,
-            "TextId": "__SingleUse_ZWI4",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1056,12 +1049,12 @@
           {
             "Type": "Button",
             "Name": "btnPrevPage",
-            "X": 749,
-            "Y": 432,
-            "Width": 38,
-            "Height": 35,
-            "Pressed": "btn_prev_raw-removebg-preview.png",
-            "Released": "btn_prev_raw-removebg-preview.png"
+            "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_prev.png",
+            "Released": "btn_prev.png"
           },
           {
             "Type": "TextArea",

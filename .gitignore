@@ -74,3 +74,4 @@ ctrlp.root
 *.html
 
 .vscode/
+Middlewares/ST/touchgfx/*

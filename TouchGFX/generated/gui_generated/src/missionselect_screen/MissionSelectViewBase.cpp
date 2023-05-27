@@ -14,8 +14,8 @@ MissionSelectViewBase::MissionSelectViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    btnPrevPage.setXY(749, 432);
-    btnPrevPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_PREV_RAW_REMOVEBG_PREVIEW_ID), touchgfx::Bitmap(BITMAP_BTN_PREV_RAW_REMOVEBG_PREVIEW_ID));
+    btnPrevPage.setXY(735, 415);
+    btnPrevPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_PREV_ID), touchgfx::Bitmap(BITMAP_BTN_PREV_ID));
     btnPrevPage.setAction(buttonCallback);
     add(btnPrevPage);
 

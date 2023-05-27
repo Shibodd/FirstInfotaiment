@@ -29,7 +29,6 @@ enum TEXTS
     T_TOIL,
     T_POIL,
     T_TWATER,
-    T___SINGLEUSE_ZWI4,
     T___SINGLEUSE_BU43,
     T___SINGLEUSE_J3QN,
     T___SINGLEUSE_8BB2,

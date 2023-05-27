@@ -300,16 +300,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__generated/image_alternate_theme_images_widgets_button_regular_height_36_medium_rounded_pressed.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_Gear_Down.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Gear_Down.cpp</locationURI>
-		</link>
-		<link>
-			<name>Application/User/generated/image_Gear_Up.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Gear_Up.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/image_MMRD_logo_nuovo-185x111.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_MMRD_logo_nuovo-185x111.cpp</locationURI>
@@ -335,14 +325,14 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_battery_ok.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_btn_next_raw-removebg-preview.cpp</name>
+			<name>Application/User/generated/image_btn_next.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_btn_next_raw-removebg-preview.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_btn_next.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_btn_prev_raw-removebg-preview.cpp</name>
+			<name>Application/User/generated/image_btn_prev.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_btn_prev_raw-removebg-preview.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_btn_prev.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_oil_pres_high.cpp</name>
@@ -375,9 +365,14 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_oil_temp_ok.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_progress.cpp</name>
+			<name>Application/User/generated/image_orin_t_high.cpp</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_progress.cpp</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_orin_t_high.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_orin_t_ok.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_orin_t_ok.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_water_high.cpp</name>
