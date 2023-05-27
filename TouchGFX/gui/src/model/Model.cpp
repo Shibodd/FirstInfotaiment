@@ -56,7 +56,7 @@ void Model::tick()
 		setLC(info.LC);
 		setCLT(info.CLT);
 
-		setBatteryV(info.battery_v);
+		setBattery_v(info.battery_v);
 
 		setOrinTemperature(info.orinTemperature);
 		setVoltage24v(info.voltage24v);
