@@ -50,6 +50,10 @@ void MissionSelectView::missionScrollListUpdateItem(missionBtnContainer& item, i
     MISSIONS[itemIndex].item = &item;
 }
 
+void MissionSelectView::requestResOpMode() {
+    
+}
+
 
 
 MissionSelectView::MissionSelectView()

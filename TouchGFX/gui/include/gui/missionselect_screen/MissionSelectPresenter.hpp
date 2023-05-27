@@ -28,6 +28,8 @@ public:
 
     void requestMission(MmrMission type);
 
+    void requestResOperationalMode();
+
     virtual ~MissionSelectPresenter() {};
 
 private:

@@ -57,6 +57,7 @@ public:
     float getBattery_v() { return battery_v; }
 
     void requestMission(MmrMission missionType);
+    void requestResOperationalMode();
 
     const char* getDebugMessage() { return dbgMessage; }
 

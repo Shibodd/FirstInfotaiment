@@ -37,6 +37,14 @@ MissionSelectViewBase::MissionSelectViewBase() :
     missionScrollList.setDrawableSize(36, 7);
     missionScrollList.setDrawables(missionScrollListListItems, updateItemCallback);
     add(missionScrollList);
+
+    btnResOpMode.setXY(520, 215);
+    btnResOpMode.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    btnResOpMode.setLabelText(touchgfx::TypedText(T___SINGLEUSE_5CM1));
+    btnResOpMode.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    btnResOpMode.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    btnResOpMode.setAction(buttonCallback);
+    add(btnResOpMode);
 }
 
 MissionSelectViewBase::~MissionSelectViewBase()
@@ -60,19 +68,14 @@ void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //fromMissionSelectToLiveData
         //When btnPrevPage clicked change screen to MainInfotaiment
         //Go to MainInfotaiment with screen transition towards West
-        application().gotoMainInfotaimentScreenSlideTransitionWest();
-        //startManualMission
-        //When btnPrevPage clicked call virtual function
-        //Call startManualMission
-        startManualMission();
-        //startTrackdriveMission
-        //When btnPrevPage clicked call virtual function
-        //Call startTrackdriveMission
-        startTrackdriveMission();
-        //startAccelerationMission
-        //When btnPrevPage clicked call virtual function
-        //Call startAccelerationMission
-        startAccelerationMission();
+        application().gotoMainInfotaimentScreenSlideTransitionWest();
+    }
+    if (&src == &btnResOpMode)
+    {
+        //ResOperationalMode
+        //When btnResOpMode clicked call virtual function
+        //Call requestResOpMode
+        requestResOpMode();
     }
 }
 

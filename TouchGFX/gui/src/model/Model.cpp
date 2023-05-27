@@ -87,13 +87,28 @@ void Model::requestMission(MmrMission missionType) {
   modelListener->debugMessageChanged();
 }
 
+void Model::requestResOperationalMode() {
+	static char buf[32];
+  snprintf(buf, 32, "Res operational mode requested");
+  dbgMessage = buf;
+  modelListener->debugMessageChanged();
+}
+
 #else
 
 void Model::requestMission(MmrMission missionType) {
-  guiToMainMsg msg {
-	  .missionType = missionType
-  };
+  guiToMainMsg msg;
+	msg.type = GUI_TO_MAIN_MSG_MISSIONSELECT;
+	msg.content.selectedMission = missionType;
 
   osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
+}
+
+void Model::requestResOperationalMode() {
+  guiToMainMsg msg {
+		.type = GUI_TO_MAIN_MSG_SETRESOPMODE
+	};
+
+	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
 }
 #endif

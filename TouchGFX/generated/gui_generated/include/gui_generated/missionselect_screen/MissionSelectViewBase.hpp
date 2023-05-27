@@ -12,6 +12,7 @@
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/scrollers/ScrollList.hpp>
 #include <gui/containers/missionBtnContainer.hpp>
+#include <touchgfx/widgets/ButtonWithLabel.hpp>
 
 class MissionSelectViewBase : public touchgfx::View<MissionSelectPresenter>
 {
@@ -28,15 +29,7 @@ public:
     /*
      * Virtual Action Handlers
      */
-    virtual void startManualMission()
-    {
-        // Override and implement this function in MissionSelect
-    }
-    virtual void startTrackdriveMission()
-    {
-        // Override and implement this function in MissionSelect
-    }
-    virtual void startAccelerationMission()
+    virtual void requestResOpMode()
     {
         // Override and implement this function in MissionSelect
     }
@@ -54,6 +47,7 @@ protected:
     touchgfx::TextArea labelSelectMission;
     touchgfx::ScrollList missionScrollList;
     touchgfx::DrawableListItems<missionBtnContainer, 10> missionScrollListListItems;
+    touchgfx::ButtonWithLabel btnResOpMode;
 
 private:
 

@@ -16,6 +16,8 @@ public:
     virtual void tearDownScreen();
 
     virtual void missionScrollListUpdateItem(missionBtnContainer& item, int16_t itemIndex);
+    
+    virtual void requestResOpMode();
 protected:
 
     Callback<MissionSelectView, int16_t> scrollListItemSelectedCallback;
