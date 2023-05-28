@@ -4,26 +4,37 @@
 #include <stdint.h>
 #include <missions.h>
 
-typedef struct {
-	uint8_t speed;
-	uint8_t gear;
-	uint16_t rpm;
-	uint8_t T_water;
-	uint8_t T_oil;
-	uint8_t throttle_perc;
-	uint8_t brake_perc;
-	float P_oil;
-	int RES;
-	bool LC;
-	bool CLT;
-	float battery_v;
-	float brakePressureFront;
-	float brakePressureRear;
-	float voltage24v;
-	float orinTemperature;
-	/* TODO: String variables */
-} displayInfo;
+// VALUE UPDATE MESSAGE
+typedef enum {
+	VALUE_UPDATE_ID_SPEED, // uint16_t
+	VALUE_UPDATE_ID_GEAR, // uint8_t
+	VALUE_UPDATE_ID_RPM, // uint16_t
 
+	VALUE_UPDATE_ID_RES, // bool
+	VALUE_UPDATE_ID_LC, // bool
+	VALUE_UPDATE_ID_CLT, // bool
+
+	VALUE_UPDATE_ID_WATERTEMP, // uint8_t
+	VALUE_UPDATE_ID_OILTEMP, // uint8_t
+	VALUE_UPDATE_ID_OILPRESS, // float
+
+	VALUE_UPDATE_ID_THROTTLEPERC, // uint8_t
+	VALUE_UPDATE_ID_BRAKEPRESSFRONT, // float 
+	VALUE_UPDATE_ID_BRAKEPRESSREAR, // float
+
+	VALUE_UPDATE_ID_ORINTEMP, // float
+	VALUE_UPDATE_ID_VOLTAGE24V, // float
+	VALUE_UPDATE_ID_VOLTAGE12V // float
+} ValueUpdateId;
+
+#define VALUE_MESSAGE_MAX_SIZE sizeof(uint32_t)
+typedef struct {
+  ValueUpdateId id;
+  uint8_t value[VALUE_MESSAGE_MAX_SIZE];
+} valueUpdateMessage;
+
+
+// GUI TO MAIN MESSAGES
 typedef enum {
   GUI_TO_MAIN_MSG_MISSIONSELECT,
   GUI_TO_MAIN_MSG_SETRESOPMODE

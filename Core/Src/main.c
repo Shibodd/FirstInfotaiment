@@ -84,7 +84,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
 /* USER CODE BEGIN PV */
 osMessageQueueId_t dbgMsgQueue;
 osMessageQueueId_t guiToMainMsgQueue;
-osMessageQueueId_t mainToGuiMsgQueue;
+osMessageQueueId_t valueUpdatesQueue;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -173,7 +173,7 @@ int main(void)
   /* add queues, ... */
   if ((guiToMainMsgQueue = osMessageQueueNew(10, sizeof(guiToMainMsg), NULL)) == NULL)
 	  return -1;
-  if ((mainToGuiMsgQueue = osMessageQueueNew(10, sizeof(displayInfo), NULL)) == NULL)
+  if ((valueUpdatesQueue = osMessageQueueNew(10, sizeof(valueUpdateMessage), NULL)) == NULL)
 	  return -1;
   if ((dbgMsgQueue = osMessageQueueNew(10, sizeof(char*), NULL)) == NULL)
 	  return -1;

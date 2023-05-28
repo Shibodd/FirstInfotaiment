@@ -17,11 +17,16 @@
 
 extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
-extern osMessageQueueId_t mainToGuiMsgQueue;
+extern osMessageQueueId_t valueUpdatesQueue;
 extern SPI_HandleTypeDef hspi2;
 
-displayInfo msgDisplayInfo;
-int gear_six_count = 0, gear_mem = 0;
+struct CarState {
+  int gear;
+  int rpm;
+  MmrLaunchControlState launchControlState;
+} carState;
+
+
 
 MmrPin mcp2515csPin;
 MmrPin* spiSlavePins[] = { &mcp2515csPin };
@@ -107,17 +112,17 @@ void task_run_ecu_tasks() {
 			return;
 
 		case ECU_Task_ShiftingUp:
-			if ((finished = MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem)))
+			if ((finished = MMR_NET_GEAR_ShiftUpAsync(&mcp2515, carState.gear)))
 			  userMessage("INFO: Shifted up.");
 			break;
 
 		case ECU_Task_ShiftingDown:
-			if ((finished = MMR_NET_GEAR_ShiftDownAsync(&mcp2515, gear_mem)))
+			if ((finished = MMR_NET_GEAR_ShiftDownAsync(&mcp2515, carState.gear)))
 			  userMessage("INFO: Shifted down.");
 			break;
 
 		case ECU_Task_ShiftingNtrl:
-			if ((finished = MMR_NET_GEAR_ShiftToNeutralAsync(&mcp2515, gear_mem)))
+			if ((finished = MMR_NET_GEAR_ShiftToNeutralAsync(&mcp2515, carState.gear)))
 			  userMessage("INFO: Shifted to neutral.");
 			break;
 
@@ -130,9 +135,9 @@ void task_run_ecu_tasks() {
 			}
 
 			MmrNetLaunchControlCarState cs = {
-				.rpm = msgDisplayInfo.rpm,
-				.gear = msgDisplayInfo.gear,
-				.launchControl = msgDisplayInfo.LC ? MMR_LAUNCH_CONTROL_SET : MMR_LAUNCH_CONTROL_NOT_SET
+				.rpm = carState.rpm,
+				.gear = carState.gear,
+				.launchControl = carState.launchControlState
 			};
 
 			if (runningEcuTask == ECU_Task_SetLaunchCtrl) {
@@ -237,6 +242,7 @@ void process_single_gui_message(guiToMainMsg* msg) {
     case GUI_TO_MAIN_MSG_MISSIONSELECT:
       mission_request(msg->content.selectedMission);
       break;
+    
     case GUI_TO_MAIN_MSG_SETRESOPMODE:
       resOpMode_request();
       break;
@@ -253,100 +259,79 @@ void task_process_gui_messages_rx() {
   }
 }
 
+
+#define SEND_VALUE_UPDATE_FUNCTION_DEF(name, type) \
+static inline void name(ValueUpdateId id, type data) { \
+  valueUpdateMessage msg; \
+  msg.id = id; \
+  *((type*)msg.value) = data; \
+  osMessageQueuePut(valueUpdatesQueue, &msg, 0U, 0U); \
+}
+
+SEND_VALUE_UPDATE_FUNCTION_DEF(sendValueUpdate8, uint8_t)
+SEND_VALUE_UPDATE_FUNCTION_DEF(sendValueUpdate16, uint16_t)
+SEND_VALUE_UPDATE_FUNCTION_DEF(sendValueUpdateBool, bool)
+SEND_VALUE_UPDATE_FUNCTION_DEF(sendValueUpdateFloat, float)
+
 void process_single_can_message(MmrCanMessage* msg) {
   if (!msg->isStandardId)
     return;
 
   switch (msg->id) {
-    /* RES */
     case MMR_CAN_MESSAGE_ID_RES:
-      msgDisplayInfo.RES = msg->payload[0];  /* 0 = emergency, 1 = GO */
+      sendValueUpdateBool(VALUE_UPDATE_ID_RES, 1 == MMR_BUFFER_ReadByte(msg->payload, 0)); /* 0 = emergency, 1 = GO */
       break;
 
-    /* RPM, SPEED, GEAR, ATH */
     case MMR_CAN_MESSAGE_ID_ECU_ENGINE_FN1:
-      msgDisplayInfo.rpm = (msg->payload[1] << 8) | msg->payload[0];
-
-      uint16_t speed = (msg->payload[3] << 8) | msg->payload[2];
-      msgDisplayInfo.speed = (unsigned char)(speed / 100);
-
-      uint8_t gear = msg->payload[4]; /* No need to read msg->payload[5] since it will ALWAYS be 0! */
-      gear_mem = gear;
-      if (gear == 6)
-      {
-        gear_six_count++;
-        if (gear_six_count == 3)
-          msgDisplayInfo.gear = gear;
-      }
-      else
-      {
-        gear_six_count = 0;
-        msgDisplayInfo.gear = gear;
-      }
-
-      uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
-      msgDisplayInfo.throttle_perc = (unsigned char)(throttle / 100);
+      sendValueUpdate16(VALUE_UPDATE_ID_RPM, carState.rpm = MMR_BUFFER_ReadUint16(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN));
+      sendValueUpdate16(VALUE_UPDATE_ID_SPEED, MMR_BUFFER_ReadUint16(msg->payload, 2, MMR_ENCODING_LITTLE_ENDIAN) / 100);
+      sendValueUpdate8(VALUE_UPDATE_ID_GEAR, carState.gear = MMR_BUFFER_ReadByte(msg->payload, 4););
+      sendValueUpdate8(VALUE_UPDATE_ID_THROTTLEPERC, MMR_BUFFER_ReadUint16(msg->payload, 6, MMR_ENCODING_LITTLE_ENDIAN) / 100);
       break;
 
-    /* TOIL, TWATER */
-    case 0x701:
-      msgDisplayInfo.T_oil = (msg->payload[0] - 40);/* No need to read RxData[1] since it will ALWAYS be 0! */
-      msgDisplayInfo.T_water = (msg->payload[2] - 40); /* No need to read RxData[3] since it will ALWAYS be 0! */
+    case MMR_CAN_MESSAGE_ID_ECU_TEMPERATURES:
+      sendValueUpdate8(VALUE_UPDATE_ID_OILTEMP, MMR_BUFFER_ReadByte(msg->payload, 0) - 40);
+      sendValueUpdate8(VALUE_UPDATE_ID_WATERTEMP, MMR_BUFFER_ReadByte(msg->payload, 2) - 40);
       break;
 
-    /* POIL */
-    case 0x703: {
-      short p_oil = (msg->payload[1] << 8) | msg->payload[0];
-      msgDisplayInfo.P_oil = (float)p_oil / 20;
+    case MMR_CAN_MESSAGE_ID_ECU_PRESSURES:
+      sendValueUpdateFloat(VALUE_UPDATE_ID_OILPRESS, MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN) / 20.0f);
       break;
-    }
 
-    /* Brake pressure */
     case MMR_CAN_MESSAGE_ID_ECU_BRAKE_PRESSURES:
-      msgDisplayInfo.brakePressureFront = (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 2, MMR_ENCODING_LITTLE_ENDIAN);
-      msgDisplayInfo.brakePressureRear = (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
+      sendValueUpdateFloat(VALUE_UPDATE_ID_BRAKEPRESSFRONT, (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 2, MMR_ENCODING_LITTLE_ENDIAN));
+      sendValueUpdateFloat(VALUE_UPDATE_ID_BRAKEPRESSREAR, (0.005f) * MMR_BUFFER_ReadUint16(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN));
       break;
 
-
-    /* battery_V * 1000 */
-    case 0x704: {
-      short bat = (msg->payload[1] << 8) | msg->payload[0];
-      msgDisplayInfo.battery_v = (float)bat / 1000;
-      break;
-    }
-
-    /* LAUNCH CONTROL ACTIVE */
-    case 0x70C:
-      msgDisplayInfo.LC = msg->payload[0] & 0x1;
+    case MMR_CAN_MESSAGE_ID_ECU_ENGINE_FN2:
+      sendValueUpdateFloat(VALUE_UPDATE_ID_VOLTAGE12V, (float)MMR_BUFFER_ReadUint16(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN) / 1000.0f);
       break;
 
-    /* CLUTCH PULL OK */
+    case MMR_CAN_MESSAGE_ID_ECU_LAUNCH_CONTROL_ACK:
+      bool launchControlSet = 1 == (MMR_BUFFER_ReadByte(msg->payload, 0) & 0x1);
+      carState.launchControlState = launchControlSet? MMR_LAUNCH_CONTROL_SET : MMR_LAUNCH_CONTROL_NOT_SET;
+      sendValueUpdateBool(VALUE_UPDATE_ID_LC, launchControlSet);
+      break;
+
     case MMR_CAN_MESSAGE_ID_CS_CLUTCH_PULL_OK:
-      msgDisplayInfo.CLT = true; /* No need to read RxData[7] since it will ALWAYS be 0! */
+      sendValueUpdate8(VALUE_UPDATE_ID_CLT, true);
       break;
 
-    /* ORIN TEMPERATURE */
-    case MMR_CAN_MESSAGE_ID_ORIN_TEMPERATURE:
-      msgDisplayInfo.orinTemperature = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
-      break;
-
-    /* 24V */
-    case MMR_CAN_MESSAGE_ID_24v:
-      msgDisplayInfo.voltage24v = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
-      break;
-
-    /* CLUTCH RELEASE OK */
     case MMR_CAN_MESSAGE_ID_CS_CLUTCH_RELEASE_OK:
-      msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */
+      sendValueUpdate8(VALUE_UPDATE_ID_CLT, false);
+      break;
+
+    case MMR_CAN_MESSAGE_ID_ORIN_TEMPERATURE:
+      sendValueUpdateFloat(VALUE_UPDATE_ID_ORINTEMP, MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN));
+      break;
+
+    case MMR_CAN_MESSAGE_ID_24v:
+      sendValueUpdateFloat(VALUE_UPDATE_ID_VOLTAGE24V, MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN));
       break;
 
     default:
       return;
   }
-
-  // If no case matched (only the default case did), this is not reached.
-  // Send a message containing the updated data to the display thread.
-  osMessageQueuePut(mainToGuiMsgQueue, &msgDisplayInfo, 0U, 0U);
 }
 
 void task_process_can_rx() {
@@ -378,7 +363,7 @@ void task_process_buttons() {
     ecu_task_request(ECU_Task_ShiftingNtrl);
   }
   if (IS_JUST_PRESSED(SET_LAUNCHCTRL_BTN)) {
-    ecu_task_request(msgDisplayInfo.LC? ECU_Task_UnsetLaunchCtrl : ECU_Task_SetLaunchCtrl);
+    ecu_task_request(carState.launchControlState == MMR_LAUNCH_CONTROL_SET? ECU_Task_UnsetLaunchCtrl : ECU_Task_SetLaunchCtrl);
   }
   if (IS_JUST_PRESSED(MISSION_MANUAL_BTN)) {
     mission_request(MMR_MISSION_MANUAL);

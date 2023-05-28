@@ -33,13 +33,13 @@ void Model::tick() {
 
 extern osMessageQueueId_t dbgMsgQueue;
 extern osMessageQueueId_t guiToMainMsgQueue;
-extern osMessageQueueId_t mainToGuiMsgQueue;
+extern osMessageQueueId_t valueUpdatesQueue;
 
 void Model::tick()
 {
 	osStatus_t status;
 	
-	status = osMessageQueueGet(mainToGuiMsgQueue, &info, NULL, 0);
+	status = osMessageQueueGet(valueUpdatesQueue, &info, NULL, 0);
 	if (status == osOK)
 	{
 		setGear(info.gear);
