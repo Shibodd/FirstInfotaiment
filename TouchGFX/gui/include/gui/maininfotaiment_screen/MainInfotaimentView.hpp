@@ -52,6 +52,8 @@ public:
 
     void setDebugMessage(const char* msg);
 
+    void setLap(int lap);
+
     /* TODO: String variables */
 
 protected:

@@ -335,6 +335,10 @@ void process_single_can_message(MmrCanMessage* msg) {
       msgDisplayInfo.voltage24v = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
       break;
 
+    case MMR_CAN_MESSAGE_ID_CURRENTLAP:
+      msgDisplayInfo.lap = MMR_BUFFER_ReadByte(msg->payload, 0);
+      break;
+
     /* CLUTCH RELEASE OK */
     case MMR_CAN_MESSAGE_ID_CS_CLUTCH_RELEASE_OK:
       msgDisplayInfo.CLT = false; /* No need to read RxData[7] since it will ALWAYS be 0! */

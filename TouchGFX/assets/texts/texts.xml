@@ -60,6 +60,15 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_IPF6" Alignment="Center" TypographyId="little_medium">
+        <Translation Language="GB">LAP</Translation>
+      </Text>
+      <Text Id="__SingleUse_AR7I" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">13</Translation>
+      </Text>
+      <Text Id="__SingleUse_9DFI" Alignment="Right" TypographyId="Speed">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_5CM1" Alignment="Center" TypographyId="Medium">
         <Translation Language="GB">RES Operational &#10;Mode</Translation>
       </Text>
@@ -182,7 +191,7 @@
   <Typographies>
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
-    <Typography Id="Gear" Font="verdana.ttf" Size="90" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
+    <Typography Id="Gear" Font="verdana.ttf" Size="100" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Speed" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="Medium" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=": ." WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="little_medium" Font="verdana.ttf" Size="15" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />

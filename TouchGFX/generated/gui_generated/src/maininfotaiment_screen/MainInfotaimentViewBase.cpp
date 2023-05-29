@@ -16,7 +16,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    txtGear.setXY(367, 42);
+    txtGear.setXY(363, 40);
     txtGear.setColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     txtGear.setLinespacing(0);
     Unicode::snprintf(txtGearBuffer, TXTGEAR_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_B1YM).getText());
@@ -50,7 +50,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     add(line1);
 
-    txtRpm.setPosition(12, 71, 158, 49);
+    txtRpm.setPosition(12, 71, 128, 49);
     txtRpm.setColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     txtRpm.setLinespacing(0);
     Unicode::snprintf(txtRpmBuffer, TXTRPM_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_Y39W).getText());
@@ -124,6 +124,30 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     line1_1.setLineWidth(10);
     line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     add(line1_1);
+
+    line1_1_1.setPosition(143, 154, 15, 42);
+    line1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    line1_1_1.setPainter(line1_1_1Painter);
+    line1_1_1.setStart(0, 0);
+    line1_1_1.setEnd(0, 45);
+    line1_1_1.setLineWidth(10);
+    line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    add(line1_1_1);
+
+    labelLapCounter.setXY(158, 161);
+    labelLapCounter.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    labelLapCounter.setLinespacing(0);
+    labelLapCounter.setRotation(touchgfx::TEXT_ROTATE_90);
+    labelLapCounter.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IPF6));
+    add(labelLapCounter);
+
+    txtLap.setPosition(5, 150, 135, 49);
+    txtLap.setColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
+    txtLap.setLinespacing(0);
+    Unicode::snprintf(txtLapBuffer, TXTLAP_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_AR7I).getText());
+    txtLap.setWildcard(txtLapBuffer);
+    txtLap.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9DFI));
+    add(txtLap);
 
     labelRES.setXY(44, 260);
     labelRES.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));

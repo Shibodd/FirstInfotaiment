@@ -51,6 +51,7 @@ void MainInfotaimentPresenter::infoChanged()
 
 	view.setOrinTemperature(model->getOrinTemperature());
 	view.setVoltage24v(model->getVoltage24v());
+	view.setLap(model->getLap());
 
 	/* TODO: String variables */
 }

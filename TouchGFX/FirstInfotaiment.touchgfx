@@ -62,10 +62,10 @@
           {
             "Type": "TextArea",
             "Name": "txtGear",
-            "X": 367,
-            "Y": 42,
-            "Width": 67,
-            "Height": 110,
+            "X": 363,
+            "Y": 40,
+            "Width": 75,
+            "Height": 122,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -136,7 +136,7 @@
             "Name": "txtRpm",
             "X": 12,
             "Y": 71,
-            "Width": 158,
+            "Width": 128,
             "Height": 49,
             "TextId": "__SingleUse_VS7F",
             "TextRotation": "0",
@@ -310,6 +310,57 @@
             "EndY": 45.0,
             "LineWidth": 10.0,
             "LineEndingStyle": "Butt"
+          },
+          {
+            "Type": "Line",
+            "Name": "line1_1_1",
+            "X": 143,
+            "Y": 154,
+            "Width": 15,
+            "Height": 42,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "EndY": 45.0,
+            "LineWidth": 10.0,
+            "LineEndingStyle": "Butt"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelLapCounter",
+            "X": 158,
+            "Y": 161,
+            "Width": 19,
+            "Height": 28,
+            "TextId": "__SingleUse_IPF6",
+            "TextRotation": "90",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtLap",
+            "X": 5,
+            "Y": 150,
+            "Width": 135,
+            "Height": 49,
+            "TextId": "__SingleUse_9DFI",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 234
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_AR7I",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
           },
           {
             "Type": "TextArea",

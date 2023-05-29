@@ -251,6 +251,13 @@ void MainInfotaimentView::setBattery_V(float battery_v)
 	txtBattery_V.invalidate();
 	imgBatteryV.invalidate();
 }
+
+void MainInfotaimentView::setLap(int lap) {
+	Unicode::snprintf(txtLapBuffer, TXTLAP_SIZE, "%d", lap);
+
+  txtLap.invalidate();
+}
+
 /* TODO: String variables */
 
 

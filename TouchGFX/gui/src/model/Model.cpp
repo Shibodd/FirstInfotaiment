@@ -21,6 +21,7 @@ void Model::tick() {
   setRearBrakePerc(100 - (t % 100));
   setOrinTemperature(t % 100);
   setVoltage24v(18.0f);
+	setLap(5);
 
   ++t;
   modelListener->infoChanged();
@@ -63,6 +64,7 @@ void Model::tick()
 
 		setRearBrakePerc(info.brakePressureRear * (100.0 / 160.0));
 		setFrontBrakePerc(info.brakePressureFront * (100.0 / 160.0));
+		setLap(info.lap);
 
 		/* TODO: String variables */
 

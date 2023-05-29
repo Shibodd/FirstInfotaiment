@@ -50,6 +50,10 @@ protected:
     touchgfx::BoxWithBorder boxRES;
     touchgfx::Line line1_1;
     touchgfx::PainterRGB565 line1_1Painter;
+    touchgfx::Line line1_1_1;
+    touchgfx::PainterRGB565 line1_1_1Painter;
+    touchgfx::TextArea labelLapCounter;
+    touchgfx::TextAreaWithOneWildcard txtLap;
     touchgfx::TextArea labelRES;
     touchgfx::BoxProgress progressRpmLow;
     touchgfx::BoxProgress progressRpmMed;
@@ -111,6 +115,8 @@ protected:
     touchgfx::Unicode::UnicodeChar txtSpeedBuffer[TXTSPEED_SIZE];
     static const uint16_t TXTRPM_SIZE = 7;
     touchgfx::Unicode::UnicodeChar txtRpmBuffer[TXTRPM_SIZE];
+    static const uint16_t TXTLAP_SIZE = 3;
+    touchgfx::Unicode::UnicodeChar txtLapBuffer[TXTLAP_SIZE];
     static const uint16_t TXTTWATER_SIZE = 4;
     touchgfx::Unicode::UnicodeChar txtTWaterBuffer[TXTTWATER_SIZE];
     static const uint16_t TXTTOIL_SIZE = 4;

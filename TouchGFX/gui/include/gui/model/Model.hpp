@@ -46,6 +46,9 @@ public:
     void setFrontBrakePerc(int recvBrake_perc) { frontBrakePerc = recvBrake_perc; }
     int getFrontBrakePerc() { return frontBrakePerc; }
 
+    void setLap(int lap_recv) { lap = lap_recv; }
+    int getLap() { return lap; }
+
     void setRES(int recvRES) { RES = recvRES; }
     int getRES() { return RES; }
     void setLC(bool recvLC) { LC= recvLC; }
@@ -69,6 +72,8 @@ protected:
     const char* dbgMessage;
     int gear, speed, rpm, T_water, T_oil, throttle_perc;
     int frontBrakePerc, rearBrakePerc;
+
+    int lap;
 
     float orinTemperature;
 
