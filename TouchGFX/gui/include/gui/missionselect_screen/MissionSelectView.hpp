@@ -18,6 +18,7 @@ public:
     virtual void missionScrollListUpdateItem(missionBtnContainer& item, int16_t itemIndex);
     
     virtual void requestResOpMode();
+    virtual void onChassisResetClicked();
 protected:
 
     Callback<MissionSelectView, int16_t> scrollListItemSelectedCallback;

@@ -51,7 +51,11 @@ void MissionSelectView::missionScrollListUpdateItem(missionBtnContainer& item, i
 }
 
 void MissionSelectView::requestResOpMode() {
-    
+    presenter->requestResOperationalMode();
+}
+
+void MissionSelectView::onChassisResetClicked() {
+    presenter->requestChassisReset();
 }
 
 

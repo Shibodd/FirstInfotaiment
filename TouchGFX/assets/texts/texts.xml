@@ -60,6 +60,18 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_ONGO" Alignment="Left" TypographyId="Medium">
+        <Translation Language="GB">Fuel</Translation>
+      </Text>
+      <Text Id="__SingleUse_B7Z3" Alignment="Left" TypographyId="little_medium">
+        <Translation Language="GB">0.00</Translation>
+      </Text>
+      <Text Id="__SingleUse_EUMO" Alignment="Center" TypographyId="little_medium">
+        <Translation Language="GB">&lt;value&gt; bar</Translation>
+      </Text>
+      <Text Id="__SingleUse_5MAQ" Alignment="Center" TypographyId="Medium">
+        <Translation Language="GB">Chassis&#10;Reset</Translation>
+      </Text>
       <Text Id="__SingleUse_IPF6" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">LAP</Translation>
       </Text>

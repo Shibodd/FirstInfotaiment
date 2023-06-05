@@ -21,7 +21,10 @@ void Model::tick() {
   setRearBrakePerc(100 - (t % 100));
   setOrinTemperature(t % 100);
   setVoltage24v(18.0f);
-	setLap(5);
+  setLap(5);
+
+
+  setP_Fuel((float)(t % 999) / 100);
 
   ++t;
   modelListener->infoChanged();
@@ -65,6 +68,7 @@ void Model::tick()
 		setRearBrakePerc(info.brakePressureRear * (100.0 / 160.0));
 		setFrontBrakePerc(info.brakePressureFront * (100.0 / 160.0));
 		setLap(info.lap);
+		setP_Fuel(info.P_fuel);
 
 		/* TODO: String variables */
 
@@ -96,6 +100,13 @@ void Model::requestResOperationalMode() {
   modelListener->debugMessageChanged();
 }
 
+void Model::requestChassisReset() {
+	static char buf[32];
+  snprintf(buf, 32, "Chassis reset requested.");
+  dbgMessage = buf;
+  modelListener->debugMessageChanged();
+}
+
 #else
 
 void Model::requestMission(MmrMission missionType) {
@@ -113,4 +124,14 @@ void Model::requestResOperationalMode() {
 
 	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
 }
+
+void Model::requestChassisReset() {
+  guiToMainMsg msg {
+		.type = GUI_TO_MAIN_MSG_CHASSISRESET
+	};
+
+	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
+}
+
+
 #endif

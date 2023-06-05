@@ -37,6 +37,7 @@ void MainInfotaimentPresenter::infoChanged()
 	view.setT_Water(model->getT_water());
 	view.setT_Oil(model->getT_oil());
 	view.setP_Oil(model->getP_oil());
+	view.setP_Fuel(model->getP_fuel());
 
 	view.setThrottle_Perc(model->getThrottle_perc());
 

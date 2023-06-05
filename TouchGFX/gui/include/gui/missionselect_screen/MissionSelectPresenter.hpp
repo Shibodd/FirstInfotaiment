@@ -29,6 +29,7 @@ public:
     void requestMission(MmrMission type);
 
     void requestResOperationalMode();
+    void requestChassisReset();
 
     virtual ~MissionSelectPresenter() {};
 

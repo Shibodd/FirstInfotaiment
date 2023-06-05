@@ -170,7 +170,7 @@ MmrTaskResult RepeatAsync(RepeatAsyncParams* params) {
   }
   
   if (MMR_DELAY_WaitAsync(&params->interval)) {
-    if (!params->action) {
+    if (!params->action()) {
       params->__currentRepetition = 0;
       return MMR_TASK_ERROR;
     }
@@ -214,9 +214,6 @@ RepeatAsyncParams sendMissionRequestRepeatAsync = {
 
 // RES operational mode
 bool isSendingResOpMode;
-void resOpMode_request() {
-  isSendingResOpMode = true;
-}
 
 bool sendResOpMode() {
   static uint8_t buf[1] = { 0x01 };
@@ -230,6 +227,9 @@ RepeatAsyncParams sendResOpModeRepeatAsync = {
 };
 
 
+// Chassis reset
+bool isResettingChassis;
+
 // Main logic
 void process_single_gui_message(guiToMainMsg* msg) {
   switch (msg->type) {
@@ -237,8 +237,10 @@ void process_single_gui_message(guiToMainMsg* msg) {
       mission_request(msg->content.selectedMission);
       break;
     case GUI_TO_MAIN_MSG_SETRESOPMODE:
-      resOpMode_request();
+      isSendingResOpMode = true;
       break;
+    case GUI_TO_MAIN_MSG_CHASSISRESET:
+      isResettingChassis = true;
   }
 }
 
@@ -297,6 +299,9 @@ void process_single_can_message(MmrCanMessage* msg) {
     case 0x703: {
       short p_oil = (msg->payload[1] << 8) | msg->payload[0];
       msgDisplayInfo.P_oil = (float)p_oil / 20;
+
+      float p_fuel = (float)MMR_BUFFER_ReadInt16(msg->payload, 2, MMR_ENCODING_LITTLE_ENDIAN) / 100.0f;
+      msgDisplayInfo.P_fuel = p_fuel;
       break;
     }
 
@@ -392,11 +397,8 @@ void task_send_missionrequest() {
   if (isSwitchingMission) {
     MmrTaskResult result = RepeatAsync(&sendMissionRequestRepeatAsync);
     if (result != MMR_TASK_PENDING) {
-      if (result == MMR_TASK_COMPLETED)
-        userMessage("INFO: Mission switched.");
-      else
-        userMessage("WARN: Mission switch failed.");
       isSwitchingMission = false;
+      msgOnTask(result, "INFO: Mission switched.", "WARN: Mission switch failed.");
     }
   }
 }
@@ -405,16 +407,21 @@ void task_send_resopmode() {
   if (isSendingResOpMode) {
     MmrTaskResult result = RepeatAsync(&sendResOpModeRepeatAsync);
     if (result != MMR_TASK_PENDING) {
-      if (result == MMR_TASK_COMPLETED)
-        userMessage("INFO: Sent res operational mode.");
-      else
-        userMessage("WARN: RES operational mode transmission failed.");
-      isSwitchingMission = false;
+      isSendingResOpMode = false;
+      msgOnTask(result, "INFO: Sent res operational mode.", "WARN: RES operational mode transmission failed.");
     }
   }
 }
 
-
+void task_resetchassis() {
+  if (isResettingChassis) {
+	MmrTaskResult result = MMR_NET_ChassisResetAsync();
+	if (result != MMR_TASK_PENDING) {
+	  isResettingChassis = false;
+	  msgOnTask(result, "INFO: Reset chassis sensors.", "WARN: Chassis reset failed.");
+	}
+  }
+}
 
 void configuration() {
   // Initialize the MMR libraries
@@ -476,6 +483,7 @@ void userDefaultTask() {
     task_run_ecu_tasks();
     task_send_missionrequest();
     task_send_resopmode();
+    task_resetchassis();
   }
 }
 

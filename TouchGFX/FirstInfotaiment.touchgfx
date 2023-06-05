@@ -438,7 +438,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxTWater",
             "X": 150,
-            "Y": 345,
+            "Y": 373,
             "Width": 90,
             "Height": 38,
             "BorderColor": {
@@ -451,7 +451,7 @@
             "Type": "TextArea",
             "Name": "txtTWater",
             "X": 157,
-            "Y": 355,
+            "Y": 383,
             "Width": 75,
             "Height": 19,
             "TextId": "__SingleUse_ROYB",
@@ -471,7 +471,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxTOil",
             "X": 150,
-            "Y": 305,
+            "Y": 333,
             "Width": 90,
             "Height": 38,
             "BorderColor": {
@@ -484,7 +484,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxPOil",
             "X": 150,
-            "Y": 265,
+            "Y": 293,
             "Width": 90,
             "Height": 38,
             "BorderColor": {
@@ -497,7 +497,7 @@
             "Type": "TextArea",
             "Name": "txtTOil",
             "X": 157,
-            "Y": 315,
+            "Y": 343,
             "Width": 75,
             "Height": 19,
             "TextId": "__SingleUse_YR52",
@@ -517,7 +517,7 @@
             "Type": "TextArea",
             "Name": "txtPOil",
             "X": 157,
-            "Y": 275,
+            "Y": 303,
             "Width": 75,
             "Height": 19,
             "TextId": "__SingleUse_5NKC",
@@ -900,16 +900,49 @@
             "Type": "Image",
             "Name": "imgOilPres",
             "X": 242,
-            "Y": 265,
+            "Y": 293,
             "Width": 43,
             "Height": 38,
             "RelativeFilename": "oil_pres_ok.png"
           },
           {
+            "Type": "BoxWithBorder",
+            "Name": "boxPFuel",
+            "X": 150,
+            "Y": 253,
+            "Width": 90,
+            "Height": 38,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 234
+            },
+            "BorderSize": 5
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtPFuel",
+            "X": 157,
+            "Y": 263,
+            "Width": 75,
+            "Height": 19,
+            "TextId": "__SingleUse_EUMO",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_B7Z3",
+              "UseBuffer": true,
+              "BufferSize": 6
+            }
+          },
+          {
             "Type": "Image",
             "Name": "imgOilTemp",
             "X": 242,
-            "Y": 302,
+            "Y": 330,
             "Width": 43,
             "Height": 41,
             "RelativeFilename": "oil_temp_ok.png"
@@ -918,7 +951,7 @@
             "Type": "Image",
             "Name": "imgWaterTemp",
             "X": 242,
-            "Y": 349,
+            "Y": 377,
             "Width": 43,
             "Height": 31,
             "RelativeFilename": "water_low.png"
@@ -927,7 +960,7 @@
             "Type": "Image",
             "Name": "imgTOrin",
             "X": 246,
-            "Y": 387,
+            "Y": 415,
             "Width": 35,
             "Height": 34,
             "RelativeFilename": "orin_t_ok.png"
@@ -936,7 +969,7 @@
             "Type": "BoxWithBorder",
             "Name": "boxTOrin",
             "X": 150,
-            "Y": 385,
+            "Y": 413,
             "Width": 90,
             "Height": 38,
             "BorderColor": {
@@ -949,7 +982,7 @@
             "Type": "TextArea",
             "Name": "txtTOrin",
             "X": 157,
-            "Y": 395,
+            "Y": 423,
             "Width": 75,
             "Height": 19,
             "TextId": "__SingleUse_9UXZ",
@@ -1076,6 +1109,22 @@
               "Blue": 255
             },
             "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2",
+            "X": 246,
+            "Y": 261,
+            "Width": 42,
+            "Height": 25,
+            "TextId": "__SingleUse_ONGO",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
           }
         ],
         "Interactions": [
@@ -1160,6 +1209,60 @@
             },
             "TextRotation": "0",
             "Preset": "alternate_theme\\presets\\button\\regular\\height_50\\medium_rounded_normal.json"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "chassisResetBtn",
+            "X": 12,
+            "Y": 41,
+            "Width": 215,
+            "Height": 241,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "Y": 93,
+                "TextId": "__SingleUse_5MAQ",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "ColorPressed": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                }
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 215,
+                "Height": 241,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Red": 58,
+                  "Green": 121,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 119,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
           }
         ],
         "Interactions": [
@@ -1185,6 +1288,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "requestResOpMode"
+            }
+          },
+          {
+            "InteractionName": "ChassisReset",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "chassisResetBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onChassisResetClicked"
             }
           }
         ]

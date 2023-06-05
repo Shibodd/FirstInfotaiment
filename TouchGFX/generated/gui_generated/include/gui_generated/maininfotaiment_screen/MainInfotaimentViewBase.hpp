@@ -92,6 +92,8 @@ protected:
     touchgfx::BoxWithBorder boxBattery_V;
     touchgfx::TextAreaWithOneWildcard txtBattery_V;
     touchgfx::Image imgOilPres;
+    touchgfx::BoxWithBorder boxPFuel;
+    touchgfx::TextAreaWithOneWildcard txtPFuel;
     touchgfx::Image imgOilTemp;
     touchgfx::Image imgWaterTemp;
     touchgfx::Image imgTOrin;
@@ -105,6 +107,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard dbgTextArea;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea1_1;
+    touchgfx::TextArea textArea2;
 
     /*
      * Wildcard Buffers
@@ -131,6 +134,8 @@ protected:
     touchgfx::Unicode::UnicodeChar txtEBSBuffer[TXTEBS_SIZE];
     static const uint16_t TXTBATTERY_V_SIZE = 6;
     touchgfx::Unicode::UnicodeChar txtBattery_VBuffer[TXTBATTERY_V_SIZE];
+    static const uint16_t TXTPFUEL_SIZE = 6;
+    touchgfx::Unicode::UnicodeChar txtPFuelBuffer[TXTPFUEL_SIZE];
     static const uint16_t TXTTORIN_SIZE = 4;
     touchgfx::Unicode::UnicodeChar txtTOrinBuffer[TXTTORIN_SIZE];
     static const uint16_t TXT24V_SIZE = 6;

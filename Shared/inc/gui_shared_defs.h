@@ -21,13 +21,15 @@ typedef struct {
 	float brakePressureRear;
 	float voltage24v;
 	float orinTemperature;
+	float P_fuel;
 	int lap;
 	/* TODO: String variables */
 } displayInfo;
 
 typedef enum {
   GUI_TO_MAIN_MSG_MISSIONSELECT,
-  GUI_TO_MAIN_MSG_SETRESOPMODE
+  GUI_TO_MAIN_MSG_SETRESOPMODE,
+  GUI_TO_MAIN_MSG_CHASSISRESET
 } GuiToMainMsgType;
 
 typedef struct {

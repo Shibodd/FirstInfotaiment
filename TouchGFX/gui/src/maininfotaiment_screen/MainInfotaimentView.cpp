@@ -132,6 +132,11 @@ void MainInfotaimentView::setP_Oil(float p_oil)
 	imgOilPres.invalidate();
 }
 
+void MainInfotaimentView::setP_Fuel(float p_fuel) {
+	Unicode::snprintfFloat(txtPFuelBuffer, TXTPFUEL_SIZE, "%.2f", p_fuel);
+	txtPFuel.invalidate();
+}
+
 void MainInfotaimentView::setThrottle_Perc(int throttle_perc)
 {
 	progressThrottle.setValue(throttle_perc);

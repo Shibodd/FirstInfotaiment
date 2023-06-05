@@ -8,7 +8,8 @@
 
 MissionSelectViewBase::MissionSelectViewBase() :
     updateItemCallback(this, &MissionSelectViewBase::updateItemCallbackHandler),
-    buttonCallback(this, &MissionSelectViewBase::buttonCallbackHandler)
+    buttonCallback(this, &MissionSelectViewBase::buttonCallbackHandler),
+    flexButtonCallback(this, &MissionSelectViewBase::flexButtonCallbackHandler)
 {
     __background.setPosition(0, 0, 800, 480);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -45,6 +46,16 @@ MissionSelectViewBase::MissionSelectViewBase() :
     btnResOpMode.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
     btnResOpMode.setAction(buttonCallback);
     add(btnResOpMode);
+
+    chassisResetBtn.setBoxWithBorderPosition(0, 0, 215, 241);
+    chassisResetBtn.setBorderSize(5);
+    chassisResetBtn.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(58, 121, 153), touchgfx::Color::getColorFromRGB(0, 119, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    chassisResetBtn.setText(TypedText(T___SINGLEUSE_5MAQ));
+    chassisResetBtn.setTextPosition(0, 93, 215, 241);
+    chassisResetBtn.setTextColors(touchgfx::Color::getColorFromRGB(255, 255, 255), touchgfx::Color::getColorFromRGB(255, 255, 255));
+    chassisResetBtn.setAction(flexButtonCallback);
+    chassisResetBtn.setPosition(12, 41, 215, 241);
+    add(chassisResetBtn);
 }
 
 MissionSelectViewBase::~MissionSelectViewBase()
@@ -76,6 +87,17 @@ void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //When btnResOpMode clicked call virtual function
         //Call requestResOpMode
         requestResOpMode();
+    }
+}
+
+void MissionSelectViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
+{
+    if (&src == &chassisResetBtn)
+    {
+        //ChassisReset
+        //When chassisResetBtn clicked call virtual function
+        //Call onChassisResetClicked
+        onChassisResetClicked();
     }
 }
 

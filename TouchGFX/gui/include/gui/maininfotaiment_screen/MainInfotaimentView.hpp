@@ -36,6 +36,7 @@ public:
     void setT_Water(int t_water);
     void setT_Oil(int t_oil);
     void setP_Oil(float p_oil);
+    void setP_Fuel(float p_fuel);
 
     void setThrottle_Perc(int throttle_perc);
     void setFrontBrake_Perc(int brake_perc);

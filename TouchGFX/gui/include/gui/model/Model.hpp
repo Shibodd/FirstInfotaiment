@@ -30,6 +30,8 @@ public:
     int getT_oil() { return T_oil; }
     void setP_oil(float recvP_oil) { P_oil= recvP_oil; }
     float getP_oil() { return P_oil; }
+    void setP_Fuel(float recvP_fuel) { P_fuel = recvP_fuel; }
+    float getP_fuel() { return P_fuel; }
 
     void setOrinTemperature(float recvOrinTemperature) { orinTemperature = recvOrinTemperature; }
     float getOrinTemperature() { return orinTemperature; }
@@ -61,6 +63,7 @@ public:
 
     void requestMission(MmrMission missionType);
     void requestResOperationalMode();
+    void requestChassisReset();
 
     const char* getDebugMessage() { return dbgMessage; }
 
@@ -77,7 +80,7 @@ protected:
 
     float orinTemperature;
 
-    float P_oil;
+    float P_oil, P_fuel;
 
     int RES;
     bool LC, CLT;
