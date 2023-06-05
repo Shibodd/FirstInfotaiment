@@ -98,37 +98,37 @@ bool ecu_task_request(EcuTask task) {
   return false;
 }
 
-void task_run_ecu_tasks() {
-	static MmrDelay lcTimeout = { .ms = 500 };
 
-	bool finished = false;
+void msgOnTask(MmrTaskResult result, const char* completed, const char* error) {
+  if (result == MMR_TASK_COMPLETED)
+    userMessage(completed);
+  else if (result == MMR_TASK_ERROR)
+	userMessage(error);
+}
+
+void task_run_ecu_tasks() {
+	MmrTaskResult taskResult = MMR_TASK_COMPLETED;
 	switch (runningEcuTask) {
 		case ECU_Task_None:
 			return;
 
 		case ECU_Task_ShiftingUp:
-			if ((finished = MMR_NET_GEAR_ShiftUpAsync(&mcp2515, gear_mem)))
-			  userMessage("INFO: Shifted up.");
+			taskResult = MMR_NET_ShiftUpAsync(gear_mem);
+			msgOnTask(taskResult, "INFO: Shifted up.", "WARN: Failed to shift up.");
 			break;
 
 		case ECU_Task_ShiftingDown:
-			if ((finished = MMR_NET_GEAR_ShiftDownAsync(&mcp2515, gear_mem)))
-			  userMessage("INFO: Shifted down.");
+			taskResult = MMR_NET_ShiftDownAsync(gear_mem);
+			msgOnTask(taskResult, "INFO: Shifted down.", "WARN: Failed to shift down.");
 			break;
 
 		case ECU_Task_ShiftingNtrl:
-			if ((finished = MMR_NET_GEAR_ShiftToNeutralAsync(&mcp2515, gear_mem)))
-			  userMessage("INFO: Shifted to neutral.");
+			taskResult = MMR_NET_ShiftToNeutralAsync(gear_mem);
+			msgOnTask(taskResult, "INFO: Shifted to neutral.", "WARN: Failed to shift to neutral.");
 			break;
 
 		case ECU_Task_SetLaunchCtrl:
-		case ECU_Task_UnsetLaunchCtrl:
-			if ((finished = MMR_DELAY_WaitOnceAsync(&lcTimeout))) {
-				lcTimeout.start = 0;
-				userMessage("WARN: Launch control toggle FAILED.");
-				break;
-			}
-
+		case ECU_Task_UnsetLaunchCtrl: {
 			MmrNetLaunchControlCarState cs = {
 				.rpm = msgDisplayInfo.rpm,
 				.gear = msgDisplayInfo.gear,
@@ -136,19 +136,18 @@ void task_run_ecu_tasks() {
 			};
 
 			if (runningEcuTask == ECU_Task_SetLaunchCtrl) {
-				if ((finished = MMR_NET_LaunchControlSetAsync(&mcp2515, cs))) {
-					userMessage("INFO: Launch control set.");
-				}
+				taskResult = MMR_NET_LaunchControlSetAsync(cs);
+				msgOnTask(taskResult, "INFO: Launch control set.", "WARN: Failed to set launch control.");
 			} else {
-				if ((finished = MMR_NET_LaunchControlUnsetAsync(&mcp2515, cs))) {
-					userMessage("INFO: Launch control unset.");
-				}
+				taskResult = MMR_NET_LaunchControlUnsetAsync(cs);
+				msgOnTask(taskResult, "INFO: Launch control unset.", "WARN: Failed to unset launch control.");
 			}
 
 			break;
+		}
 	}
 
-	if (finished)
+	if (taskResult != MMR_TASK_PENDING)
 		runningEcuTask = ECU_Task_None;
 }
 
@@ -335,7 +334,7 @@ void process_single_can_message(MmrCanMessage* msg) {
       msgDisplayInfo.voltage24v = MMR_BUFFER_ReadFloat(msg->payload, 0, MMR_ENCODING_LITTLE_ENDIAN);
       break;
 
-    case MMR_CAN_MESSAGE_ID_CURRENTLAP:
+    case MMR_CAN_MESSAGE_ID_D_LAP_COUNTER:
       msgDisplayInfo.lap = MMR_BUFFER_ReadByte(msg->payload, 0);
       break;
 
@@ -416,6 +415,7 @@ void task_send_resopmode() {
 }
 
 
+
 void configuration() {
   // Initialize the MMR libraries
   userMessage("INFO: Initialization...");
@@ -430,6 +430,7 @@ void configuration() {
 
   MMR_MCP2515_Init(&spi0, 0);
 
+  MMR_NET_ECU_BUTTONS_Init(&mcp2515);
 
   userMessage("INFO: Resetting MCP2515...");
   while (!MMR_MCP2515_ResetAsync(10)) {
@@ -438,7 +439,6 @@ void configuration() {
 
 	  osDelay(200);
   }
-
 
   userMessage("INFO: Configuring MCP2515 timings...");
   // MCP2515 setup
