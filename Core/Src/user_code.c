@@ -26,6 +26,8 @@ int gear_six_count = 0, gear_mem = 0;
 MmrPin mcp2515csPin;
 MmrPin* spiSlavePins[] = { &mcp2515csPin };
 
+MmrLaunchControlState lcState = MMR_LAUNCH_CONTROL_UNKNOWN;
+
 #include <string.h>
 void userMessage(const char* msg) {
   osMessageQueuePut(dbgMsgQueue, &msg, 0U, 0U);
@@ -129,20 +131,12 @@ void task_run_ecu_tasks() {
 
 		case ECU_Task_SetLaunchCtrl:
 		case ECU_Task_UnsetLaunchCtrl: {
-			MmrNetLaunchControlCarState cs = {
-				.rpm = msgDisplayInfo.rpm,
-				.gear = msgDisplayInfo.gear,
-				.launchControl = msgDisplayInfo.LC ? MMR_LAUNCH_CONTROL_SET : MMR_LAUNCH_CONTROL_NOT_SET
-			};
-
-			if (runningEcuTask == ECU_Task_SetLaunchCtrl) {
-				taskResult = MMR_NET_LaunchControlSetAsync(cs);
-				msgOnTask(taskResult, "INFO: Launch control set.", "WARN: Failed to set launch control.");
-			} else {
-				taskResult = MMR_NET_LaunchControlUnsetAsync(cs);
-				msgOnTask(taskResult, "INFO: Launch control unset.", "WARN: Failed to unset launch control.");
-			}
-
+			if (runningEcuTask == ECU_Task_SetLaunchCtrl)
+				taskResult = MMR_NET_CoerceLaunchControlAsync(lcState, MMR_LAUNCH_CONTROL_SET);
+			else
+				taskResult = MMR_NET_CoerceLaunchControlAsync(lcState, MMR_LAUNCH_CONTROL_NOT_SET);
+			
+			msgOnTask(taskResult, "INFO: Launch control toggled.", "WARN: Failed to toggle launch control.");
 			break;
 		}
 	}
@@ -320,9 +314,12 @@ void process_single_can_message(MmrCanMessage* msg) {
     }
 
     /* LAUNCH CONTROL ACTIVE */
-    case 0x70C:
-      msgDisplayInfo.LC = msg->payload[0] & 0x1;
+    case 0x70C: {
+      bool lc = msg->payload[0] & 0x1;
+      msgDisplayInfo.LC = lc;
+      lcState = lc? MMR_LAUNCH_CONTROL_SET : MMR_LAUNCH_CONTROL_NOT_SET;
       break;
+    }
 
     /* CLUTCH PULL OK */
     case MMR_CAN_MESSAGE_ID_CS_CLUTCH_PULL_OK:
