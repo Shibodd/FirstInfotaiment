@@ -1161,8 +1161,8 @@
             "Name": "labelSelectMission",
             "X": 258,
             "Y": 17,
-            "Width": 284,
-            "Height": 49,
+            "Width": 214,
+            "Height": 36,
             "TextId": "__SingleUse_U2AM",
             "TextRotation": "0",
             "Color": {
@@ -1173,27 +1173,12 @@
             "AutoSize": true
           },
           {
-            "Type": "ScrollList",
-            "Name": "missionScrollList",
-            "X": 280,
-            "Y": 76,
-            "Width": 214,
-            "Height": 377,
-            "ItemTemplateName": "missionBtnContainer",
-            "NumberofItems": 1,
-            "ItemMargin": 7,
-            "Easing": "Back",
-            "EasingOption": "Out",
-            "SwipeAcceleration": 1.0,
-            "DragAcceleration": 1.0
-          },
-          {
             "Type": "FlexButton",
             "Name": "chassisResetBtn",
-            "X": 12,
-            "Y": 41,
-            "Width": 215,
-            "Height": 241,
+            "X": 17,
+            "Y": 84,
+            "Width": 214,
+            "Height": 299,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
             },
@@ -1216,8 +1201,8 @@
               },
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 215,
-                "Height": 241,
+                "Width": 214,
+                "Height": 299,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -1240,6 +1225,213 @@
                 }
               }
             ]
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "idleBtn",
+            "X": 270,
+            "Y": 84,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_W8G5",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "trackdriveBtn",
+            "X": 532,
+            "Y": 84,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_9VBP",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "ebsTestBtn",
+            "X": 532,
+            "Y": 164,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_4TAP",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "inspectionBtn",
+            "X": 532,
+            "Y": 244,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_FFJ8",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "manualBtn",
+            "X": 532,
+            "Y": 323,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_33YC",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "debugBtn",
+            "X": 400,
+            "Y": 405,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_9QUA",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "accelerationBtn",
+            "X": 270,
+            "Y": 164,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_O6Z0",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "skidpadBtn",
+            "X": 270,
+            "Y": 244,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_55VW",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "autocrossBtn",
+            "X": 270,
+            "Y": 323,
+            "Width": 228,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_small_rounded_normal.png",
+            "TextId": "__SingleUse_VKZX",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\small_rounded_normal.json"
           }
         ],
         "Interactions": [
@@ -1265,6 +1457,105 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "onChassisResetClicked"
+            }
+          },
+          {
+            "InteractionName": "IdleMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "idleBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onIdleBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "AccelerationMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "accelerationBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onAccelerationBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "SkidpadMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "skidpadBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onSkidpadBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "AutocrossMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "autocrossBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onAutocrossBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "TrackdriveMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "trackdriveBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onTrackdriveBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "EbtTestMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "ebsTestBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onEbsTestBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "InspectionMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "inspectionBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onInspectionBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "ManualMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "manualBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onManualBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "DebugMission",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "debugBtn"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "onDebugBtnClicked"
             }
           }
         ]

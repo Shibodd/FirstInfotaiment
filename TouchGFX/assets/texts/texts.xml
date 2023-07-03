@@ -60,6 +60,33 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_9QUA" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Debug</Translation>
+      </Text>
+      <Text Id="__SingleUse_33YC" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Manual</Translation>
+      </Text>
+      <Text Id="__SingleUse_FFJ8" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Inspection</Translation>
+      </Text>
+      <Text Id="__SingleUse_4TAP" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">EBS Test</Translation>
+      </Text>
+      <Text Id="__SingleUse_9VBP" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Trackdrive</Translation>
+      </Text>
+      <Text Id="__SingleUse_VKZX" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Autocross</Translation>
+      </Text>
+      <Text Id="__SingleUse_55VW" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Skidpad</Translation>
+      </Text>
+      <Text Id="__SingleUse_O6Z0" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Acceleration</Translation>
+      </Text>
+      <Text Id="__SingleUse_W8G5" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Idle</Translation>
+      </Text>
       <Text Id="__SingleUse_ONGO" Alignment="Left" TypographyId="Medium">
         <Translation Language="GB">Fuel</Translation>
       </Text>
@@ -69,7 +96,7 @@
       <Text Id="__SingleUse_EUMO" Alignment="Center" TypographyId="little_medium">
         <Translation Language="GB">&lt;value&gt; bar</Translation>
       </Text>
-      <Text Id="__SingleUse_5MAQ" Alignment="Center" TypographyId="Medium">
+      <Text Id="__SingleUse_5MAQ" Alignment="Center" TypographyId="Large">
         <Translation Language="GB">Chassis&#10;Reset</Translation>
       </Text>
       <Text Id="__SingleUse_IPF6" Alignment="Center" TypographyId="little_medium">
@@ -198,7 +225,7 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
+    <Typography Id="Large" Font="verdana.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Gear" Font="verdana.ttf" Size="100" Bpp="4" Direction="LTR" FallbackCharacter="N" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Speed" Font="verdana.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />

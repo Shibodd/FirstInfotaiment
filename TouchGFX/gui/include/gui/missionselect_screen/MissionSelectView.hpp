@@ -15,14 +15,18 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    virtual void missionScrollListUpdateItem(missionBtnContainer& item, int16_t itemIndex);
     
-    virtual void requestResOpMode();
     virtual void onChassisResetClicked();
-protected:
 
-    Callback<MissionSelectView, int16_t> scrollListItemSelectedCallback;
-    void scrollListItemSelectedHandler(int16_t itemSelected);
+    virtual void onIdleBtnClicked();
+    virtual void onAccelerationBtnClicked();
+    virtual void onSkidpadBtnClicked();
+    virtual void onAutocrossBtnClicked();
+    virtual void onTrackdriveBtnClicked();
+    virtual void onEbsTestBtnClicked();
+    virtual void onInspectionBtnClicked();
+    virtual void onManualBtnClicked();
+    virtual void onDebugBtnClicked();
 };
 
 #endif // MISSIONSELECTVIEW_HPP

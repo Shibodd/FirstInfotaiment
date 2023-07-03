@@ -23,10 +23,6 @@ void MissionSelectPresenter::requestMission(MmrMission missionType)
     model->requestMission(missionType);
 }
 
-void MissionSelectPresenter::requestResOperationalMode() {
-    model->requestResOperationalMode();
-}
-
 void MissionSelectPresenter::requestChassisReset() {
     model->requestChassisReset();
 }
