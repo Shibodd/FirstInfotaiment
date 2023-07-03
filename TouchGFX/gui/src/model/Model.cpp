@@ -117,14 +117,6 @@ void Model::requestMission(MmrMission missionType) {
   osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
 }
 
-void Model::requestResOperationalMode() {
-  guiToMainMsg msg {
-		.type = GUI_TO_MAIN_MSG_SETRESOPMODE
-	};
-
-	osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
-}
-
 void Model::requestChassisReset() {
   guiToMainMsg msg {
 		.type = GUI_TO_MAIN_MSG_CHASSISRESET

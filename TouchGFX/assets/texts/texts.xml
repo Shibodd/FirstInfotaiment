@@ -81,9 +81,6 @@
       <Text Id="__SingleUse_9DFI" Alignment="Right" TypographyId="Speed">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_5CM1" Alignment="Center" TypographyId="Medium">
-        <Translation Language="GB">RES Operational &#10;Mode</Translation>
-      </Text>
       <Text Id="__SingleUse_BU43" Alignment="Left" TypographyId="little_medium">
         <Translation Language="GB">12V</Translation>
       </Text>

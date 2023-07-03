@@ -39,14 +39,6 @@ MissionSelectViewBase::MissionSelectViewBase() :
     missionScrollList.setDrawables(missionScrollListListItems, updateItemCallback);
     add(missionScrollList);
 
-    btnResOpMode.setXY(520, 215);
-    btnResOpMode.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
-    btnResOpMode.setLabelText(touchgfx::TypedText(T___SINGLEUSE_5CM1));
-    btnResOpMode.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnResOpMode.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    btnResOpMode.setAction(buttonCallback);
-    add(btnResOpMode);
-
     chassisResetBtn.setBoxWithBorderPosition(0, 0, 215, 241);
     chassisResetBtn.setBorderSize(5);
     chassisResetBtn.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(58, 121, 153), touchgfx::Color::getColorFromRGB(0, 119, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
@@ -80,13 +72,6 @@ void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //When btnPrevPage clicked change screen to MainInfotaiment
         //Go to MainInfotaiment with screen transition towards West
         application().gotoMainInfotaimentScreenSlideTransitionWest();
-    }
-    if (&src == &btnResOpMode)
-    {
-        //ResOperationalMode
-        //When btnResOpMode clicked call virtual function
-        //Call requestResOpMode
-        requestResOpMode();
     }
 }
 
