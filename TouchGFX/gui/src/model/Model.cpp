@@ -93,13 +93,6 @@ void Model::requestMission(MmrMission missionType) {
   modelListener->debugMessageChanged();
 }
 
-void Model::requestResOperationalMode() {
-	static char buf[32];
-  snprintf(buf, 32, "Res operational mode requested");
-  dbgMessage = buf;
-  modelListener->debugMessageChanged();
-}
-
 void Model::requestChassisReset() {
 	static char buf[32];
   snprintf(buf, 32, "Chassis reset requested.");

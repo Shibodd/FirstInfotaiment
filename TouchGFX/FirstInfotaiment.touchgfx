@@ -84,8 +84,8 @@
             "Name": "txtSpeed",
             "X": 670,
             "Y": 71,
-            "Width": 75,
-            "Height": 49,
+            "Width": 57,
+            "Height": 36,
             "TextId": "__SingleUse_UXLR",
             "TextRotation": "0",
             "Color": {
@@ -367,8 +367,8 @@
             "Name": "labelRES",
             "X": 32,
             "Y": 261,
-            "Width": 80,
-            "Height": 49,
+            "Width": 61,
+            "Height": 36,
             "TextId": "RES",
             "TextRotation": "0",
             "Color": {
@@ -551,8 +551,8 @@
             "Name": "labelLC",
             "X": 47,
             "Y": 328,
-            "Width": 50,
-            "Height": 49,
+            "Width": 38,
+            "Height": 36,
             "TextId": "LC",
             "TextRotation": "0",
             "Color": {
@@ -580,8 +580,8 @@
             "Name": "labelClutch",
             "X": 36,
             "Y": 395,
-            "Width": 72,
-            "Height": 49,
+            "Width": 54,
+            "Height": 36,
             "TextId": "CLUTCH",
             "TextRotation": "0",
             "Color": {
