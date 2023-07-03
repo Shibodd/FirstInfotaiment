@@ -28,9 +28,10 @@ const uint16_t BITMAP_OIL_TEMP_LOW_ID = 18;
 const uint16_t BITMAP_OIL_TEMP_OK_ID = 19;
 const uint16_t BITMAP_ORIN_T_HIGH_ID = 20;
 const uint16_t BITMAP_ORIN_T_OK_ID = 21;
-const uint16_t BITMAP_WATER_HIGH_ID = 22;
-const uint16_t BITMAP_WATER_LOW_ID = 23;
-const uint16_t BITMAP_WATER_OK_ID = 24;
+const uint16_t BITMAP_PROGRESS_BAR_LARGE_ID = 22;
+const uint16_t BITMAP_WATER_HIGH_ID = 23;
+const uint16_t BITMAP_WATER_LOW_ID = 24;
+const uint16_t BITMAP_WATER_OK_ID = 25;
 
 namespace BitmapDatabase
 {

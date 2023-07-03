@@ -105,8 +105,6 @@ void MissionSelectViewBase::updateItemCallbackHandler(touchgfx::DrawableListItem
 {
     if (items == &missionScrollListListItems)
     {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        missionBtnContainer* cc = (missionBtnContainer*)d;
-        missionScrollListUpdateItem(*cc, itemIndex);
+        missionScrollListUpdateItem(missionScrollListListItems[containerIndex], itemIndex);
     }
 }

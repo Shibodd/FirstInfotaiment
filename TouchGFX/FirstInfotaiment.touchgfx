@@ -15,8 +15,8 @@
             "Type": "TextArea",
             "Name": "textArea1",
             "X": 707,
-            "Width": 93,
-            "Height": 52,
+            "Width": 94,
+            "Height": 48,
             "TextId": "__SingleUse_RP6T",
             "TextRotation": "0",
             "Color": {
@@ -84,7 +84,7 @@
             "Name": "txtSpeed",
             "X": 670,
             "Y": 71,
-            "Width": 76,
+            "Width": 75,
             "Height": 49,
             "TextId": "__SingleUse_UXLR",
             "TextRotation": "0",
@@ -104,8 +104,8 @@
             "Name": "labelSpeed",
             "X": 767,
             "Y": 78,
-            "Width": 19,
-            "Height": 34,
+            "Width": 34,
+            "Height": 18,
             "TextId": "__SingleUse_FQ22",
             "TextRotation": "90",
             "Color": {
@@ -155,8 +155,8 @@
             "Name": "labelRpm",
             "X": 158,
             "Y": 79,
-            "Width": 19,
-            "Height": 32,
+            "Width": 32,
+            "Height": 18,
             "TextId": "__SingleUse_4SAL",
             "TextRotation": "90",
             "Color": {
@@ -285,10 +285,10 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxRES",
-            "X": 31,
-            "Y": 259,
-            "Width": 109,
-            "Height": 50,
+            "X": 5,
+            "Y": 253,
+            "Width": 135,
+            "Height": 64,
             "BorderColor": {
               "Red": 255,
               "Green": 234
@@ -332,8 +332,8 @@
             "Name": "labelLapCounter",
             "X": 158,
             "Y": 161,
-            "Width": 19,
-            "Height": 28,
+            "Width": 27,
+            "Height": 18,
             "TextId": "__SingleUse_IPF6",
             "TextRotation": "90",
             "Color": {
@@ -365,8 +365,8 @@
           {
             "Type": "TextArea",
             "Name": "labelRES",
-            "X": 44,
-            "Y": 260,
+            "X": 32,
+            "Y": 261,
             "Width": 80,
             "Height": 49,
             "TextId": "RES",
@@ -383,54 +383,54 @@
             "Name": "progressRpmLow",
             "X": 12,
             "Y": 20,
-            "Width": 184,
+            "Width": 250,
             "Height": 20,
             "Color": {
               "Red": 9,
               "Green": 255
             },
             "Direction": "Right",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "FileNameBackground": "__designer\\progress_bar_large.png",
             "IndicatorPositionX": 2,
             "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 180,
+            "IndicatorPositionWidth": 246,
             "IndicatorPositionHeight": 16,
             "ProgressRangeMax": 100
           },
           {
             "Type": "BoxProgress",
             "Name": "progressRpmMed",
-            "X": 308,
+            "X": 275,
             "Y": 20,
-            "Width": 184,
+            "Width": 250,
             "Height": 20,
             "Color": {
               "Red": 255
             },
             "Direction": "Right",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "FileNameBackground": "__designer\\progress_bar_large.png",
             "IndicatorPositionX": 2,
             "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 180,
+            "IndicatorPositionWidth": 246,
             "IndicatorPositionHeight": 16,
             "ProgressRangeMax": 100
           },
           {
             "Type": "BoxProgress",
             "Name": "progressRpmHigh",
-            "X": 608,
+            "X": 536,
             "Y": 20,
-            "Width": 184,
+            "Width": 250,
             "Height": 20,
             "Color": {
               "Red": 149,
               "Blue": 255
             },
             "Direction": "Right",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "FileNameBackground": "__designer\\progress_bar_large.png",
             "IndicatorPositionX": 2,
             "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 180,
+            "IndicatorPositionWidth": 246,
             "IndicatorPositionHeight": 16,
             "ProgressRangeMax": 100
           },
@@ -536,10 +536,10 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxLC",
-            "X": 31,
-            "Y": 320,
-            "Width": 109,
-            "Height": 50,
+            "X": 5,
+            "Y": 321,
+            "Width": 135,
+            "Height": 63,
             "BorderColor": {
               "Red": 255,
               "Green": 234
@@ -549,8 +549,8 @@
           {
             "Type": "TextArea",
             "Name": "labelLC",
-            "X": 60,
-            "Y": 320,
+            "X": 47,
+            "Y": 328,
             "Width": 50,
             "Height": 49,
             "TextId": "LC",
@@ -565,10 +565,10 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxClutch",
-            "X": 31,
-            "Y": 380,
-            "Width": 109,
-            "Height": 50,
+            "X": 5,
+            "Y": 388,
+            "Width": 135,
+            "Height": 63,
             "BorderColor": {
               "Red": 255,
               "Green": 234
@@ -578,8 +578,8 @@
           {
             "Type": "TextArea",
             "Name": "labelClutch",
-            "X": 49,
-            "Y": 380,
+            "X": 36,
+            "Y": 395,
             "Width": 72,
             "Height": 49,
             "TextId": "CLUTCH",
@@ -606,8 +606,8 @@
             "Name": "labelDS",
             "X": 766,
             "Y": 160,
-            "Width": 19,
-            "Height": 22,
+            "Width": 22,
+            "Height": 18,
             "TextId": "__SingleUse_67FN",
             "TextRotation": "90",
             "Color": {
@@ -667,8 +667,8 @@
             "Name": "labelAS",
             "X": 766,
             "Y": 207,
-            "Width": 19,
-            "Height": 20,
+            "Width": 20,
+            "Height": 18,
             "TextId": "__SingleUse_MIUL",
             "TextRotation": "90",
             "Color": {
@@ -754,8 +754,8 @@
             "Name": "labelAS_1",
             "X": 767,
             "Y": 247,
-            "Width": 19,
-            "Height": 29,
+            "Width": 29,
+            "Height": 18,
             "TextId": "__SingleUse_D9LL",
             "TextRotation": "90",
             "Color": {
@@ -770,8 +770,8 @@
             "Name": "labelAS_2",
             "X": 766,
             "Y": 290,
-            "Width": 19,
-            "Height": 30,
+            "Width": 29,
+            "Height": 18,
             "TextId": "__SingleUse_W7WZ",
             "TextRotation": "90",
             "Color": {
@@ -787,7 +787,7 @@
             "X": 595,
             "Y": 158,
             "Width": 126,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_J40F",
             "TextRotation": "0",
             "Color": {
@@ -808,7 +808,7 @@
             "X": 595,
             "Y": 202,
             "Width": 112,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_0J70",
             "TextRotation": "0",
             "Color": {
@@ -827,7 +827,7 @@
             "X": 595,
             "Y": 247,
             "Width": 122,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_74WN",
             "TextRotation": "0",
             "Color": {
@@ -848,7 +848,7 @@
             "X": 595,
             "Y": 293,
             "Width": 30,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_HJ17",
             "TextRotation": "0",
             "Color": {
@@ -1083,8 +1083,8 @@
             "Name": "textArea1",
             "X": 635,
             "Y": 414,
-            "Width": 29,
-            "Height": 19,
+            "Width": 30,
+            "Height": 18,
             "TextId": "__SingleUse_J3QN",
             "TextRotation": "0",
             "Color": {
@@ -1099,8 +1099,8 @@
             "Name": "textArea1_1",
             "X": 557,
             "Y": 414,
-            "Width": 29,
-            "Height": 19,
+            "Width": 30,
+            "Height": 18,
             "TextId": "__SingleUse_BU43",
             "TextRotation": "0",
             "Color": {
@@ -1116,7 +1116,7 @@
             "X": 246,
             "Y": 261,
             "Width": 42,
-            "Height": 25,
+            "Height": 24,
             "TextId": "__SingleUse_ONGO",
             "TextRotation": "0",
             "Color": {
@@ -1392,6 +1392,6 @@
     "OptionalComponents": [],
     "AdditionalFeatures": []
   },
-  "Version": "4.21.4",
+  "Version": "4.22.0",
   "CreatedBy": "4.20.0"
 }

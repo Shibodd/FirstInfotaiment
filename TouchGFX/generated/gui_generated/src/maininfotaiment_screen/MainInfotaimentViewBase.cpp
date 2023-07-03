@@ -110,7 +110,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     progressBrakeRear.setValue(0);
     add(progressBrakeRear);
 
-    boxRES.setPosition(31, 259, 109, 50);
+    boxRES.setPosition(5, 253, 135, 64);
     boxRES.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxRES.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxRES.setBorderSize(4);
@@ -149,35 +149,35 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtLap.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9DFI));
     add(txtLap);
 
-    labelRES.setXY(44, 260);
+    labelRES.setXY(32, 261);
     labelRES.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelRES.setLinespacing(0);
     labelRES.setTypedText(touchgfx::TypedText(T_RES));
     add(labelRES);
 
     progressRpmLow.setXY(12, 20);
-    progressRpmLow.setProgressIndicatorPosition(2, 2, 180, 16);
+    progressRpmLow.setProgressIndicatorPosition(2, 2, 246, 16);
     progressRpmLow.setRange(0, 100);
     progressRpmLow.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    progressRpmLow.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    progressRpmLow.setBackground(touchgfx::Bitmap(BITMAP_PROGRESS_BAR_LARGE_ID));
     progressRpmLow.setColor(touchgfx::Color::getColorFromRGB(9, 255, 0));
     progressRpmLow.setValue(0);
     add(progressRpmLow);
 
-    progressRpmMed.setXY(308, 20);
-    progressRpmMed.setProgressIndicatorPosition(2, 2, 180, 16);
+    progressRpmMed.setXY(275, 20);
+    progressRpmMed.setProgressIndicatorPosition(2, 2, 246, 16);
     progressRpmMed.setRange(0, 100);
     progressRpmMed.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    progressRpmMed.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    progressRpmMed.setBackground(touchgfx::Bitmap(BITMAP_PROGRESS_BAR_LARGE_ID));
     progressRpmMed.setColor(touchgfx::Color::getColorFromRGB(255, 0, 0));
     progressRpmMed.setValue(0);
     add(progressRpmMed);
 
-    progressRpmHigh.setXY(608, 20);
-    progressRpmHigh.setProgressIndicatorPosition(2, 2, 180, 16);
+    progressRpmHigh.setXY(536, 20);
+    progressRpmHigh.setProgressIndicatorPosition(2, 2, 246, 16);
     progressRpmHigh.setRange(0, 100);
     progressRpmHigh.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    progressRpmHigh.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
+    progressRpmHigh.setBackground(touchgfx::Bitmap(BITMAP_PROGRESS_BAR_LARGE_ID));
     progressRpmHigh.setColor(touchgfx::Color::getColorFromRGB(149, 0, 255));
     progressRpmHigh.setValue(0);
     add(progressRpmHigh);
@@ -224,25 +224,25 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtPOil.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5NKC));
     add(txtPOil);
 
-    boxLC.setPosition(31, 320, 109, 50);
+    boxLC.setPosition(5, 321, 135, 63);
     boxLC.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxLC.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxLC.setBorderSize(4);
     add(boxLC);
 
-    labelLC.setXY(60, 320);
+    labelLC.setXY(47, 328);
     labelLC.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelLC.setLinespacing(0);
     labelLC.setTypedText(touchgfx::TypedText(T_LC));
     add(labelLC);
 
-    boxClutch.setPosition(31, 380, 109, 50);
+    boxClutch.setPosition(5, 388, 135, 63);
     boxClutch.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxClutch.setBorderColor(touchgfx::Color::getColorFromRGB(255, 234, 0));
     boxClutch.setBorderSize(4);
     add(boxClutch);
 
-    labelClutch.setXY(49, 380);
+    labelClutch.setXY(36, 395);
     labelClutch.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelClutch.setLinespacing(0);
     labelClutch.setTypedText(touchgfx::TypedText(T_CLUTCH));
