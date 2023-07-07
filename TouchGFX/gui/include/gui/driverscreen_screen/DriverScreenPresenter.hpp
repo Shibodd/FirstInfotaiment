@@ -25,6 +25,9 @@ public:
      */
     virtual void deactivate();
 
+    virtual void gearChanged();
+    virtual void infoChanged();
+
     virtual ~DriverScreenPresenter() {}
 
 private:

@@ -14,4 +14,5 @@ void CompetitionScreenView::tearDownScreen()
 
 void CompetitionScreenView::setMission(const char *mission) {
 	Unicode::strncpy(txtMissionBuffer, mission, TXTMISSION_SIZE);
+	txtMission.invalidate();
 }

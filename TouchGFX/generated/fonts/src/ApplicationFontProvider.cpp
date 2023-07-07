@@ -33,9 +33,12 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
     case Typography::ENORMOUS:
         // verdana_120_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[6]);
-    case Typography::TYPOGRAPHY_00:
-        // verdana_20_4bpp
-        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[4]);
+    case Typography::PRIMARYDRIVERINFO:
+        // verdana_180_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[7]);
+    case Typography::SECONDARYDRIVERINFO:
+        // verdana_57_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[8]);
     default:
         return 0;
     }

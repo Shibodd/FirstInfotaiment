@@ -60,6 +60,144 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_A8DL" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">RES</Translation>
+      </Text>
+      <Text Id="DriverScreenGlyphs" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">1234567890%.</Translation>
+      </Text>
+      <Text Id="__SingleUse_DCFN" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">LC</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y1TQ" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">CLT</Translation>
+      </Text>
+      <Text Id="__SingleUse_43VM" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">LC</Translation>
+      </Text>
+      <Text Id="__SingleUse_7E8Q" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">P Brake</Translation>
+      </Text>
+      <Text Id="__SingleUse_OXBY" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">TPS</Translation>
+      </Text>
+      <Text Id="__SingleUse_Z9U2" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">P Fuel</Translation>
+      </Text>
+      <Text Id="__SingleUse_8R8S" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">P Oil</Translation>
+      </Text>
+      <Text Id="__SingleUse_6T5M" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Bat 24</Translation>
+      </Text>
+      <Text Id="__SingleUse_DE5T" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">Bat 12</Translation>
+      </Text>
+      <Text Id="__SingleUse_8VFR" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">T Orin</Translation>
+      </Text>
+      <Text Id="__SingleUse_2Q01" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">T Oil</Translation>
+      </Text>
+      <Text Id="__SingleUse_S2KY" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">T Mot</Translation>
+      </Text>
+      <Text Id="__SingleUse_1E1Q" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">24.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_BB62" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_5Z8O" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_IEE9" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_2VKQ" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">00</Translation>
+      </Text>
+      <Text Id="__SingleUse_QBHD" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;%</Translation>
+      </Text>
+      <Text Id="__SingleUse_KOX0" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">12.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_1UNR" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AJ0J" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">0.0</Translation>
+      </Text>
+      <Text Id="__SingleUse_Q9H4" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_TP9G" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">0.00</Translation>
+      </Text>
+      <Text Id="__SingleUse_E4IL" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_IM6N" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_T9US" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_CUPH" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_BID7" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_HO5R" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_73JB" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AHJH" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">100</Translation>
+      </Text>
+      <Text Id="__SingleUse_0URK" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt; kmh</Translation>
+      </Text>
+      <Text Id="__SingleUse_1QOJ" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_2FOI" Alignment="Left" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">12000</Translation>
+      </Text>
+      <Text Id="__SingleUse_QZ30" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">LAP_&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YH8M" Alignment="Center" TypographyId="SecondaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="Neutral" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">N</Translation>
+      </Text>
+      <Text Id="Fifth" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">5</Translation>
+      </Text>
+      <Text Id="Fourth" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">4</Translation>
+      </Text>
+      <Text Id="Third" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">3</Translation>
+      </Text>
+      <Text Id="Second" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">2</Translation>
+      </Text>
+      <Text Id="First" Alignment="Left" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_BNQX" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">N</Translation>
+      </Text>
+      <Text Id="__SingleUse_0O7B" Alignment="Center" TypographyId="PrimaryDriverInfo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="ResourceId2" Alignment="Left" TypographyId="Enormous">
         <Translation Language="GB">Test</Translation>
       </Text>
@@ -269,6 +407,7 @@
     <Typography Id="little_medium" Font="verdana.ttf" Size="15" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Med_Large" Font="verdana.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="a-z,A-Z,0-9" />
     <Typography Id="Enormous" Font="verdana.ttf" Size="120" Bpp="4" Direction="LTR" FallbackCharacter="?" />
-    <Typography Id="Typography_00" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="PrimaryDriverInfo" Font="verdana.ttf" Size="180" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="SecondaryDriverInfo" Font="verdana.ttf" Size="57" Bpp="4" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
 </TextDatabase>

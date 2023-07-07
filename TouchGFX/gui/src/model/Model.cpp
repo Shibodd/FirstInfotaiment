@@ -22,14 +22,22 @@ void Model::tick() {
   setFrontBrakePerc(t % 100);
   setRearBrakePerc(100 - (t % 100));
   setOrinTemperature(t % 100);
-  setVoltage24v(18.0f);
-  setLap(5);
-
-
+  setVoltage24v(25.0f);
+  setBattery_v(13.0f);
+  setLap(t % 6);
   setP_Fuel((float)(t % 999) / 100);
+  setP_oil((float)(t % 999) / 100);
+  setT_oil(t % 200);
+  setT_water(t % 300);
+  setGear(t % 6);
+  setSpeed(t % 150);
+  setRES(t % 4);
+  setLC(true);
+  setCLT(true);
 
-  ++t;
+  t++;
   modelListener->infoChanged();
+  modelListener->gearChanged();
 }
 
 #else

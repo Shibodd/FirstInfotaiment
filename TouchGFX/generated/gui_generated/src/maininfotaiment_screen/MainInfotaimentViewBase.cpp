@@ -149,7 +149,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     txtLap.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9DFI));
     add(txtLap);
 
-    labelRES.setXY(32, 261);
+    labelRES.setXY(36, 267);
     labelRES.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelRES.setLinespacing(0);
     labelRES.setTypedText(touchgfx::TypedText(T_RES));
@@ -230,7 +230,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     boxLC.setBorderSize(4);
     add(boxLC);
 
-    labelLC.setXY(47, 328);
+    labelLC.setXY(47, 335);
     labelLC.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelLC.setLinespacing(0);
     labelLC.setTypedText(touchgfx::TypedText(T_LC));
@@ -242,7 +242,7 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     boxClutch.setBorderSize(4);
     add(boxClutch);
 
-    labelClutch.setXY(36, 395);
+    labelClutch.setXY(39, 402);
     labelClutch.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelClutch.setLinespacing(0);
     labelClutch.setTypedText(touchgfx::TypedText(T_CLUTCH));

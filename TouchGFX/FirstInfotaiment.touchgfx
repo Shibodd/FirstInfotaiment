@@ -65,7 +65,7 @@
             "X": 363,
             "Y": 40,
             "Width": 75,
-            "Height": 121,
+            "Height": 122,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -365,8 +365,8 @@
           {
             "Type": "TextArea",
             "Name": "labelRES",
-            "X": 32,
-            "Y": 261,
+            "X": 36,
+            "Y": 267,
             "Width": 61,
             "Height": 36,
             "TextId": "RES",
@@ -550,7 +550,7 @@
             "Type": "TextArea",
             "Name": "labelLC",
             "X": 47,
-            "Y": 328,
+            "Y": 335,
             "Width": 38,
             "Height": 36,
             "TextId": "LC",
@@ -578,8 +578,8 @@
           {
             "Type": "TextArea",
             "Name": "labelClutch",
-            "X": 36,
-            "Y": 395,
+            "X": 39,
+            "Y": 402,
             "Width": 54,
             "Height": 36,
             "TextId": "CLUTCH",
@@ -1659,6 +1659,21 @@
         "Name": "DriverScreen",
         "Components": [
           {
+            "Type": "TextArea",
+            "Name": "txtTmot_1",
+            "X": 1,
+            "Y": 144,
+            "Width": 133,
+            "Height": 73,
+            "TextId": "__SingleUse_DCFN",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
             "Type": "Button",
             "Name": "btnPrevPage",
             "X": 17,
@@ -1677,6 +1692,667 @@
             "Height": 50,
             "Pressed": "btn_next.png",
             "Released": "btn_next.png"
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxRpm",
+            "X": 1,
+            "Width": 266,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxLC",
+            "X": 1,
+            "Y": 120,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxTmot",
+            "X": 134,
+            "Y": 120,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxCLT",
+            "X": 1,
+            "Y": 240,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxToil",
+            "X": 134,
+            "Y": 240,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxRES",
+            "X": 663,
+            "Y": 240,
+            "Width": 137,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxTorin",
+            "X": 134,
+            "Y": 360,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxBat24",
+            "X": 398,
+            "Y": 360,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxBat12",
+            "X": 267,
+            "Y": 360,
+            "Width": 131,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxPoil",
+            "X": 531,
+            "Y": 120,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxPfuel",
+            "X": 531,
+            "Y": 240,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxTPS",
+            "X": 663,
+            "Y": 120,
+            "Width": 137,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxPbrake",
+            "X": 531,
+            "Y": 360,
+            "Width": 133,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxLap",
+            "X": 267,
+            "Width": 265,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxSpeed",
+            "X": 531,
+            "Width": 269,
+            "Height": 120,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxGear",
+            "X": 267,
+            "Y": 120,
+            "Width": 265,
+            "Height": 240,
+            "BorderColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtGear",
+            "X": 267,
+            "Y": 120,
+            "Width": 265,
+            "Height": 240,
+            "TextId": "__SingleUse_0O7B",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_BNQX",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtRpm",
+            "X": 1,
+            "Y": 24,
+            "Width": 266,
+            "Height": 72,
+            "TextId": "__SingleUse_YH8M",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_2FOI",
+              "UseBuffer": true,
+              "BufferSize": 6
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtTmot",
+            "X": 134,
+            "Y": 167,
+            "Width": 133,
+            "Height": 73,
+            "TextId": "__SingleUse_73JB",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_HO5R",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelLC",
+            "X": 1,
+            "Y": 144,
+            "Width": 133,
+            "Height": 73,
+            "TextId": "__SingleUse_43VM",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelRES",
+            "X": 663,
+            "Y": 266,
+            "Width": 135,
+            "Height": 69,
+            "TextId": "__SingleUse_A8DL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelCLT",
+            "X": 1,
+            "Y": 264,
+            "Width": 132,
+            "Height": 73,
+            "TextId": "__SingleUse_Y1TQ",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelTmot",
+            "X": 134,
+            "Y": 130,
+            "Width": 133,
+            "Height": 37,
+            "TextId": "__SingleUse_S2KY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelToil",
+            "X": 134,
+            "Y": 250,
+            "Width": 133,
+            "Height": 37,
+            "TextId": "__SingleUse_2Q01",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelTorin",
+            "X": 134,
+            "Y": 367,
+            "Width": 133,
+            "Height": 37,
+            "TextId": "__SingleUse_8VFR",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelBat12",
+            "X": 268,
+            "Y": 370,
+            "Width": 130,
+            "Height": 37,
+            "TextId": "__SingleUse_DE5T",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelTorin_1_1",
+            "X": 399,
+            "Y": 370,
+            "Width": 130,
+            "Height": 37,
+            "TextId": "__SingleUse_6T5M",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelPoil",
+            "X": 532,
+            "Y": 130,
+            "Width": 132,
+            "Height": 37,
+            "TextId": "__SingleUse_8R8S",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelTPS",
+            "X": 664,
+            "Y": 130,
+            "Width": 136,
+            "Height": 37,
+            "TextId": "__SingleUse_OXBY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelPbrake",
+            "X": 532,
+            "Y": 370,
+            "Width": 131,
+            "Height": 37,
+            "TextId": "__SingleUse_7E8Q",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "labelPfuel",
+            "X": 532,
+            "Y": 250,
+            "Width": 131,
+            "Height": 37,
+            "TextId": "__SingleUse_Z9U2",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtPoil",
+            "X": 532,
+            "Y": 167,
+            "Width": 131,
+            "Height": 73,
+            "TextId": "__SingleUse_E4IL",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_TP9G",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtTPS",
+            "X": 664,
+            "Y": 167,
+            "Width": 137,
+            "Height": 73,
+            "TextId": "__SingleUse_QBHD",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_2VKQ",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtPbrake",
+            "X": 531,
+            "Y": 407,
+            "Width": 132,
+            "Height": 73,
+            "TextId": "__SingleUse_IEE9",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_5Z8O",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtBat24",
+            "X": 399,
+            "Y": 407,
+            "Width": 130,
+            "Height": 73,
+            "TextId": "__SingleUse_BB62",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_1E1Q",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtPfuel",
+            "X": 533,
+            "Y": 287,
+            "Width": 131,
+            "Height": 73,
+            "TextId": "__SingleUse_Q9H4",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_AJ0J",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtBat12",
+            "X": 267,
+            "Y": 407,
+            "Width": 131,
+            "Height": 73,
+            "TextId": "__SingleUse_1UNR",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_KOX0",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtToil",
+            "X": 134,
+            "Y": 287,
+            "Width": 133,
+            "Height": 73,
+            "TextId": "__SingleUse_BID7",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_CUPH",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtTorin",
+            "X": 134,
+            "Y": 404,
+            "Width": 133,
+            "Height": 76,
+            "TextId": "__SingleUse_T9US",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_IM6N",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtLap",
+            "X": 267,
+            "Y": 24,
+            "Width": 264,
+            "Height": 72,
+            "TextId": "__SingleUse_QZ30",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_1QOJ",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtSpeed",
+            "X": 532,
+            "Y": 24,
+            "Width": 268,
+            "Height": 72,
+            "TextId": "__SingleUse_0URK",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_AHJH",
+              "UseBuffer": true,
+              "BufferSize": 8
+            }
           }
         ],
         "Interactions": [
