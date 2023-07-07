@@ -153,6 +153,7 @@
                   <listOptionValue builtIn="false" value="C:/Users/simonebondi/Desktop/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/Users/Francesco/Downloads/FirstInfotainmentAU1/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/Users/Francesco/Downloads/FirstInfotainmentAU1/FirstInfotainmentAU1/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
+                  <listOptionValue builtIn="false" value="C:/Users/ScemoChiLogga/Downloads/FirstInfotaiment-master/FirstInfotaiment-master/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                 </option>
                 <inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input.1690517566" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input">
                   <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -332,6 +333,7 @@
                   <listOptionValue builtIn="false" value="C:/Users/simonebondi/Desktop/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/Users/Francesco/Downloads/FirstInfotainmentAU1/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                   <listOptionValue builtIn="false" value="C:/Users/Francesco/Downloads/FirstInfotainmentAU1/FirstInfotainmentAU1/FirstInfotaiment/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
+                  <listOptionValue builtIn="false" value="C:/Users/ScemoChiLogga/Downloads/FirstInfotaiment-master/FirstInfotaiment-master/Middlewares/ST/touchgfx/lib/core/cortex_m4f/gcc"/>
                 </option>
                 <inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input.129321398" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.linker.input">
                   <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

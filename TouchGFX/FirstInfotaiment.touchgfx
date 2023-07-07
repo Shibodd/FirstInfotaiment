@@ -1125,6 +1125,31 @@
               "Blue": 255
             },
             "AutoSize": true
+          },
+          {
+            "Type": "Button",
+            "Name": "toDriver1",
+            "X": 308,
+            "Y": 341,
+            "Width": 144,
+            "Height": 60,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_tiny_rounded_disabled.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_tiny_rounded_disabled.png",
+            "Alpha": 0,
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\tiny_rounded_disabled.json"
+          },
+          {
+            "Type": "Button",
+            "Name": "toDriver2",
+            "X": 351,
+            "Y": 393,
+            "Width": 144,
+            "Height": 60,
+            "Visible": false,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_60_tiny_rounded_disabled.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_60_tiny_rounded_disabled.png",
+            "Alpha": 0,
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_60\\tiny_rounded_disabled.json"
           }
         ],
         "Interactions": [
@@ -1139,6 +1164,30 @@
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "East",
               "ActionComponent": "MissionSelect"
+            }
+          },
+          {
+            "InteractionName": "toDriverEasterEgg1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toDriver1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "DriverScreen"
+            }
+          },
+          {
+            "InteractionName": "toDriverEasterEgg2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "toDriver2"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "DriverScreen"
             }
           }
         ]
@@ -1661,8 +1710,8 @@
           {
             "Type": "TextArea",
             "Name": "txtTmot_1",
-            "X": 1,
-            "Y": 144,
+            "X": 531,
+            "Y": 384,
             "Width": 133,
             "Height": 73,
             "TextId": "__SingleUse_DCFN",
@@ -1709,8 +1758,8 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxLC",
-            "X": 1,
-            "Y": 120,
+            "X": 531,
+            "Y": 360,
             "Width": 133,
             "Height": 120,
             "BorderColor": {
@@ -1765,9 +1814,9 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxRES",
-            "X": 663,
-            "Y": 240,
-            "Width": 137,
+            "X": 1,
+            "Y": 120,
+            "Width": 133,
             "Height": 120,
             "BorderColor": {
               "Red": 255,
@@ -1863,9 +1912,9 @@
           {
             "Type": "BoxWithBorder",
             "Name": "boxPbrake",
-            "X": 531,
-            "Y": 360,
-            "Width": 133,
+            "X": 664,
+            "Y": 240,
+            "Width": 136,
             "Height": 120,
             "BorderColor": {
               "Red": 255,
@@ -1977,8 +2026,8 @@
           {
             "Type": "TextArea",
             "Name": "labelLC",
-            "X": 1,
-            "Y": 144,
+            "X": 531,
+            "Y": 384,
             "Width": 133,
             "Height": 73,
             "TextId": "__SingleUse_43VM",
@@ -1992,9 +2041,9 @@
           {
             "Type": "TextArea",
             "Name": "labelRES",
-            "X": 663,
-            "Y": 266,
-            "Width": 135,
+            "X": 1,
+            "Y": 146,
+            "Width": 131,
             "Height": 69,
             "TextId": "__SingleUse_A8DL",
             "TextRotation": "0",
@@ -2127,8 +2176,8 @@
           {
             "Type": "TextArea",
             "Name": "labelPbrake",
-            "X": 532,
-            "Y": 370,
+            "X": 665,
+            "Y": 250,
             "Width": 131,
             "Height": 37,
             "TextId": "__SingleUse_7E8Q",
@@ -2197,9 +2246,9 @@
           {
             "Type": "TextArea",
             "Name": "txtPbrake",
-            "X": 531,
-            "Y": 407,
-            "Width": 132,
+            "X": 664,
+            "Y": 287,
+            "Width": 136,
             "Height": 73,
             "TextId": "__SingleUse_IEE9",
             "TextRotation": "0",

@@ -486,6 +486,19 @@ MainInfotaimentViewBase::MainInfotaimentViewBase() :
     textArea2.setLinespacing(0);
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ONGO));
     add(textArea2);
+
+    toDriver1.setXY(308, 341);
+    toDriver1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_60_TINY_ROUNDED_DISABLED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_60_TINY_ROUNDED_DISABLED_ID));
+    toDriver1.setAlpha(0);
+    toDriver1.setAction(buttonCallback);
+    add(toDriver1);
+
+    toDriver2.setXY(351, 393);
+    toDriver2.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_60_TINY_ROUNDED_DISABLED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_60_TINY_ROUNDED_DISABLED_ID));
+    toDriver2.setAlpha(0);
+    toDriver2.setVisible(false);
+    toDriver2.setAction(buttonCallback);
+    add(toDriver2);
 }
 
 MainInfotaimentViewBase::~MainInfotaimentViewBase()
@@ -506,5 +519,19 @@ void MainInfotaimentViewBase::buttonCallbackHandler(const touchgfx::AbstractButt
         //When btnNextPage clicked change screen to MissionSelect
         //Go to MissionSelect with screen transition towards East
         application().gotoMissionSelectScreenSlideTransitionEast();
+    }
+    if (&src == &toDriver1)
+    {
+        //toDriverEasterEgg1
+        //When toDriver1 clicked change screen to DriverScreen
+        //Go to DriverScreen with no screen transition
+        application().gotoDriverScreenScreenNoTransition();
+    }
+    if (&src == &toDriver2)
+    {
+        //toDriverEasterEgg2
+        //When toDriver2 clicked change screen to DriverScreen
+        //Go to DriverScreen with no screen transition
+        application().gotoDriverScreenScreenNoTransition();
     }
 }

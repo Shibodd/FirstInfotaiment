@@ -136,6 +136,17 @@ void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWestImpl
 
 // DriverScreen
 
+void FrontendApplicationBase::gotoDriverScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoDriverScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDriverScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<DriverScreenView, DriverScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 void FrontendApplicationBase::gotoDriverScreenScreenSlideTransitionEast()
 {
     transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoDriverScreenScreenSlideTransitionEastImpl);

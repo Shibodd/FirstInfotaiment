@@ -169,7 +169,7 @@
         <Translation Language="GB">12000</Translation>
       </Text>
       <Text Id="__SingleUse_QZ30" Alignment="Center" TypographyId="SecondaryDriverInfo">
-        <Translation Language="GB">LAP_&lt;value&gt;</Translation>
+        <Translation Language="GB">LAP &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_YH8M" Alignment="Center" TypographyId="SecondaryDriverInfo">
         <Translation Language="GB">&lt;value&gt;</Translation>

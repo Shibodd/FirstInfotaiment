@@ -108,6 +108,8 @@ protected:
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea2;
+    touchgfx::Button toDriver1;
+    touchgfx::Button toDriver2;
 
     /*
      * Wildcard Buffers

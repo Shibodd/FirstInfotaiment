@@ -41,6 +41,8 @@ public:
     void gotoCompetitionScreenScreenSlideTransitionWest();
 
     // DriverScreen
+    void gotoDriverScreenScreenNoTransition();
+
     void gotoDriverScreenScreenSlideTransitionEast();
 
 protected:
@@ -69,6 +71,8 @@ protected:
     void gotoCompetitionScreenScreenSlideTransitionWestImpl();
 
     // DriverScreen
+    void gotoDriverScreenScreenNoTransitionImpl();
+
     void gotoDriverScreenScreenSlideTransitionEastImpl();
 };
 
