@@ -28,8 +28,20 @@ public:
 
     void gotoMainInfotaimentScreenSlideTransitionWest();
 
+    void gotoMainInfotaimentScreenSlideTransitionEast();
+
     // MissionSelect
     void gotoMissionSelectScreenSlideTransitionEast();
+
+    void gotoMissionSelectScreenSlideTransitionWest();
+
+    // CompetitionScreen
+    void gotoCompetitionScreenScreenSlideTransitionEast();
+
+    void gotoCompetitionScreenScreenSlideTransitionWest();
+
+    // DriverScreen
+    void gotoDriverScreenScreenSlideTransitionEast();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -44,8 +56,20 @@ protected:
 
     void gotoMainInfotaimentScreenSlideTransitionWestImpl();
 
+    void gotoMainInfotaimentScreenSlideTransitionEastImpl();
+
     // MissionSelect
     void gotoMissionSelectScreenSlideTransitionEastImpl();
+
+    void gotoMissionSelectScreenSlideTransitionWestImpl();
+
+    // CompetitionScreen
+    void gotoCompetitionScreenScreenSlideTransitionEastImpl();
+
+    void gotoCompetitionScreenScreenSlideTransitionWestImpl();
+
+    // DriverScreen
+    void gotoDriverScreenScreenSlideTransitionEastImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

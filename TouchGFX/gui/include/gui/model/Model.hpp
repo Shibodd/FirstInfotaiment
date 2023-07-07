@@ -61,17 +61,35 @@ public:
     void setBattery_v(float recvBattery_v) { battery_v = recvBattery_v; }
     float getBattery_v() { return battery_v; }
 
-    void requestMission(MmrMission missionType);
     void requestChassisReset();
+
+    void requestMission(MmrMission missionType);
+    void commonAfterRequestMission(MmrMission missionType);
+
+    const char* getMission() { return mission; }
 
     const char* getDebugMessage() { return dbgMessage; }
 
     /* TODO: string variables */
 
 protected:
-    ModelListener* modelListener;
+    ModelListener *modelListener;
 
-    const char* dbgMessage;
+    const char *dbgMessage;
+    char mission[15];
+    constexpr static const int MAX_MISSION_LEN = 15;
+    const char missionTranslation[9][MAX_MISSION_LEN] = {
+    	"Idle",
+		"Acceleration",
+		"Skidpad",
+		"Autocross",
+		"Trackdrive",
+		"EBS Test",
+		"Inspection",
+		"Manual",
+		"Debug"
+    };
+
     int gear, speed, rpm, T_water, T_oil, throttle_perc;
     int frontBrakePerc, rearBrakePerc;
 

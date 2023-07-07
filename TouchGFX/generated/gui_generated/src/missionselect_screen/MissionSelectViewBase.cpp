@@ -14,7 +14,12 @@ MissionSelectViewBase::MissionSelectViewBase() :
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     add(__background);
 
-    btnPrevPage.setXY(735, 415);
+    btnNextPage.setXY(735, 415);
+    btnNextPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_NEXT_ID), touchgfx::Bitmap(BITMAP_BTN_NEXT_ID));
+    btnNextPage.setAction(buttonCallback);
+    add(btnNextPage);
+
+    btnPrevPage.setXY(17, 415);
     btnPrevPage.setBitmaps(touchgfx::Bitmap(BITMAP_BTN_PREV_ID), touchgfx::Bitmap(BITMAP_BTN_PREV_ID));
     btnPrevPage.setAction(buttonCallback);
     add(btnPrevPage);
@@ -120,12 +125,12 @@ void MissionSelectViewBase::setupScreen()
 
 void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &btnPrevPage)
+    if (&src == &btnNextPage)
     {
-        //fromMissionSelectToLiveData
-        //When btnPrevPage clicked change screen to MainInfotaiment
-        //Go to MainInfotaiment with screen transition towards West
-        application().gotoMainInfotaimentScreenSlideTransitionWest();
+        //fromMissionSelectToCompetitionScreen
+        //When btnNextPage clicked change screen to CompetitionScreen
+        //Go to CompetitionScreen with screen transition towards East
+        application().gotoCompetitionScreenScreenSlideTransitionEast();
     }
     if (&src == &idleBtn)
     {
@@ -189,6 +194,13 @@ void MissionSelectViewBase::buttonCallbackHandler(const touchgfx::AbstractButton
         //When debugBtn clicked call virtual function
         //Call onDebugBtnClicked
         onDebugBtnClicked();
+    }
+    if (&src == &btnPrevPage)
+    {
+        //fromMissionSelectToMainInfotaiment
+        //When btnPrevPage clicked change screen to MainInfotaiment
+        //Go to MainInfotaiment with screen transition towards West
+        application().gotoMainInfotaimentScreenSlideTransitionWest();
     }
 }
 

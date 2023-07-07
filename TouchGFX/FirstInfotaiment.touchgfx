@@ -65,7 +65,7 @@
             "X": 363,
             "Y": 40,
             "Width": 75,
-            "Height": 122,
+            "Height": 121,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -1148,8 +1148,18 @@
         "Components": [
           {
             "Type": "Button",
-            "Name": "btnPrevPage",
+            "Name": "btnNextPage",
             "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_next.png",
+            "Released": "btn_next.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "btnPrevPage",
+            "X": 17,
             "Y": 415,
             "Width": 50,
             "Height": 50,
@@ -1436,16 +1446,16 @@
         ],
         "Interactions": [
           {
-            "InteractionName": "fromMissionSelectToLiveData",
+            "InteractionName": "fromMissionSelectToCompetitionScreen",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "btnPrevPage"
+              "TriggerComponent": "btnNextPage"
             },
             "Action": {
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionSlide",
-              "ScreenTransitionDirection": "West",
-              "ActionComponent": "MainInfotaiment"
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "CompetitionScreen"
             }
           },
           {
@@ -1556,6 +1566,144 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "onDebugBtnClicked"
+            }
+          },
+          {
+            "InteractionName": "fromMissionSelectToMainInfotaiment",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnPrevPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "MainInfotaiment"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "CompetitionScreen",
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "btnPrevPage",
+            "X": 17,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_prev.png",
+            "Released": "btn_prev.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "btnNextPage",
+            "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_next.png",
+            "Released": "btn_next.png"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "txtMission",
+            "Y": 158,
+            "Width": 800,
+            "Height": 165,
+            "TextId": "__SingleUse_1ZY1",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_FAAC",
+              "UseBuffer": true,
+              "BufferSize": 15
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "fromCompetitionViewToDriverView",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnNextPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "DriverScreen"
+            }
+          },
+          {
+            "InteractionName": "fromCompetitionScreenToMissionSelect",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnPrevPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "MissionSelect"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "DriverScreen",
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "btnPrevPage",
+            "X": 17,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_prev.png",
+            "Released": "btn_prev.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "btnNextPage",
+            "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_next.png",
+            "Released": "btn_next.png"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "fromDriverScreenToMainInfotaiment",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnNextPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "MainInfotaiment"
+            }
+          },
+          {
+            "InteractionName": "fromDriverScreenToCompetitionScreen",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnPrevPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "CompetitionScreen"
             }
           }
         ]

@@ -73,6 +73,7 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
+    touchgfx::Button btnNextPage;
     touchgfx::Button btnPrevPage;
     touchgfx::TextArea labelSelectMission;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  chassisResetBtn;

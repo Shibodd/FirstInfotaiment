@@ -15,6 +15,10 @@
 #include <gui/maininfotaiment_screen/MainInfotaimentPresenter.hpp>
 #include <gui/missionselect_screen/MissionSelectView.hpp>
 #include <gui/missionselect_screen/MissionSelectPresenter.hpp>
+#include <gui/competitionscreen_screen/CompetitionScreenView.hpp>
+#include <gui/competitionscreen_screen/CompetitionScreenPresenter.hpp>
+#include <gui/driverscreen_screen/DriverScreenView.hpp>
+#include <gui/driverscreen_screen/DriverScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -71,6 +75,17 @@ void FrontendApplicationBase::gotoMainInfotaimentScreenSlideTransitionWestImpl()
     touchgfx::makeTransition<MainInfotaimentView, MainInfotaimentPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
+void FrontendApplicationBase::gotoMainInfotaimentScreenSlideTransitionEast()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoMainInfotaimentScreenSlideTransitionEastImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoMainInfotaimentScreenSlideTransitionEastImpl()
+{
+    touchgfx::makeTransition<MainInfotaimentView, MainInfotaimentPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 // MissionSelect
 
 void FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionEast()
@@ -82,4 +97,52 @@ void FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionEast()
 void FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionEastImpl()
 {
     touchgfx::makeTransition<MissionSelectView, MissionSelectPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionWest()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionWestImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoMissionSelectScreenSlideTransitionWestImpl()
+{
+    touchgfx::makeTransition<MissionSelectView, MissionSelectPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// CompetitionScreen
+
+void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionEast()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionEastImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionEastImpl()
+{
+    touchgfx::makeTransition<CompetitionScreenView, CompetitionScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWest()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWestImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWestImpl()
+{
+    touchgfx::makeTransition<CompetitionScreenView, CompetitionScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// DriverScreen
+
+void FrontendApplicationBase::gotoDriverScreenScreenSlideTransitionEast()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoDriverScreenScreenSlideTransitionEastImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDriverScreenScreenSlideTransitionEastImpl()
+{
+    touchgfx::makeTransition<DriverScreenView, DriverScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

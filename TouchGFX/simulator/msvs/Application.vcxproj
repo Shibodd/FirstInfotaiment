@@ -32,6 +32,12 @@
     <ClCompile Include="..\..\generated\gui_generated\src\missionselect_screen\MissionSelectViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\missionBtnContainer.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\missionBtnContainerBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\competitionscreen_screen\CompetitionScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\competitionscreen_screen\CompetitionScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\competitionscreen_screen\CompetitionScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\driverscreen_screen\DriverScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\driverscreen_screen\DriverScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\driverscreen_screen\DriverScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -194,6 +200,12 @@
     <ClInclude Include="..\..\gui\include\gui\containers\missionBtnContainer.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\missionBtnContainerBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\common\Property.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\competitionscreen_screen\CompetitionScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\competitionscreen_screen\CompetitionScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\competitionscreen_screen\CompetitionScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\driverscreen_screen\DriverScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\driverscreen_screen\DriverScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\driverscreen_screen\DriverScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

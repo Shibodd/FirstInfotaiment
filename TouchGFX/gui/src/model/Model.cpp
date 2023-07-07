@@ -1,11 +1,13 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
+#include <string.h>
 
 displayInfo info;
 
 Model::Model() : modelListener(0)
 {
 	dbgMessage = nullptr;
+	strncpy(mission, "None", MAX_MISSION_LEN);
 }
 
 
@@ -91,6 +93,7 @@ void Model::requestMission(MmrMission missionType) {
   snprintf(buf, 32, "Mission requested: %d", missionType);
   dbgMessage = buf;
   modelListener->debugMessageChanged();
+  commonAfterRequestMission(missionType);
 }
 
 void Model::requestChassisReset() {
@@ -108,6 +111,7 @@ void Model::requestMission(MmrMission missionType) {
 	msg.content.selectedMission = missionType;
 
   osMessageQueuePut(guiToMainMsgQueue, &msg, 0, 0);
+  commonAfterRequestMission(missionType);
 }
 
 void Model::requestChassisReset() {
@@ -120,3 +124,8 @@ void Model::requestChassisReset() {
 
 
 #endif
+
+void Model::commonAfterRequestMission(MmrMission missionType) {
+	strncpy(mission, missionTranslation[missionType], MAX_MISSION_LEN),
+	modelListener->missionChanged();
+}

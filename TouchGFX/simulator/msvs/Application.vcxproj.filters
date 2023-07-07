@@ -220,6 +220,30 @@
     <Filter Include="Source Files\generated\gui_generated\containers">
       <UniqueIdentifier>10E6F00C-7A8D-1796-66DC-931F59FBD574</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\driverscreen_screen">
+      <UniqueIdentifier>A4E6CF94-6642-7794-1E1D-071AC9174FEF</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\driverscreen_screen">
+      <UniqueIdentifier>13FF6FB7-99F5-1D60-5B34-4B2B10304C3B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\competitionscreen_screen">
+      <UniqueIdentifier>7AD3EFC4-8316-5F6A-AA9C-E0444BDC528E</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\competitionscreen_screen">
+      <UniqueIdentifier>DCED450B-80AC-F328-9E73-0548518D8B62</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\competitionscreen_screen">
+      <UniqueIdentifier>B444D39C-069A-4AA0-EF7B-BE9DC23FAC16</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\competitionscreen_screen">
+      <UniqueIdentifier>02F5DA24-7301-9DE9-DCEB-234AC325C22C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\driverscreen_screen">
+      <UniqueIdentifier>C5FA3371-DFBA-44AE-3134-54926301EA52</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\driverscreen_screen">
+      <UniqueIdentifier>F5EF2749-6C94-D45D-4469-5AE13AF8D262</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -284,6 +308,24 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\missionBtnContainerBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\competitionscreen_screen\CompetitionScreenPresenter.cpp">
+      <Filter>Source Files\gui\competitionscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\competitionscreen_screen\CompetitionScreenView.cpp">
+      <Filter>Source Files\gui\competitionscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\competitionscreen_screen\CompetitionScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\competitionscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\driverscreen_screen\DriverScreenPresenter.cpp">
+      <Filter>Source Files\gui\driverscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\driverscreen_screen\DriverScreenView.cpp">
+      <Filter>Source Files\gui\driverscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\driverscreen_screen\DriverScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\driverscreen_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -762,6 +804,24 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\common\Property.hpp">
       <Filter>Header Files\gui\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\competitionscreen_screen\CompetitionScreenPresenter.hpp">
+      <Filter>Header Files\gui\competitionscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\competitionscreen_screen\CompetitionScreenView.hpp">
+      <Filter>Header Files\gui\competitionscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\competitionscreen_screen\CompetitionScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\competitionscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\driverscreen_screen\DriverScreenPresenter.hpp">
+      <Filter>Header Files\gui\driverscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\driverscreen_screen\DriverScreenView.hpp">
+      <Filter>Header Files\gui\driverscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\driverscreen_screen\DriverScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\driverscreen_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
