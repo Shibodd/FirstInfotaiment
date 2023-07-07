@@ -49,7 +49,7 @@ void DriverScreenView::setRES(int resVal) {
 		labelRES.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 		break;
 
-		case 2:  // Go
+		case 3:  // Go
 		boxRES.setColor(touchgfx::Color::getColorFromRGB(0, 255, 0));
 		labelRES.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 		break;

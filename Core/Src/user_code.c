@@ -387,6 +387,7 @@ void task_process_buttons() {
   }
   if (IS_JUST_PRESSED(MISSION_MANUAL_BTN)) {
     mission_request(MMR_MISSION_MANUAL);
+    sendResOpMode();
   }
 }
 
