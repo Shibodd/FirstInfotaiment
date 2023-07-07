@@ -4,6 +4,7 @@
 
 #include <pin.h>
 #include <button.h>
+#include <led.h>
 #include <spi.h>
 #include <mcp2515.h>
 #include <spi0.h>
@@ -50,12 +51,17 @@ typedef struct SteeringButton {
 } SteeringButton;
 
 
+typedef struct DashboardLed {
+  MmrPin mmr_pin;
+  MmrLed mmr_led;
+} DashboardLed;
 
 SteeringButton rightPaddleBtn;
 SteeringButton leftPaddleBtn;
 SteeringButton greenBtn;
 SteeringButton leftRedBtn;
 SteeringButton rightRedBtn;
+DashboardLed neutralLed;
 // SteeringButton blackButton;
 
 // Mappings
@@ -70,12 +76,18 @@ void init_button(SteeringButton* btn, GPIO_TypeDef* port, uint16_t pin, bool has
 	btn->mmr_button = MMR_Button(&btn->mmr_pin);
 }
 
+void init_led(DashboardLed* led, GPIO_TypeDef* port, uint16_t pin, bool hasInvertedLogic) {
+	led->mmr_pin = MMR_Pin(port, pin, hasInvertedLogic);
+	led->mmr_led = MMR_Led(&led->mmr_pin);
+}
+
 void initialize_steering_buttons() {
 	init_button(&leftPaddleBtn,  STEERING_LEFT_PADDLE_BUTTON_GPIO_Port,	 STEERING_LEFT_PADDLE_BUTTON_Pin,	false);
 	init_button(&rightPaddleBtn, STEERING_RIGHT_PADDLE_BUTTON_GPIO_Port, STEERING_RIGHT_PADDLE_BUTTON_Pin, 	false);
 	init_button(&greenBtn,	     STEERING_GREEN_BUTTON_GPIO_Port,	     STEERING_GREEN_BUTTON_Pin,			false);
 	init_button(&leftRedBtn,	 STEERING_LEFT_RED_BUTTON_GPIO_Port,     STEERING_LEFT_RED_BUTTON_Pin,  	false);
 	init_button(&rightRedBtn, 	 STEERING_RIGHT_RED_BUTTON_GPIO_Port,    STEERING_RIGHT_RED_BUTTON_Pin, 	false);
+	// init_led(&neutralLed,		 DASHBOARD_NETURAL_LED_Port,			 DASHBOARD_NEUTRAL_LED_Pin,			false);
 	// blackButton = init_button(STEERING_BLACK_BUTTON_GPIO_Port, STEERING_BLACK_BUTTON_Pin, true);
 }
 
@@ -277,6 +289,15 @@ void process_single_can_message(MmrCanMessage* msg) {
       {
         gear_six_count = 0;
         msgDisplayInfo.gear = gear;
+      }
+
+      if (gear == 0) {
+    	  // MMR_LED_Set(&neutralLed, MMR_LED_ON);
+    	  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_11, 1);
+      }
+      else {
+    	  // MMR_LED_Set(&neutralLed, MMR_LED_OFF);
+    	  HAL_GPIO_WritePin(GPIOG, GPIO_PIN_11, 0);
       }
 
       uint16_t throttle = (msg->payload[7] << 8) | msg->payload[6];
