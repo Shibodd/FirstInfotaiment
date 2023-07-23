@@ -63,7 +63,7 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     112, // T___SINGLEUSE_0URK: "<> kmh"
     428, // T___SINGLEUSE_1QOJ: "1"
     291, // T___SINGLEUSE_2FOI: "12000"
-    118, // T___SINGLEUSE_QZ30: "LAP_<>"
+    118, // T___SINGLEUSE_QZ30: "LAP <>"
     122, // T___SINGLEUSE_YH8M: "<>"
     432, // T_NEUTRAL: "N"
     430, // T_FIFTH: "5"
