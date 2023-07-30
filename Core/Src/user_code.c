@@ -454,7 +454,7 @@ void configuration() {
 
   userMessage("INFO: Configuring MCP2515 timings...");
   // MCP2515 setup
-  if (!MMR_MCP2515_ConfigureCANTiming(MMR_MCP2515_TIMING_8MHz_1000kBPS))
+  if (!MMR_MCP2515_ConfigureCANTiming(MMR_MCP2515_TIMING_8MHz_500kBPS))
 	  userError("ERROR: MCP2515 Timings configuration failed.");
 
 
