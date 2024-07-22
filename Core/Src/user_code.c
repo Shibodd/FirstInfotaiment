@@ -445,6 +445,14 @@ void task_mock_lap_trigger() {
 
 }
 
+void task_uart_echo() {
+	static const uint8_t buf[] = "Ciao Simo!\r\n";
+	static uint8_t count = 0;
+	HAL_UART_Transmit(&huart6, buf, strlen(buf), 100);
+
+	if (!count++) HAL_UART_Transmit(&huart6, "Suca\r\n", strlen("Suca\r\n"), 100);
+}
+
 void configuration() {
   // Initialize the MMR libraries
   userMessage("INFO: Initialization...");
@@ -511,6 +519,7 @@ void userDefaultTask() {
     task_send_resopmode();
     task_resetchassis();
     task_mock_lap_trigger();
+    task_uart_echo();
   }
 }
 

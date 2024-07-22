@@ -87,6 +87,7 @@ void Error_Handler(void);
 #define STEERING_LEFT_PADDLE_BUTTON_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+extern UART_HandleTypeDef huart6;
 
 /* USER CODE END Private defines */
 
