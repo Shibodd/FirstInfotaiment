@@ -16,9 +16,3 @@ void LoggingView::tearDownScreen()
     LoggingViewBase::tearDownScreen();
 }
 
-
-void LoggingView::addLogMessage(std::string msg) {
-	auto btn = missionBtnContainer();
-	btn.setText("Test");
-	this->logsContainer.add(btn);
-}
