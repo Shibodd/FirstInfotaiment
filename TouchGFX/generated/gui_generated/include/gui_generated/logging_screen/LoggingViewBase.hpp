@@ -13,6 +13,7 @@
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/RadioButton.hpp>
+#include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class LoggingViewBase : public touchgfx::View<LoggingPresenter>
 {
@@ -36,6 +37,7 @@ protected:
     touchgfx::TextArea textArea1;
     touchgfx::Container levelSelectorsContainer;
     touchgfx::Container filterContainerDebug;
+    touchgfx::RadioButtonGroup<4> radioButtonGroup;
     touchgfx::RadioButton filterCheckbox;
     touchgfx::TextArea filterName;
     touchgfx::Container filterContainerInfo;

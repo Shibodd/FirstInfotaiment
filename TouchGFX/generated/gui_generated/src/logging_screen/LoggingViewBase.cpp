@@ -43,6 +43,7 @@ LoggingViewBase::LoggingViewBase() :
     filterCheckbox.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_PRESSED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_DARK_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_PRESSED_ID));
     filterCheckbox.setSelected(false);
     filterCheckbox.setDeselectionEnabled(true);
+    radioButtonGroup.add(filterCheckbox);
     filterContainerDebug.add(filterCheckbox);
 
     filterName.setXY(4, 6);
@@ -58,6 +59,7 @@ LoggingViewBase::LoggingViewBase() :
     filterCheckbox_1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_PRESSED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_DARK_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_PRESSED_ID));
     filterCheckbox_1.setSelected(false);
     filterCheckbox_1.setDeselectionEnabled(true);
+    radioButtonGroup.add(filterCheckbox_1);
     filterContainerInfo.add(filterCheckbox_1);
 
     filterName_1.setXY(0, 7);
@@ -73,6 +75,7 @@ LoggingViewBase::LoggingViewBase() :
     filterCheckbox_1_1.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_PRESSED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_DARK_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_PRESSED_ID));
     filterCheckbox_1_1.setSelected(false);
     filterCheckbox_1_1.setDeselectionEnabled(true);
+    radioButtonGroup.add(filterCheckbox_1_1);
     filterContainerWarning.add(filterCheckbox_1_1);
 
     filterName_1_1.setXY(4, 7);
@@ -88,6 +91,7 @@ LoggingViewBase::LoggingViewBase() :
     filterCheckbox_1_2.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_OFF_PRESSED_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_DARK_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_RADIOBUTTON_CHECK_LARGE_ROUNDED_ON_PRESSED_ID));
     filterCheckbox_1_2.setSelected(true);
     filterCheckbox_1_2.setDeselectionEnabled(true);
+    radioButtonGroup.add(filterCheckbox_1_2);
     filterContainerError.add(filterCheckbox_1_2);
 
     filterName_1_2.setXY(3, 6);

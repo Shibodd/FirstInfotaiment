@@ -1788,6 +1788,7 @@
                 "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
                 "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
                 "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "RadioButtonGroup": "radioButtonGroup",
                 "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
               },
               {
@@ -1830,6 +1831,7 @@
                 "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
                 "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
                 "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "RadioButtonGroup": "radioButtonGroup",
                 "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
               },
               {
@@ -1871,6 +1873,7 @@
                 "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
                 "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
                 "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "RadioButtonGroup": "radioButtonGroup",
                 "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
               },
               {
@@ -1914,6 +1917,7 @@
                 "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
                 "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
                 "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "RadioButtonGroup": "radioButtonGroup",
                 "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
               },
               {
