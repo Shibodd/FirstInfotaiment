@@ -32,7 +32,7 @@ protected:
     touchgfx::Box __background;
     touchgfx::Button btnNextPage;
     touchgfx::Button btnPrevPage;
-    touchgfx::ScrollableContainer scrollableContainer1;
+    touchgfx::ScrollableContainer logsContainer;
     touchgfx::TextArea textArea1;
     touchgfx::Container levelSelectorsContainer;
     touchgfx::Container filterContainerDebug;

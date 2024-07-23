@@ -25,6 +25,8 @@ public:
      */
     virtual void deactivate();
 
+    void logMessageReceived();
+
     virtual ~LoggingPresenter() {}
 
 private:

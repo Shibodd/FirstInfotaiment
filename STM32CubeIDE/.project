@@ -365,6 +365,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/competitionscreen_screen/CompetitionScreenView.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/logLineContainer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/logLineContainer.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/missionBtnContainer.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/missionBtnContainer.cpp</locationURI>
@@ -608,6 +613,11 @@
 			<name>Application/User/generated/CompetitionScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/competitionscreen_screen/CompetitionScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/logLineContainerBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/logLineContainerBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/missionBtnContainerBase.cpp</name>

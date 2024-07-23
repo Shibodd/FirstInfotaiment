@@ -41,6 +41,8 @@
     <ClCompile Include="..\..\gui\src\logging_screen\LoggingPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\logging_screen\LoggingView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\logging_screen\LoggingViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\logLineContainer.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\logLineContainerBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -212,6 +214,8 @@
     <ClInclude Include="..\..\gui\include\gui\logging_screen\LoggingPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\logging_screen\LoggingView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\logging_screen\LoggingViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\logLineContainer.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\logLineContainerBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

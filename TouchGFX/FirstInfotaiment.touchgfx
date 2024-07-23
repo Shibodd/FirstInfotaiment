@@ -1729,7 +1729,7 @@
           },
           {
             "Type": "ScrollableContainer",
-            "Name": "scrollableContainer1",
+            "Name": "logsContainer",
             "Y": 42,
             "Width": 800,
             "Height": 373,
@@ -2722,6 +2722,70 @@
               "Red": 255,
               "Green": 255,
               "Blue": 255
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "logLineContainer",
+        "X": 10,
+        "Width": 780,
+        "Height": 24,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "separtorLabel",
+            "X": 51,
+            "Y": -8,
+            "Width": 14,
+            "Height": 36,
+            "LockPosition": true,
+            "TextId": "__SingleUse_AQ31",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 150,
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "levelLabel",
+            "Width": 51,
+            "Height": 24,
+            "LockPosition": true,
+            "TextId": "__SingleUse_9SJI",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "levelTxt"
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "messageLabel",
+            "X": 65,
+            "Width": 559,
+            "Height": 24,
+            "LockPosition": true,
+            "TextId": "__SingleUse_2IH3",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "messageTxt"
             }
           }
         ],

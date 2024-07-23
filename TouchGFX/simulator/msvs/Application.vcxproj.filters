@@ -348,6 +348,12 @@
     <ClCompile Include="..\..\generated\gui_generated\src\logging_screen\LoggingViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\logging_screen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\logLineContainer.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\logLineContainerBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml">
@@ -852,6 +858,12 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\logging_screen\LoggingViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\logging_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\logLineContainer.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\logLineContainerBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,3 +16,8 @@ void LoggingPresenter::deactivate()
 {
 
 }
+
+
+void LoggingPresenter::logMessageReceived() {
+
+}

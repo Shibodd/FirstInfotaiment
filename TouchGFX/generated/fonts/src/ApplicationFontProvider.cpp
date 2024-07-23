@@ -42,7 +42,7 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
     case Typography::BOLDTITLE:
         // verdanab_35_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[9]);
-    case Typography::TYPOGRAPHY_01:
+    case Typography::LOGTYPO:
         // verdana_20_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[4]);
     default:

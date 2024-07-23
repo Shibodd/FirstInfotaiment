@@ -11,6 +11,7 @@ public:
     virtual ~LoggingView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    void addLogMessage();
 protected:
 };
 

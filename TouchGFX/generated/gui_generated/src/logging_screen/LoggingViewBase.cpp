@@ -23,11 +23,11 @@ LoggingViewBase::LoggingViewBase() :
     btnPrevPage.setAction(buttonCallback);
     add(btnPrevPage);
 
-    scrollableContainer1.setPosition(0, 42, 800, 373);
-    scrollableContainer1.enableHorizontalScroll(false);
-    scrollableContainer1.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
-    scrollableContainer1.setScrollbarsAlpha(255);
-    add(scrollableContainer1);
+    logsContainer.setPosition(0, 42, 800, 373);
+    logsContainer.enableHorizontalScroll(false);
+    logsContainer.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    logsContainer.setScrollbarsAlpha(255);
+    add(logsContainer);
 
     textArea1.setXY(229, 0);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));

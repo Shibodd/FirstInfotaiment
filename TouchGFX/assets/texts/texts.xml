@@ -60,6 +60,27 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="messageTxt" Alignment="Left" TypographyId="BoldTitle">
+        <Translation Language="GB">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Translation>
+      </Text>
+      <Text Id="__SingleUse_2IH3" Alignment="Left" TypographyId="logTypo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="levelTxt" Alignment="Left" TypographyId="BoldTitle">
+        <Translation Language="GB">INFO</Translation>
+      </Text>
+      <Text Id="__SingleUse_9SJI" Alignment="Left" TypographyId="logTypo">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="INFO" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AQ31" Alignment="Center" TypographyId="Large">
+        <Translation Language="GB">|</Translation>
+      </Text>
+      <Text Id="level" Alignment="Left" TypographyId="Large">
+        <Translation Language="GB">INFO</Translation>
+      </Text>
       <Text Id="__SingleUse_4HJ8" Alignment="Right" TypographyId="BoldTitle">
         <Translation Language="GB">E</Translation>
       </Text>
@@ -425,6 +446,6 @@
     <Typography Id="PrimaryDriverInfo" Font="verdana.ttf" Size="180" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="SecondaryDriverInfo" Font="verdana.ttf" Size="57" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="BoldTitle" Font="verdanab.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" />
-    <Typography Id="Typography_01" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="logTypo" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
 </TextDatabase>
