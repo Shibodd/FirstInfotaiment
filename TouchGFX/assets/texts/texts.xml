@@ -60,13 +60,13 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
-      <Text Id="messageTxt" Alignment="Left" TypographyId="BoldTitle">
+      <Text Id="messageBuffer" Alignment="Left" TypographyId="BoldTitle">
         <Translation Language="GB">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Translation>
       </Text>
       <Text Id="__SingleUse_2IH3" Alignment="Left" TypographyId="logTypo">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="levelTxt" Alignment="Left" TypographyId="BoldTitle">
+      <Text Id="levelBuffer" Alignment="Left" TypographyId="BoldTitle">
         <Translation Language="GB">INFO</Translation>
       </Text>
       <Text Id="__SingleUse_9SJI" Alignment="Left" TypographyId="logTypo">

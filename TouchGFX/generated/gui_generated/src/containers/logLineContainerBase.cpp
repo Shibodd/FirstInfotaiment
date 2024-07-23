@@ -19,7 +19,8 @@ logLineContainerBase::logLineContainerBase()
     levelLabel.setXY(0, 0);
     levelLabel.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     levelLabel.setLinespacing(0);
-    levelLabel.setWildcard(touchgfx::TypedText(T_LEVELTXT).getText());
+    Unicode::snprintf(levelLabelBuffer, LEVELLABEL_SIZE, "%s", touchgfx::TypedText(T_LEVELBUFFER).getText());
+    levelLabel.setWildcard(levelLabelBuffer);
     levelLabel.resizeToCurrentText();
     levelLabel.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9SJI));
     add(levelLabel);
@@ -27,7 +28,8 @@ logLineContainerBase::logLineContainerBase()
     messageLabel.setXY(65, 0);
     messageLabel.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     messageLabel.setLinespacing(0);
-    messageLabel.setWildcard(touchgfx::TypedText(T_MESSAGETXT).getText());
+    Unicode::snprintf(messageLabelBuffer, MESSAGELABEL_SIZE, "%s", touchgfx::TypedText(T_MESSAGEBUFFER).getText());
+    messageLabel.setWildcard(messageLabelBuffer);
     messageLabel.resizeToCurrentText();
     messageLabel.setTypedText(touchgfx::TypedText(T___SINGLEUSE_2IH3));
     add(messageLabel);

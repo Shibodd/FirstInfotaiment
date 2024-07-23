@@ -2766,7 +2766,9 @@
             },
             "AutoSize": true,
             "Wildcard1": {
-              "TextId": "levelTxt"
+              "TextId": "levelBuffer",
+              "UseBuffer": true,
+              "BufferSize": 10
             }
           },
           {
@@ -2785,7 +2787,9 @@
             },
             "AutoSize": true,
             "Wildcard1": {
-              "TextId": "messageTxt"
+              "TextId": "messageBuffer",
+              "UseBuffer": true,
+              "BufferSize": 10
             }
           }
         ],

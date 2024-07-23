@@ -28,6 +28,14 @@ protected:
     touchgfx::TextAreaWithOneWildcard levelLabel;
     touchgfx::TextAreaWithOneWildcard messageLabel;
 
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t LEVELLABEL_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar levelLabelBuffer[LEVELLABEL_SIZE];
+    static const uint16_t MESSAGELABEL_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar messageLabelBuffer[MESSAGELABEL_SIZE];
+
 private:
 
 };
