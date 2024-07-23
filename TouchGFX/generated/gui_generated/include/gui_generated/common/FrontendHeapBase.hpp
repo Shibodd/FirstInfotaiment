@@ -23,6 +23,8 @@
 #include <gui/missionselect_screen/MissionSelectPresenter.hpp>
 #include <gui/competitionscreen_screen/CompetitionScreenView.hpp>
 #include <gui/competitionscreen_screen/CompetitionScreenPresenter.hpp>
+#include <gui/logging_screen/LoggingView.hpp>
+#include <gui/logging_screen/LoggingPresenter.hpp>
 #include <gui/driverscreen_screen/DriverScreenView.hpp>
 #include <gui/driverscreen_screen/DriverScreenPresenter.hpp>
 
@@ -51,8 +53,9 @@ public:
             touchgfx::meta::TypeList< MainInfotaimentView,
             touchgfx::meta::TypeList< MissionSelectView,
             touchgfx::meta::TypeList< CompetitionScreenView,
+            touchgfx::meta::TypeList< LoggingView,
             touchgfx::meta::TypeList< DriverScreenView,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -68,8 +71,9 @@ public:
             touchgfx::meta::TypeList< MainInfotaimentPresenter,
             touchgfx::meta::TypeList< MissionSelectPresenter,
             touchgfx::meta::TypeList< CompetitionScreenPresenter,
+            touchgfx::meta::TypeList< LoggingPresenter,
             touchgfx::meta::TypeList< DriverScreenPresenter,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**

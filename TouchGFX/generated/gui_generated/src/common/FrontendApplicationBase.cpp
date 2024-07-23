@@ -17,6 +17,8 @@
 #include <gui/missionselect_screen/MissionSelectPresenter.hpp>
 #include <gui/competitionscreen_screen/CompetitionScreenView.hpp>
 #include <gui/competitionscreen_screen/CompetitionScreenPresenter.hpp>
+#include <gui/logging_screen/LoggingView.hpp>
+#include <gui/logging_screen/LoggingPresenter.hpp>
 #include <gui/driverscreen_screen/DriverScreenView.hpp>
 #include <gui/driverscreen_screen/DriverScreenPresenter.hpp>
 
@@ -132,6 +134,30 @@ void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWest()
 void FrontendApplicationBase::gotoCompetitionScreenScreenSlideTransitionWestImpl()
 {
     touchgfx::makeTransition<CompetitionScreenView, CompetitionScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Logging
+
+void FrontendApplicationBase::gotoLoggingScreenSlideTransitionEast()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoLoggingScreenSlideTransitionEastImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoLoggingScreenSlideTransitionEastImpl()
+{
+    touchgfx::makeTransition<LoggingView, LoggingPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoLoggingScreenSlideTransitionWest()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplicationBase::gotoLoggingScreenSlideTransitionWestImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoLoggingScreenSlideTransitionWestImpl()
+{
+    touchgfx::makeTransition<LoggingView, LoggingPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // DriverScreen

@@ -46,10 +46,10 @@ void CompetitionScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractBu
 {
     if (&src == &btnNextPage)
     {
-        //fromCompetitionViewToDriverView
-        //When btnNextPage clicked change screen to DriverScreen
-        //Go to DriverScreen with screen transition towards East
-        application().gotoDriverScreenScreenSlideTransitionEast();
+        //fromCompetitionScreenToLogging
+        //When btnNextPage clicked change screen to Logging
+        //Go to Logging with screen transition towards East
+        application().gotoLoggingScreenSlideTransitionEast();
     }
     if (&src == &btnPrevPage)
     {

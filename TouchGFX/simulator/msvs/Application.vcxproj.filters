@@ -244,6 +244,18 @@
     <Filter Include="Header Files\generated\gui_generated\driverscreen_screen">
       <UniqueIdentifier>F5EF2749-6C94-D45D-4469-5AE13AF8D262</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\logging_screen">
+      <UniqueIdentifier>4CAB515D-A794-5F07-69E8-C1D66313E046</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\logging_screen">
+      <UniqueIdentifier>FED0DD14-742A-693E-5B47-84B301FFD21F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\logging_screen">
+      <UniqueIdentifier>D1271118-4861-0E06-BCEF-B9877D5809FA</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\logging_screen">
+      <UniqueIdentifier>1CA86C9F-975B-0646-5802-498DCC212BF4</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -326,6 +338,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\driverscreen_screen\DriverScreenViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\driverscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\logging_screen\LoggingPresenter.cpp">
+      <Filter>Source Files\gui\logging_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\logging_screen\LoggingView.cpp">
+      <Filter>Source Files\gui\logging_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\logging_screen\LoggingViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\logging_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -822,6 +843,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\driverscreen_screen\DriverScreenViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\driverscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\logging_screen\LoggingPresenter.hpp">
+      <Filter>Header Files\gui\logging_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\logging_screen\LoggingView.hpp">
+      <Filter>Header Files\gui\logging_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\logging_screen\LoggingViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\logging_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

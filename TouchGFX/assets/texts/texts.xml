@@ -60,6 +60,21 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_4HJ8" Alignment="Right" TypographyId="BoldTitle">
+        <Translation Language="GB">E</Translation>
+      </Text>
+      <Text Id="__SingleUse_72M5" Alignment="Right" TypographyId="BoldTitle">
+        <Translation Language="GB">W</Translation>
+      </Text>
+      <Text Id="__SingleUse_9TTD" Alignment="Right" TypographyId="BoldTitle">
+        <Translation Language="GB">I</Translation>
+      </Text>
+      <Text Id="__SingleUse_VCLC" Alignment="Right" TypographyId="BoldTitle">
+        <Translation Language="GB">D</Translation>
+      </Text>
+      <Text Id="__SingleUse_83AV" Alignment="Center" TypographyId="BoldTitle">
+        <Translation Language="GB">AD Stack Logging</Translation>
+      </Text>
       <Text Id="__SingleUse_A8DL" Alignment="Center" TypographyId="SecondaryDriverInfo">
         <Translation Language="GB">RES</Translation>
       </Text>
@@ -409,5 +424,7 @@
     <Typography Id="Enormous" Font="verdana.ttf" Size="120" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="PrimaryDriverInfo" Font="verdana.ttf" Size="180" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="SecondaryDriverInfo" Font="verdana.ttf" Size="57" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="BoldTitle" Font="verdanab.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Typography_01" Font="verdana.ttf" Size="20" Bpp="4" Direction="LTR" FallbackCharacter="?" />
   </Typographies>
 </TextDatabase>

@@ -23,6 +23,8 @@ struct Typography
     static const touchgfx::FontId ENORMOUS = 7;
     static const touchgfx::FontId PRIMARYDRIVERINFO = 8;
     static const touchgfx::FontId SECONDARYDRIVERINFO = 9;
+    static const touchgfx::FontId BOLDTITLE = 10;
+    static const touchgfx::FontId TYPOGRAPHY_01 = 11;
 };
 
 struct TypographyFontIndex
@@ -37,7 +39,9 @@ struct TypographyFontIndex
     static const touchgfx::FontId ENORMOUS = 6;            // verdana_120_4bpp
     static const touchgfx::FontId PRIMARYDRIVERINFO = 7;   // verdana_180_4bpp
     static const touchgfx::FontId SECONDARYDRIVERINFO = 8; // verdana_57_4bpp
-    static const uint16_t NUMBER_OF_FONTS = 9;
+    static const touchgfx::FontId BOLDTITLE = 9;           // verdanab_35_4bpp
+    static const touchgfx::FontId TYPOGRAPHY_01 = 4;       // verdana_20_4bpp
+    static const uint16_t NUMBER_OF_FONTS = 10;
 };
 
 class ApplicationFontProvider : public touchgfx::FontProvider

@@ -40,6 +40,11 @@ public:
 
     void gotoCompetitionScreenScreenSlideTransitionWest();
 
+    // Logging
+    void gotoLoggingScreenSlideTransitionEast();
+
+    void gotoLoggingScreenSlideTransitionWest();
+
     // DriverScreen
     void gotoDriverScreenScreenNoTransition();
 
@@ -69,6 +74,11 @@ protected:
     void gotoCompetitionScreenScreenSlideTransitionEastImpl();
 
     void gotoCompetitionScreenScreenSlideTransitionWestImpl();
+
+    // Logging
+    void gotoLoggingScreenSlideTransitionEastImpl();
+
+    void gotoLoggingScreenSlideTransitionWestImpl();
 
     // DriverScreen
     void gotoDriverScreenScreenNoTransitionImpl();

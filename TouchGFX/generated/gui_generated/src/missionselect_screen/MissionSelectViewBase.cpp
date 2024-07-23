@@ -24,7 +24,7 @@ MissionSelectViewBase::MissionSelectViewBase() :
     btnPrevPage.setAction(buttonCallback);
     add(btnPrevPage);
 
-    labelSelectMission.setXY(258, 17);
+    labelSelectMission.setXY(293, 17);
     labelSelectMission.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     labelSelectMission.setLinespacing(0);
     labelSelectMission.setTypedText(touchgfx::TypedText(T___SINGLEUSE_U2AM));

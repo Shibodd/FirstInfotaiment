@@ -65,7 +65,7 @@
             "X": 363,
             "Y": 40,
             "Width": 75,
-            "Height": 122,
+            "Height": 121,
             "TextId": "__SingleUse_8VH0",
             "TextRotation": "0",
             "Color": {
@@ -1218,7 +1218,7 @@
           {
             "Type": "TextArea",
             "Name": "labelSelectMission",
-            "X": 258,
+            "X": 293,
             "Y": 17,
             "Width": 214,
             "Height": 36,
@@ -1677,7 +1677,7 @@
         ],
         "Interactions": [
           {
-            "InteractionName": "fromCompetitionViewToDriverView",
+            "InteractionName": "fromCompetitionScreenToLogging",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "btnNextPage"
@@ -1686,7 +1686,7 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "East",
-              "ActionComponent": "DriverScreen"
+              "ActionComponent": "Logging"
             }
           },
           {
@@ -1700,6 +1700,267 @@
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "West",
               "ActionComponent": "MissionSelect"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Logging",
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "btnNextPage",
+            "X": 735,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_next.png",
+            "Released": "btn_next.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "btnPrevPage",
+            "X": 17,
+            "Y": 415,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "btn_prev.png",
+            "Released": "btn_prev.png"
+          },
+          {
+            "Type": "ScrollableContainer",
+            "Name": "scrollableContainer1",
+            "Y": 42,
+            "Width": 800,
+            "Height": 373,
+            "VerticalScrollEnabled": true,
+            "ScrollbarsVisibleOnPressed": true,
+            "ScrollbarsColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "ScrollbarsAlpha": 255,
+            "Components": []
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1",
+            "X": 229,
+            "Width": 343,
+            "Height": 42,
+            "TextId": "__SingleUse_83AV",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "Container",
+            "Name": "levelSelectorsContainer",
+            "X": 89,
+            "Y": 415,
+            "Width": 623,
+            "Height": 50,
+            "Components": []
+          },
+          {
+            "Type": "Container",
+            "Name": "filterContainerDebug",
+            "X": 126,
+            "Y": 414,
+            "Width": 85,
+            "Height": 53,
+            "Components": [
+              {
+                "Type": "RadioButton",
+                "Name": "filterCheckbox",
+                "X": 35,
+                "Y": 3,
+                "Width": 50,
+                "Height": 50,
+                "LockPosition": true,
+                "Deselectable": true,
+                "FileNameSelected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_dark.png",
+                "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
+                "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
+                "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "filterName",
+                "X": 4,
+                "Y": 6,
+                "Width": 29,
+                "Height": 42,
+                "LockPosition": true,
+                "TextId": "__SingleUse_VCLC",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "filterContainerInfo",
+            "X": 280,
+            "Y": 415,
+            "Width": 70,
+            "Height": 53,
+            "Components": [
+              {
+                "Type": "RadioButton",
+                "Name": "filterCheckbox_1",
+                "X": 20,
+                "Y": 3,
+                "Width": 50,
+                "Height": 50,
+                "LockPosition": true,
+                "Deselectable": true,
+                "FileNameSelected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_dark.png",
+                "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
+                "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
+                "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "filterName_1",
+                "Y": 7,
+                "Width": 19,
+                "Height": 42,
+                "LockPosition": true,
+                "TextId": "__SingleUse_9TTD",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "filterContainerWarning",
+            "X": 425,
+            "Y": 415,
+            "Width": 96,
+            "Height": 53,
+            "Components": [
+              {
+                "Type": "RadioButton",
+                "Name": "filterCheckbox_1_1",
+                "X": 46,
+                "Y": 3,
+                "Width": 50,
+                "Height": 50,
+                "LockPosition": true,
+                "Deselectable": true,
+                "FileNameSelected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_dark.png",
+                "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
+                "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
+                "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "filterName_1_1",
+                "X": 4,
+                "Y": 7,
+                "Width": 40,
+                "Height": 42,
+                "LockPosition": true,
+                "TextId": "__SingleUse_72M5",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "filterContainerError",
+            "X": 593,
+            "Y": 414,
+            "Width": 79,
+            "Height": 53,
+            "Components": [
+              {
+                "Type": "RadioButton",
+                "Name": "filterCheckbox_1_2",
+                "X": 29,
+                "Y": 3,
+                "Width": 50,
+                "Height": 50,
+                "LockPosition": true,
+                "Selected": true,
+                "Deselectable": true,
+                "FileNameSelected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_dark.png",
+                "FileNameSelectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_on_pressed.png",
+                "FileNameUnselected": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off.png",
+                "FileNameUnselectedPressed": "__generated\\alternate_theme_images_widgets_radiobutton_check_large_rounded_off_pressed.png",
+                "Preset": "alternate_theme\\presets\\radiobutton\\check\\large_dark_rounded.json"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "filterName_1_2",
+                "X": 3,
+                "Y": 6,
+                "Width": 24,
+                "Height": 42,
+                "LockPosition": true,
+                "TextId": "__SingleUse_4HJ8",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 255,
+                  "Green": 255,
+                  "Blue": 255
+                },
+                "AutoSize": true
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "fromLoggingToCompetitionScreen",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnPrevPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "CompetitionScreen"
+            }
+          },
+          {
+            "InteractionName": "fromLoggingToDriverScreen",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnNextPage"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "DriverScreen"
             }
           }
         ]
@@ -2419,7 +2680,7 @@
             }
           },
           {
-            "InteractionName": "fromDriverScreenToCompetitionScreen",
+            "InteractionName": "fromDriverScreenToLogging",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "btnPrevPage"
@@ -2428,7 +2689,7 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "West",
-              "ActionComponent": "CompetitionScreen"
+              "ActionComponent": "Logging"
             }
           }
         ]
